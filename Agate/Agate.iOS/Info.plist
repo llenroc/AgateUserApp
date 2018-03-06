@@ -50,5 +50,16 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>Agate</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>URL Type 1</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appcenter-7df34d42-0a03-4a9f-a531-258a00dcb43b</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

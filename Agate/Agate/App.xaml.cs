@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 using Xamarin.Forms;
 
 namespace Agate
@@ -18,8 +21,10 @@ namespace Agate
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
+		    const string iosAppSecret = "7df34d42-0a03-4a9f-a531-258a00dcb43b";
+		    const string androidAppSecret = "1b5839a3-c70b-4583-b903-3fee62584f5d";
+		    AppCenter.Start($"android={androidAppSecret};ios={iosAppSecret}",typeof(Analytics), typeof(Crashes), typeof(Distribute));
+        }
 
 		protected override void OnSleep ()
 		{
