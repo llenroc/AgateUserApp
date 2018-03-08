@@ -13,7 +13,8 @@ namespace AgateTests
             if (platform == Platform.Android)
             {
                 return ConfigureApp
-                    .Android                    
+                    .Android    
+                    .EnableLocalScreenshots()
                     .StartApp();
             }
 
