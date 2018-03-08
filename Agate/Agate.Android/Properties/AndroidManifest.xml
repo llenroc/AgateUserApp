@@ -3,5 +3,5 @@
 	<uses-sdk android:minSdkVersion="15" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:label="Agate User's Wallet"></application>
+	<application android:label="Agate Users Wallet"></application>
 </manifest>

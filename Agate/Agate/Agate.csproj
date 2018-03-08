@@ -8,6 +8,11 @@
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.5.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.5.0" />
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.5.0" />
+    <PackageReference Include="UXDivers.Artina.Shared" Version="2.6.9" />
+    <PackageReference Include="UXDivers.Artina.Shared.Base" Version="2.6.9" />
+    <PackageReference Include="UXDivers.Effects" Version="0.6.3" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.3.4" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.3.4" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
   </ItemGroup>
 
@@ -18,5 +23,17 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Resx\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resx\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

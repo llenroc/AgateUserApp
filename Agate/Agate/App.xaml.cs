@@ -15,15 +15,15 @@ namespace Agate
 		public App ()
 		{
 			InitializeComponent();
-
-			MainPage = new Agate.MainPage();
+		    Resources["DefaultStringResources"] = new Resx.AppResources();
+            MainPage = new Agate.MainPage();
 		}
 
 		protected override void OnStart ()
 		{
 		    const string iosAppSecret = "7df34d42-0a03-4a9f-a531-258a00dcb43b";
 		    const string androidAppSecret = "1b5839a3-c70b-4583-b903-3fee62584f5d";
-		    AppCenter.Start($"android={androidAppSecret};ios={iosAppSecret}",typeof(Analytics), typeof(Crashes), typeof(Distribute));
+		    AppCenter.Start($"android={androidAppSecret};ios={iosAppSecret}",typeof(Analytics), typeof(Crashes));
         }
 
 		protected override void OnSleep ()
