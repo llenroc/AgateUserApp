@@ -1,0 +1,1 @@
+appcenter test run uitest --app "Agate-Chain/Agate-User-App-Droid" --devices "Agate-Chain/default-set" --app-path Agate\Agate.Android\bin\release\com.agatechain.userapp.apk --test-series "launch-tests" --locale "en_US" --build-dir AgateTests\bin\Release
