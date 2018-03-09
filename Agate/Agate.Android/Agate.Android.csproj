@@ -121,6 +121,26 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Agate.Business\Agate.Business.csproj">
+      <Project>{9c39f1d5-79b8-4d8f-b53e-fc402699ed5c}</Project>
+      <Name>Agate.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Agate.Contracts\Agate.Contracts.csproj">
+      <Project>{722dae08-ca9c-4e1e-83fe-fc53d808589f}</Project>
+      <Name>Agate.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplezerooo.XForms\Triplezerooo.XForms.csproj">
+      <Project>{bbbb66f1-9600-4d0f-93b6-7b43230b510a}</Project>
+      <Name>Triplezerooo.XForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplezerooo.XMVVM\Triplezerooo.XMVVM.csproj">
+      <Project>{a34f97f4-2988-4f6d-9a45-191dd9f89f5f}</Project>
+      <Name>Triplezerooo.XMVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplezerooo\Triplezerooo.csproj">
+      <Project>{5275f902-ede5-4d31-a25f-8e2554725dee}</Project>
+      <Name>Triplezerooo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Agate\Agate.csproj">
       <Project>{EEDD35D4-5EE0-4DCE-9EED-15BCFE173A2D}</Project>
       <Name>Agate</Name>

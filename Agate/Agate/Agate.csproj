@@ -17,6 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Agate.Business\Agate.Business.csproj" />
+    <ProjectReference Include="..\..\Agate.Contracts\Agate.Contracts.csproj" />
+    <ProjectReference Include="..\..\Triplezerooo.XForms\Triplezerooo.XForms.csproj" />
+    <ProjectReference Include="..\..\Triplezerooo.XMVVM\Triplezerooo.XMVVM.csproj" />
+    <ProjectReference Include="..\..\Triplezerooo\Triplezerooo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
