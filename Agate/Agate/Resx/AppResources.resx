@@ -412,10 +412,10 @@
 		<value>Login or register using your email and password.</value>
 	</data>
 	<data name="LabelRegisterNow" xml:space="preserve">
-		<value>Register now</value>
+		<value>Sign Up</value>
 	</data>
 	<data name="LabelRegisterNowAndEnjoy" xml:space="preserve">
-		<value>Register now and enjoy the pleasures of the demo.</value>
+		<value>Let's set up your account.</value>
 	</data>
 	<data name="LabelPasswordsDoNotMatch" xml:space="preserve">
 		<value>Passwords do not match</value>
@@ -424,7 +424,7 @@
 		<value>Repeat Password</value>
 	</data>
 	<data name="ButtonAlreadyUserLoginNow" xml:space="preserve">
-		<value>Already a user? Login now</value>
+		<value>Already have an account? Sign In</value>
 	</data>
 	<data name="PageTitleChatTimeLine" xml:space="preserve">
 		<value>Chat Timeline</value>

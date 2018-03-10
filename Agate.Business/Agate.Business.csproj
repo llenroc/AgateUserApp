@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="RestSharp" Version="106.2.1" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.1.1" />
+    <PackageReference Include="Xam.Plugin.DeviceInfo" Version="3.1.0" />
+    <PackageReference Include="Xam.Plugin.SecureStorage" Version="1.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agate.Contracts\Agate.Contracts.csproj" />
     <ProjectReference Include="..\Triplezerooo.XMVVM\Triplezerooo.XMVVM.csproj" />
     <ProjectReference Include="..\Triplezerooo\Triplezerooo.csproj" />
   </ItemGroup>

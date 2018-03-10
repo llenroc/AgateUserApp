@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Agate.SignUpPage" 
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
+             xmlns:local="clr-namespace:Agate;assembly=Agate"
+             xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+             Title="{ artina:Translate PageTitleSignup }">
+
+    <!--MAIN CONTAINER-->
+    <Grid>
+        <!---BACKGROUND IMAGE-->
+        <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+        <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+            <!-- MAIN CONTAINER -->
+            <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- LOGO -->
+                <Grid Grid.Row="0" WidthRequest="60" HeightRequest="60" Margin="20" VerticalOptions="End" HorizontalOptions="Start">
+
+                    <Image Style="{StaticResource LogoImage}" />
+                </Grid>
+
+                <!--CLAIM TEXT-->
+                <StackLayout Grid.Row="1" Spacing="10" Padding="20,10" Orientation="Vertical" VerticalOptions="Center">
+
+                    <Label LineBreakMode="WordWrap" Text="{ artina:Translate LabelRegisterNow }" TextColor="{ DynamicResource OverImageTextColor }" VerticalTextAlignment="Center" FontAttributes="Bold" AbsoluteLayout.LayoutFlags="All">
+                        <Label.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double" Phone="26" Tablet="36" />
+                        </Label.FontSize>
+                    </Label>
+
+                    <Label LineBreakMode="WordWrap" Text="{ artina:Translate LabelRegisterNowAndEnjoy }" TextColor="{ DynamicResource OverImageTextColor }" VerticalTextAlignment="Center" FontSize="36" AbsoluteLayout.LayoutFlags="All">
+                        <Label.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double" Phone="17" Tablet="27" />
+                        </Label.FontSize>
+                    </Label>
+
+                    <BoxView Style="{DynamicResource BrandNameOrnamentStyle}" BackgroundColor="{DynamicResource OverImageTextColor}" />
+
+                </StackLayout>
+
+                <!---FIELDS CONTAINER-->
+                <Grid Padding="40,0" VerticalOptions="CenterAndExpand" HeightRequest="260" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="0" VerticalOptions="Start">
+                        <Entry x:Name="FirstNameEntry" Placeholder="First Name" Text="{Binding FirstName.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
+                        <Label Text="{Binding FirstName.ValidationError}" IsVisible="{Binding FirstName.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1" VerticalOptions="Start">
+                        <Entry x:Name="LastNameEntry" Placeholder="Last Name" Text="{Binding LastName.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
+                        <Label Text="{Binding LastName.ValidationError}" IsVisible="{Binding LastName.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="2" VerticalOptions="Start">
+                        <!---EMAIL ENTRY-->
+                        <Entry x:Name="MobileNumberEntry" Placeholder="Mobile Number" Text="{Binding MobileNumber.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
+                        <Label Text="{Binding MobileNumber.ValidationError}" IsVisible="{Binding MobileNumber.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="3" VerticalOptions="Start">
+                        <!---EMAIL ENTRY-->
+                        <Entry x:Name="EmailEntry" Placeholder="{ artina:Translate StringEmail }" Text="{Binding EmailAddress}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Done" />
+                        <Label Text="{Binding EmailAddress.ValidationError}" IsVisible="{Binding EmailAddress.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}"/>
+                    </StackLayout>
+
+                </Grid>
+
+                <!-- FOOTER -->
+                <StackLayout x:Name="LoginStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0" Grid.Row="3">
+
+                    <!-- SINGUP BUTTON -->
+                    <artina:Button Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="{ artina:Translate StringSignUp }" WidthRequest="{ artina:OnOrientationDouble
+						LandscapePhone=200,
+						LandscapeTablet=400 }" HorizontalOptions="{ artina:OnOrientationLayoutOptions
+						PortraitPhone=Fill,
+						LandscapePhone=Center,
+						PortraitTablet=Fill,
+						LandscapeTablet=Center }" 
+                        Command="{Binding SignUpCommand}" />
+
+                    <!-- ALREADY A USER BUTTON -->
+                    <artina:Button Style="{StaticResource TransparentButtonStyle}" VerticalOptions="End" Text="{ artina:Translate ButtonAlreadyUserLoginNow }" WidthRequest="{ artina:OnOrientationDouble
+						LandscapePhone=200,
+						LandscapeTablet=400 }" HorizontalOptions="{ artina:OnOrientationLayoutOptions
+						PortraitPhone=Fill,
+						LandscapePhone=Center,
+						PortraitTablet=Fill,
+						LandscapeTablet=Center }" />
+
+                </StackLayout>
+
+            </Grid>
+
+        </ScrollView>
+    </Grid>
+</ContentPage>

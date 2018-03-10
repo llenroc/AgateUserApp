@@ -12,7 +12,7 @@
              x:Class="Agate.App">
     <Application.Resources>
 
-        <ResourceDictionary MergedWith="local:GrialLightTheme">
+        <!--<ResourceDictionary MergedWith="local:GrialLightTheme">-->
             <!--<ResourceDictionary MergedWith="local:GrialDarkTheme">-->
             <!--<ResourceDictionary MergedWith="local:GrialEnterpriseTheme">-->
 
@@ -22,7 +22,7 @@
 			(It is based on GrialLightTheme but you can use the colors
 			of any other theme)
 		-->
-            <!--<ResourceDictionary MergedWith="local:MyAppTheme">-->
+            <ResourceDictionary MergedWith="local:MyAppTheme">
 
             <!-- 
 			Localization:
@@ -79,8 +79,8 @@
             <!-- PUT YOUR OWN ICONS FONT FAMILY BELOW -->
             <OnPlatform x:Key="IconsFontFamily" x:TypeArguments="x:String" Android="grialshapes.ttf#grialshapes" iOS="grialshapes" />
 
-            <!--
-			<OnPlatform 
+            
+			<!--<OnPlatform 
 				x:Key="IconsFontFamily" x:TypeArguments="x:String"
 				Android="FontAwesome.ttf#FontAwesome"
 				iOS="FontAwesome"
@@ -89,8 +89,8 @@
 				x:Key="IconsFontFamily" x:TypeArguments="x:String"
 				Android="Ionicons.ttf#Ionicons"
 				iOS="Ionicons"
-			/>
-			-->
+			/>-->
+			
 
             <!-- STATIC IMAGES -->
             <FileImageSource x:Key="HamburguerIcon">hamburguer_icon.png</FileImageSource>
@@ -412,6 +412,15 @@
                 </Setter>
             </Style>
 
+            <!-- Logo Style -->
+            <Style x:Key="LogoImage" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="ImageSource" Phone="{ StaticResource BrandImage }" Tablet="{ StaticResource BrandImage }" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
             <!-- LOGINS STYLES -->
             <Style x:Key="SignUpBackgroundImage" TargetType="Image">

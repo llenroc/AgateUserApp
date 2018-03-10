@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Agate.Business.ViewModels.User;
+using Agate.ViewBridge;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
 namespace Agate
@@ -16,7 +19,10 @@ namespace Agate
 		{
 			InitializeComponent();
 		    Resources["DefaultStringResources"] = new Resx.AppResources();
-            MainPage = new Agate.MainPage();
+
+            SingltonServices.ViewService = new ViewService();
+
+		    SingltonServices.ViewService.SetCurrentPage(new SignUpPageViewModel());
 		}
 
 		protected override void OnStart ()

@@ -115,7 +115,7 @@ namespace Agate.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already a user? Login now.
+        ///   Looks up a localized string similar to Already have an account? Sign In.
         /// </summary>
         public static string ButtonAlreadyUserLoginNow {
             get {
@@ -533,7 +533,7 @@ namespace Agate.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register now.
+        ///   Looks up a localized string similar to Sign Up.
         /// </summary>
         public static string LabelRegisterNow {
             get {
@@ -542,7 +542,7 @@ namespace Agate.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register now and enjoy the pleasures of the demo..
+        ///   Looks up a localized string similar to Let&apos;s set up your account..
         /// </summary>
         public static string LabelRegisterNowAndEnjoy {
             get {

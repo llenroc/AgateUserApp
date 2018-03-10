@@ -4,9 +4,9 @@
 	Theme XAML file by Grial UIKit build task. Please, do not modify colors manually.
 -->
 <resources>
-	<color name="AccentColor">#FFDA125F</color>
+	<color name="AccentColor">#FF14597D</color>
 	<color name="ComplementColor">#FF525ABB</color>
 	<color name="BaseTextColor">#FF666666</color>
-	<color name="ListViewSelectedItemBackgroundColor">#44DA125F</color>
-	<color name="SplashBackgroundColor">#FF525ABB</color>
+	<color name="ListViewSelectedItemBackgroundColor">#FFD4ECF8</color>
+	<color name="SplashBackgroundColor">#FFFFFFFF</color>
 </resources>

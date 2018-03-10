@@ -50,7 +50,7 @@ namespace Agate.Droid
             base.SetTheme(Resource.Style.AppTheme);
 
             FormsAppCompatActivity.ToolbarResource = Resource.Layout.Toolbar;
-            //FormsAppCompatActivity.TabLayoutResource = Resource.Layout.Tabs;
+            FormsAppCompatActivity.TabLayoutResource = Resource.Layout.Tabs;
 
             base.OnCreate(bundle);
 

@@ -25,15 +25,15 @@
 			#FF169CEE 
 	-->
 	<!-- Grial Theme Exported Colors -->
-	<Color x:Key="AccentColor">#FFDA125F</Color>
+    <Color x:Key="AccentColor">#14597D</Color>
 	<Color x:Key="BaseTextColor">#666666</Color>
-	<Color x:Key="ListViewSelectedItemBackgroundColor">#44DA125F</Color>
-	<Color x:Key="SplashBackgroundColor">#525ABB</Color>
+    <Color x:Key="ListViewSelectedItemBackgroundColor">#d4ecf8</Color>
+	<Color x:Key="SplashBackgroundColor">#FFFFFF</Color>
 	
 	<!-- GENERAL COLORS -->
 	<Color x:Key="InverseTextColor">White</Color>
-	<Color x:Key="BrandColor">#ad1457</Color>
-	<Color x:Key="BrandNameColor">#FFFFFF</Color>
+    <Color x:Key="BrandColor">#16597e</Color>
+    <Color x:Key="BrandNameColor">#1d77a6</Color>
 	<Color x:Key="BaseLightTextColor">#7b7b7b</Color>
 	<Color x:Key="OverImageTextColor">#FFFFFF</Color>
 	<Color x:Key="EcommercePromoTextColor">#FFFFFF</Color>
