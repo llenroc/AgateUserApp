@@ -128,7 +128,7 @@ namespace Agate.Business.ViewModels.User
                     {"page", "sign up"},
                     {"operation", nameof(GetDeviceId)}
                 });
-                throw;
+                return "error";
             }
         }
 
@@ -147,7 +147,7 @@ namespace Agate.Business.ViewModels.User
                     {"page", "sign up"},
                     {"operation", nameof(GetDeviceId)}
                 });
-                throw;
+                return "error";
             }
         }
     }

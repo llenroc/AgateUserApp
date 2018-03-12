@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Agate.Business.ViewModels.User;
+using Agate.Views.User;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
@@ -30,6 +31,10 @@ namespace Agate.ViewBridge
             if (viewModel.GetType() == typeof(SignUpPageViewModel))
             {
                 return new SignUpPage();
+            }
+            if(viewModel.GetType() == typeof(ConfirmationCodeEntryViewModel))
+            {
+                return new ConfirmationCodeEntryPage();
             }
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
