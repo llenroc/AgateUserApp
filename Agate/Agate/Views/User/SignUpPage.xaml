@@ -76,7 +76,7 @@
 
                     <StackLayout Grid.Row="3" VerticalOptions="Start">
                         <!---EMAIL ENTRY-->
-                        <Entry x:Name="EmailEntry" Placeholder="{ artina:Translate StringEmail }" Text="{Binding EmailAddress}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Done" />
+                        <Entry x:Name="EmailEntry" Placeholder="{ artina:Translate StringEmail }" Text="{Binding EmailAddress.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Done" />
                         <Label Text="{Binding EmailAddress.ValidationError}" IsVisible="{Binding EmailAddress.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}"/>
                     </StackLayout>
 

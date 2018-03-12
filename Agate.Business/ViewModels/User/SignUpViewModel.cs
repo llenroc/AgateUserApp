@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Agate.Business.Api;
 using Agate.Contracts.Models.Account;
+using Microsoft.AppCenter.Crashes;
 using OpalApp.AppLogic;
 using OpalApp.Services;
 using Plugin.Connectivity;
@@ -104,7 +105,12 @@ namespace Agate.Business.ViewModels.User
             }
             catch (Exception ex)
             {
-                await View.DisplayAlert("Error", "Error message:" + ex.Message, "Ok");
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                {
+                    {"page", "sign up"},
+                    {"operation", nameof(SignUp)}
+                });
+                await View.DisplayAlert("Error", "An error occurred while processing your request", "Ok");
             }
         }
 
@@ -117,7 +123,12 @@ namespace Agate.Business.ViewModels.User
             }
             catch (Exception ex)
             {
-                return "Error occurred" + ex.ToString(); // todo : this is for testing period, replace it with proper exception handling
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                {
+                    {"page", "sign up"},
+                    {"operation", nameof(GetDeviceId)}
+                });
+                throw;
             }
         }
 
@@ -131,10 +142,13 @@ namespace Agate.Business.ViewModels.User
             }
             catch (Exception ex)
             {
-                return "Error occured" + ex.ToString(); // todo : this is for testing period, replace it with proper exception handling
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                {
+                    {"page", "sign up"},
+                    {"operation", nameof(GetDeviceId)}
+                });
+                throw;
             }
         }
-
-
     }
 }
