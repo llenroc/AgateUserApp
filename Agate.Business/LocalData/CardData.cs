@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
-using static OpalApp.LocalData.FilesFacade;
 
-namespace OpalApp.LocalData
+namespace Agate.Business.LocalData
 {
     public class CardData
     {
         public const string CardsFileName = "cards.json";
-        public static async Task<Card[]> ReadCards() => await ReadObject<Card[]>(CardsFileName);
-        public static async Task SaveCards(Card[] cards) => await SaveObject(CardsFileName, cards);
+        public static async Task<Card[]> ReadCards() => await FilesFacade.ReadObject<Card[]>(CardsFileName);
+        public static async Task SaveCards(Card[] cards) => await FilesFacade.SaveObject(CardsFileName, cards);
     }
 
     public class Card

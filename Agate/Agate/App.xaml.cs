@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Agate.Business;
+using Agate.Business.Api;
+using Agate.Business.AppLogic;
 using Agate.Business.ViewModels.User;
 using Agate.ViewBridge;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+using OpalApp.Services;
+using Plugin.Connectivity;
+using Plugin.DeviceInfo;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
@@ -21,8 +27,10 @@ namespace Agate
 		    Resources["DefaultStringResources"] = new Resx.AppResources();
 
             SingltonServices.ViewService = new ViewService();
+            DataAccessServices.Account = new AccountService();
 
-		    SingltonServices.ViewService.SetCurrentPage(new SignUpPageViewModel());
+		    var signUpPage = new SignUpPageViewModel(DataAccessServices.Account, new DataFlow(), SingltonServices.ViewService, DependencyService.Get<IPhoneService>(), CrossDeviceInfo.Current, CrossConnectivity.Current);
+            SingltonServices.ViewService.SetCurrentPage(signUpPage);
 		}
 
 		protected override void OnStart ()
@@ -41,5 +49,5 @@ namespace Agate
 		{
 			// Handle when your app resumes
 		}
-	}
+    }
 }

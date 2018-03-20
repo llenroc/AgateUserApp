@@ -4,11 +4,13 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Agate.Business.Api;
+using Agate.Business.AppLogic;
 using Agate.Contracts.Models.Account;
 using Microsoft.AppCenter.Crashes;
-using OpalApp.AppLogic;
 using OpalApp.Services;
 using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
+using Plugin.DeviceInfo.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
@@ -16,8 +18,21 @@ namespace Agate.Business.ViewModels.User
 {
     public class SignUpPageViewModel : BaseViewModel
     {
-        public SignUpPageViewModel() : base()
+        private readonly IAccountService accountService;
+        private readonly IDataFlow dataFlow;
+        private readonly IViewService viewService;
+        private readonly IPhoneService phoneService;
+        private readonly IDeviceInfo deviceInfo;
+        private readonly IConnectivity connectivity;
+
+        public SignUpPageViewModel(IAccountService accountService, IDataFlow dataFlow, IViewService viewService, IPhoneService phoneService, IDeviceInfo deviceInfo, IConnectivity connectivity)
         {
+            this.accountService = accountService;
+            this.dataFlow = dataFlow;
+            this.viewService = viewService;
+            this.phoneService = phoneService;
+            this.deviceInfo = deviceInfo;
+            this.connectivity = connectivity;
             SignUpCommand = new XCommand(async () => await SignUp(), CanSignUp);
 
             FirstName = new Property<string>("First Name").RequiredString("First Name is required");
@@ -28,10 +43,10 @@ namespace Agate.Business.ViewModels.User
             SignUpCommand.SetDependency(this, FirstName, LastName, MobileNumber, EmailAddress);            
         }
 
-        public Property<string> FirstName { get; set; }
-        public Property<string> LastName { get; set; }
-        public Property<string> MobileNumber { get; set; }
-        public Property<string> EmailAddress { get; set; }
+        public Property<string> FirstName { get; }
+        public Property<string> LastName { get; }
+        public Property<string> MobileNumber { get; }
+        public Property<string> EmailAddress { get; }
 
         public IXCommand SignUpCommand { get; }
 
@@ -50,7 +65,7 @@ namespace Agate.Business.ViewModels.User
 
             try
             {
-                if (!CrossConnectivity.Current.IsConnected)
+                if (!connectivity.IsConnected)
                 {
                     await View.DisplayAlert("Internet required", "To sign up the app requires internet connection.", "Ok");
                     return;
@@ -69,24 +84,24 @@ namespace Agate.Business.ViewModels.User
 
                 SignUpResponseModel result;
 
-                using (var scope = WorkingScope.Enter())
+                using (WorkingScope.Enter())
                 {
-                    result = await AccountService.SignUp(requestObj);
+                    result = await accountService.SignUp(requestObj);
                 }
 
                 if (result != null)
                 {
                     if (result.Success)
                     {
-                        using (var scope = WorkingScope.Enter())
+                        using (WorkingScope.Enter())
                         {
-                            await DataFlow.InitializeUser(requestObj.FirstName, requestObj.LastName,
+                            await dataFlow.InitializeUser(requestObj.FirstName, requestObj.LastName,
                                 requestObj.CountryCode,
                                 requestObj.EmailAddress, requestObj.MobileNumber);
                         }
 
-                        var confirmationPage = new ConfirmationCodeEntryViewModel(result.RequestId);
-                        SingltonServices.ViewService.SetCurrentPage(confirmationPage);
+                        var confirmationPage = new ConfirmationCodeEntryViewModel(result.RequestId, accountService, viewService, dataFlow, deviceInfo, connectivity);
+                        viewService.SetCurrentPage(confirmationPage);
                     }
 
                     else
@@ -110,15 +125,15 @@ namespace Agate.Business.ViewModels.User
                     {"page", "sign up"},
                     {"operation", nameof(SignUp)}
                 });
-                await View.DisplayAlert("Error", "An error occurred while processing your request", "Ok");
+                await View.DisplayAlert("Error", "An error occurred while processing your request" + ex, "Ok");
             }
         }
 
-        private static string GetDeviceId()
+        private string GetDeviceId()
         {
             try
             {
-                var deviceId = Plugin.DeviceInfo.CrossDeviceInfo.Current.Id;
+                var deviceId = deviceInfo.Id;
                 return deviceId;
             }
             catch (Exception ex)
@@ -132,11 +147,10 @@ namespace Agate.Business.ViewModels.User
             }
         }
 
-        private static string GetCountryCode()
+        private string GetCountryCode()
         {
             try
             {
-                var phoneService = DependencyService.Get<IPhoneService>();
                 var countryCode = $"ISO:{phoneService.ICC}::::MMC:{phoneService.MCC}";
                 return countryCode;
             }

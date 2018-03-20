@@ -1,6 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading;
+using Agate.Business.Api;
+using Agate.Contracts.Models.Account;
+using HttpServerMock;
+using HttpServerMock.ExtensionMethods;
 using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Android;
@@ -10,7 +16,6 @@ using Xamarin.UITest.Queries;
 namespace AgateTests
 {
     [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
     public class Tests
     {
         IApp app;
@@ -42,20 +47,29 @@ namespace AgateTests
         [Test]
         public void SignUpRedirectsUserToConfirmationPage()
         {
-            app.EnterText("FirstNameEntry", "Meysam");
-            app.DismissKeyboard();
-            app.EnterText("LastNameEntry", "Naseri");
-            app.DismissKeyboard();
-            app.EnterText("MobileNumberEntry", "+61424556544");
-            app.DismissKeyboard();
-            app.EnterText("EmailEntry","meysamnaseri@live.com");
-            app.DismissKeyboard();
-            app.Screenshot("comleted-sign-up-page");
-            app.DismissKeyboard();
-            app.Tap("SignUpButton");
-            app.WaitForElement("ConfirmationPage", "Expected to navigate to confirmation page",
-                TimeSpan.FromSeconds(60));
-            app.Screenshot("confirmation-page-after-sign-up");
+            int portNumber = 8085;
+            using (var apiServer = new HttpServerMock.HttpServerMock(8085))
+            {
+                apiServer.SetUpExpectation(HttpMethod.POST, "/api/v1/account/signup").Response(HttpStatusCode.OK,
+                    HttpRequestContentType.Json, new SignUpResponseModel(1));
+
+                app.Invoke("SetServicesAddress", $"http://10.0.2.2:8085/api/v1/");
+
+                app.EnterText("FirstNameEntry", "Meysam");
+                app.DismissKeyboard();
+                app.EnterText("LastNameEntry", "Naseri");
+                app.DismissKeyboard();
+                app.EnterText("MobileNumberEntry", "+61424554644");
+                app.DismissKeyboard();
+                app.EnterText("EmailEntry", "meysamnaseri@live.com");
+                app.DismissKeyboard();
+                app.Screenshot("comleted-sign-up-page");
+
+                app.Tap("SignUpButton");
+                app.WaitForElement("ConfirmationPage", "Expected to navigate to confirmation page", TimeSpan.FromSeconds(60));
+                app.Screenshot("confirmation-page-after-sign-up");
+            }
+
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpalApp.LocalData
+namespace Agate.Business.LocalData
 {
     public class CacheData<TData>
     {

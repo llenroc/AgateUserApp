@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Agate.Business.ViewModels;
 using Agate.Business.ViewModels.User;
 using Agate.Views.User;
 using Triplezerooo.XMVVM;
@@ -35,6 +36,10 @@ namespace Agate.ViewBridge
             if(viewModel.GetType() == typeof(ConfirmationCodeEntryViewModel))
             {
                 return new ConfirmationCodeEntryPage();
+            }
+            if(viewModel.GetType() == typeof(SetPinViewModel))
+            {
+                return new SetPinPage();
             }
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");

@@ -7,7 +7,7 @@ namespace Agate.Business
     public class Services
     {
        //public const string BaseAddress = "http://10.1.1.196/api/v1/";
-       public const string BaseAddress = "https://oppapi.azurewebsites.net/api/v1/";
+       public static string BaseAddress = "https://oppapi.azurewebsites.net/api/v1/";
 
         public static async Task<TResponse> Post<TRequest,TResponse>(string api, TRequest request)
             where TResponse : class

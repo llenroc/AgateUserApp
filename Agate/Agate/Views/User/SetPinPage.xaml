@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
-             x:Class="Agate.Views.User.ConfirmationCodeEntryPage" AutomationId="ConfirmationPage">
-    <!--MAIN CONTAINER-->
+             x:Class="Agate.Views.User.SetPinPage" Title="Confirmation Code" AutomationId="ConfirmationCodeEntry">
     <Grid>
         <!---BACKGROUND IMAGE-->
         <Image Style="{StaticResource SignUpBackgroundImage}" />
@@ -29,7 +28,7 @@
                 <!--CLAIM TEXT-->
                 <StackLayout Grid.Row="1" Spacing="10" Padding="20,10" Orientation="Vertical" VerticalOptions="Center">
 
-                    <Label LineBreakMode="WordWrap" Text="We just send you a text message, please enter the confirmation code in below" TextColor="{ DynamicResource OverImageTextColor }" VerticalTextAlignment="Center" FontSize="36" AbsoluteLayout.LayoutFlags="All">
+                    <Label LineBreakMode="WordWrap" Text="One last step, for your security please enter a four digit PIN, don't worry you can change it later" TextColor="{ DynamicResource OverImageTextColor }" VerticalTextAlignment="Center" FontSize="36" AbsoluteLayout.LayoutFlags="All">
                         <Label.FontSize>
                             <OnIdiom x:TypeArguments="x:Double" Phone="17" Tablet="27" />
                         </Label.FontSize>
@@ -45,43 +44,30 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <StackLayout Grid.Row="1" VerticalOptions="Start">
-                        <Entry x:Name="ConfirmationCodeEntry" AutomationId="ConfirmationCodeEntry" Placeholder="" Text="{Binding ConfirmationCode.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" />
+                        <Entry x:Name="Pin1Entry" AutomationId="Pin1Entry" Placeholder="" Text="{Binding Pin1.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next"/>
                     </StackLayout>
-                    
-
+                    <StackLayout Grid.Row="2" VerticalOptions="Start">
+                        <Entry x:Name="Pin2Entry" AutomationId="Pin2Entry" Placeholder="" Text="{Binding Pin2.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" />
+                        <Label Text="{Binding Pin2.ValidationError}" IsVisible="{Binding Pin2.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}" />
+                    </StackLayout>
                 </Grid>
 
                 <!-- FOOTER -->
                 <StackLayout x:Name="ButtonsStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0" Grid.Row="3">
 
                     <!-- SINGUP BUTTON -->
-                    <artina:Button Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Confirm" WidthRequest="{ artina:OnOrientationDouble
+                    <artina:Button AutomationId="SetPinButton" Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Set PIN" WidthRequest="{ artina:OnOrientationDouble
 						LandscapePhone=200,
 						LandscapeTablet=400 }" HorizontalOptions="{ artina:OnOrientationLayoutOptions
 						PortraitPhone=Fill,
 						LandscapePhone=Center,
 						PortraitTablet=Fill,
 						LandscapeTablet=Center }" 
-                        Command="{Binding ConfirmCommand}" />
-
-                    <!-- ALREADY A USER BUTTON -->
-                    <artina:Button Style="{StaticResource TransparentButtonStyle}" FontSize="12" VerticalOptions="End" Text="You didn't recieved the code after 2 minutes?" WidthRequest="{ artina:OnOrientationDouble
-						LandscapePhone=200,
-						LandscapeTablet=400 }" HorizontalOptions="{ artina:OnOrientationLayoutOptions
-						PortraitPhone=Fill,
-						LandscapePhone=Center,
-						PortraitTablet=Fill,
-						LandscapeTablet=Center }" />
-                    <artina:Button Style="{StaticResource TransparentButtonStyle}" FontSize="12" VerticalOptions="End" Text="Request a new code" WidthRequest="{ artina:OnOrientationDouble
-						LandscapePhone=200,
-						LandscapeTablet=400 }" HorizontalOptions="{ artina:OnOrientationLayoutOptions
-						PortraitPhone=Fill,
-						LandscapePhone=Center,
-						PortraitTablet=Fill,
-						LandscapeTablet=Center }" />
+                        Command="{Binding SetPinCommand}" />
 
                 </StackLayout>
 

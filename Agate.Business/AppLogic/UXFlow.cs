@@ -1,11 +1,7 @@
-﻿using OpalApp.LocalData;
-using OpalApp.Services;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace OpalApp.AppLogic
+namespace Agate.Business.AppLogic
 {
     public class UXFlow
     {

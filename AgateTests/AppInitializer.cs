@@ -14,7 +14,7 @@ namespace AgateTests
             {
                 return ConfigureApp
                     .Android
-                    //.ApkFile(@"../../../Agate/Agate.Android/bin/Release/com.agatechain.userapp.apk")
+                    .ApkFile(@"../../../Agate/Agate.Android/bin/Release/com.agatechain.userapp.apk")
                     .EnableLocalScreenshots()
                     .StartApp();
             }

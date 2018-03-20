@@ -1,8 +1,6 @@
 ﻿using Plugin.SecureStorage;
-//using XamStorage;
-using FileAccess = System.IO.FileAccess;
 
-namespace OpalApp.Services
+namespace Agate.Business
 {
     public class UserAccount
     {

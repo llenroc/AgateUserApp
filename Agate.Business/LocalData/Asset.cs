@@ -1,4 +1,4 @@
-﻿namespace OpalApp.LocalData
+﻿namespace Agate.Business.LocalData
 {
     public class Asset
     {

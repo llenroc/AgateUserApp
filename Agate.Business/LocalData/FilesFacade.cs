@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace OpalApp.LocalData
+namespace Agate.Business.LocalData
 {
     public class FilesFacade
     {

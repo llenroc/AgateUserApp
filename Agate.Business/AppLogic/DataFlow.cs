@@ -1,13 +1,10 @@
-﻿using OpalApp.LocalData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Agate.Business.LocalData;
+using OpalApp.Services;
 
-namespace OpalApp.AppLogic
+namespace Agate.Business.AppLogic
 {
-    public class DataFlow
+    public class DataFlow : IDataFlow
     {
         //public static async Task<Asset[]> GetAllAssets()
         //{
@@ -45,7 +42,7 @@ namespace OpalApp.AppLogic
             };
         }
 
-        public static async Task InitializeUser(string firstname, string lastname, string countryCode, string emailAddress, string mobileNumber)
+        public async Task InitializeUser(string firstname, string lastname, string countryCode, string emailAddress, string mobileNumber)
         {
             await UserData.SaveUserData(new UserProfile
             {
@@ -64,6 +61,17 @@ namespace OpalApp.AppLogic
                         new UserAsset { AssetId = 5, Balance = 0, Favorited = false },
                     });
 
+        }
+
+        public async Task UpdateUserId(int userId)
+        {
+            await UserData.UpdateUserData(u => { u.UserId = userId; });
+            UserAccount.UserId = userId;
+        }
+
+        public async Task UpdateAccessCode(string accessCode)
+        {
+            UserAccount.AccessCode = accessCode;
         }
     }
 }

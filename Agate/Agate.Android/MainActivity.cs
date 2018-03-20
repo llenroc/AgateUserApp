@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Agate.Business;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Droid;
+using Java.Interop;
 using Java.Util;
 using UXDivers.Artina.Shared;
 using Xamarin.Forms.Platform.Android;
@@ -80,6 +81,12 @@ namespace Agate.Droid
                 // as changes in ConfigChanges.Locale break images used in the app
                 Recreate();
             }
+        }
+
+        [Export]
+        public void SetServicesAddress(String baseAddress)
+        {
+            Services.BaseAddress = baseAddress;
         }
     }
 }

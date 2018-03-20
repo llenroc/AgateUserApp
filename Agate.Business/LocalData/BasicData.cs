@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using static OpalApp.LocalData.FilesFacade;
+using static Agate.Business.LocalData.FilesFacade;
 
-namespace OpalApp.LocalData
+namespace Agate.Business.LocalData
 {
     //public class BasicData
     //{
