@@ -58,7 +58,7 @@
                 <StackLayout x:Name="ButtonsStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0" Grid.Row="3">
 
                     <!-- SINGUP BUTTON -->
-                    <artina:Button Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Confirm" WidthRequest="{ artina:OnOrientationDouble
+                    <artina:Button AutomationId="ConfirmButton" Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Confirm" WidthRequest="{ artina:OnOrientationDouble
 						LandscapePhone=200,
 						LandscapeTablet=400 }" HorizontalOptions="{ artina:OnOrientationLayoutOptions
 						PortraitPhone=Fill,

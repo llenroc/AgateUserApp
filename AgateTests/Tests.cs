@@ -45,7 +45,7 @@ namespace AgateTests
         }
 
         [Test]
-        public void SignUpRedirectsUserToConfirmationPage()
+        public void SignUpFlow()
         {
             int portNumber = 8085;
             using (var apiServer = new HttpServerMock.HttpServerMock(8085))
@@ -68,8 +68,18 @@ namespace AgateTests
                 app.Tap("SignUpButton");
                 app.WaitForElement("ConfirmationPage", "Expected to navigate to confirmation page", TimeSpan.FromSeconds(60));
                 app.Screenshot("confirmation-page-after-sign-up");
-            }
 
+                apiServer
+                    .SetUpExpectation(HttpMethod.POST, "/api/v1/account/confirmSignup")
+                    .Response(HttpStatusCode.OK, HttpRequestContentType.Json, new ConfirmSignUpResponse(1,"test access code", DateTime.Now.AddDays(1)));
+
+                app.EnterText("ConfirmationCodeEntry", "123456");
+                app.DismissKeyboard();
+
+                app.Tap("ConfirmButton");
+                app.WaitForElement("SetPinPage", "Expected to navigate to set pin page", TimeSpan.FromSeconds(60));
+                app.Screenshot("set-pin-page");
+            }
         }
     }
 }

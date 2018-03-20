@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
-             x:Class="Agate.Views.User.SetPinPage" Title="Confirmation Code" AutomationId="ConfirmationCodeEntry">
+             x:Class="Agate.Views.User.SetPinPage" Title="Confirmation Code" AutomationId="SetPinPage">
     <Grid>
         <!---BACKGROUND IMAGE-->
         <Image Style="{StaticResource SignUpBackgroundImage}" />

@@ -37,7 +37,7 @@ namespace Agate.Business.ViewModels.User
 
         private void Initialize()
         {
-            ConfirmationCode = new Property<string>("Confirmation Code");
+            ConfirmationCode = new Property<string>("Confirmation Code").RequiredString("Please enter confirmation code");
             ConfirmCommand = new XCommand(async () => await Confirm(), CanConfirm);
             ConfirmCommand.SetDependency(this, ConfirmationCode);
         }
@@ -47,9 +47,9 @@ namespace Agate.Business.ViewModels.User
 
         public bool CanConfirm()
         {
-            return IsNotBusy && ConfirmationCode.IsValid;
-
+            return IsNotBusy && Validation.Check(ConfirmationCode);
         }
+
         public async Task Confirm()
         {
             try
@@ -67,8 +67,8 @@ namespace Agate.Business.ViewModels.User
                     var request = new ConfirmSignUpRequest
                     {
                         RequestId = requestId,
-                        DeviceId = Plugin.DeviceInfo.CrossDeviceInfo.Current.Id,
-                        DeviceName = Plugin.DeviceInfo.CrossDeviceInfo.Current.DeviceName,
+                        DeviceId = deviceId,
+                        DeviceName = deviceName,
                         ConfirmationCode = ConfirmationCode.Value,
                     };
 

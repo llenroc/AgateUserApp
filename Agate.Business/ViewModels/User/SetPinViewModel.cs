@@ -21,7 +21,7 @@ namespace Agate.Business.ViewModels.User
 
         private bool CanSetPin()
         {
-            return IsNotBusy && Pin1.IsValid && Pin2.IsValid;
+            return IsNotBusy && Validation.Check(Pin1,Pin2);
         }
 
         private Task SetPin()
