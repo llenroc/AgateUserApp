@@ -4,6 +4,7 @@ using Moq;
 using OpalApp.Services;
 using Plugin.Connectivity.Abstractions;
 using Plugin.DeviceInfo.Abstractions;
+using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 
 namespace Agate.Business.Tests
@@ -16,6 +17,7 @@ namespace Agate.Business.Tests
         protected Mock<IDeviceInfo> deviceInfo;
         protected Mock<IConnectivity> connectivity;
         protected Mock<IPhoneService> phoneService;
+        protected Mock<ISecureStorage> secureStorage;
 
         public ViewModelTestBase()
         {
@@ -39,6 +41,8 @@ namespace Agate.Business.Tests
 
             phoneService = new Mock<IPhoneService>();
             phoneService.SetupAllProperties();
+
+            secureStorage = new Mock<ISecureStorage>();
         }
     }
 }

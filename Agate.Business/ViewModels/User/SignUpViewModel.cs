@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Agate.Business.Api;
 using Agate.Business.AppLogic;
+using Agate.Business.Services;
 using Agate.Contracts.Models.Account;
 using Microsoft.AppCenter.Crashes;
 using OpalApp.Services;
@@ -19,15 +20,17 @@ namespace Agate.Business.ViewModels.User
     public class SignUpPageViewModel : BaseViewModel
     {
         private readonly IAccountService accountService;
+        private readonly Func<int, ConfirmationCodeEntryViewModel> createConfirmationCodeEntryViewModel;
         private readonly IDataFlow dataFlow;
         private readonly IViewService viewService;
-        private readonly IPhoneService phoneService;
+        private readonly Func<IPhoneService> phoneService;
         private readonly IDeviceInfo deviceInfo;
         private readonly IConnectivity connectivity;
 
-        public SignUpPageViewModel(IAccountService accountService, IDataFlow dataFlow, IViewService viewService, IPhoneService phoneService, IDeviceInfo deviceInfo, IConnectivity connectivity)
+        public SignUpPageViewModel(IAccountService accountService, Func<int, ConfirmationCodeEntryViewModel> createConfirmationCodeEntryViewModel, IDataFlow dataFlow, IViewService viewService, Func<IPhoneService> phoneService, IDeviceInfo deviceInfo, IConnectivity connectivity)
         {
             this.accountService = accountService;
+            this.createConfirmationCodeEntryViewModel = createConfirmationCodeEntryViewModel;
             this.dataFlow = dataFlow;
             this.viewService = viewService;
             this.phoneService = phoneService;
@@ -100,7 +103,7 @@ namespace Agate.Business.ViewModels.User
                                 requestObj.EmailAddress, requestObj.MobileNumber);
                         }
 
-                        var confirmationPage = new ConfirmationCodeEntryViewModel(result.RequestId, accountService, viewService, dataFlow, deviceInfo, connectivity);
+                        var confirmationPage = createConfirmationCodeEntryViewModel(result.RequestId);
                         viewService.SetCurrentPage(confirmationPage);
                     }
 
@@ -151,7 +154,8 @@ namespace Agate.Business.ViewModels.User
         {
             try
             {
-                var countryCode = $"ISO:{phoneService.ICC}::::MMC:{phoneService.MCC}";
+                var phoneServiceInstance = phoneService();
+                var countryCode = $"ISO:{phoneServiceInstance.ICC}::::MMC:{phoneServiceInstance.MCC}";
                 return countryCode;
             }
             catch (Exception ex)

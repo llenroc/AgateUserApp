@@ -4,19 +4,17 @@ using Agate.Business.Api;
 using Agate.Business.ViewModels.User;
 using Agate.Contracts.Models.Account;
 using Moq;
-using Plugin.Connectivity;
-using Triplezerooo;
 using Triplezerooo.XMVVM;
 using Xunit;
 
-namespace Agate.Business.Tests
+namespace Agate.Business.Tests.User
 {    
     public class SignUpViewModelTests : ViewModelTestBase
     {
         [Fact(DisplayName = "Validation check")]
         public void ValidationTest()
         {
-            var viewModel = new SignUpPageViewModel(new Mock<IAccountService>().Object, dataFlow.Object, viewService.Object, phoneService.Object, deviceInfo.Object, connectivity.Object)
+            var viewModel = new SignUpPageViewModel(new Mock<IAccountService>().Object, null,  dataFlow.Object, viewService.Object,()=> phoneService.Object, deviceInfo.Object, connectivity.Object)
             {
                 View = view.Object,
                 FirstName = {Value = ""},
@@ -40,7 +38,10 @@ namespace Agate.Business.Tests
                 .Setup(m => m.SetCurrentPage(It.Is((BaseViewModel p) => p.GetType() == typeof(ConfirmationCodeEntryViewModel))))
                 .Verifiable();
 
-            var viewModel = new SignUpPageViewModel(accountService.Object, dataFlow.Object, viewService.Object, phoneService.Object, deviceInfo.Object, connectivity.Object)
+            ConfirmationCodeEntryViewModel CreateConfirmationCodeEntryViewModel(int requestId) 
+                => new ConfirmationCodeEntryViewModel(requestId, null, null, null, null, null, null);
+
+            var viewModel = new SignUpPageViewModel(accountService.Object, CreateConfirmationCodeEntryViewModel, dataFlow.Object, viewService.Object, () => phoneService.Object, deviceInfo.Object, connectivity.Object)
             {
                 View = view.Object,
                 FirstName = { Value = "Jhon" },

@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Agate.Business.Api;
 using Agate.Business.ViewModels.User;
 using Agate.Contracts.Models.Account;
 using Moq;
-using Moq.Language.Flow;
 using Triplezerooo.XMVVM;
 using Xunit;
 
-namespace Agate.Business.Tests
+namespace Agate.Business.Tests.User
 {
     public class ConfirmationCodeEntryViewModelTests : ViewModelTestBase
     {
@@ -34,7 +29,7 @@ namespace Agate.Business.Tests
         [Fact(DisplayName = "Validation Test")]
         public void ValidationTest()
         {
-            var viewModel = new ConfirmationCodeEntryViewModel(1, accountService.Object, viewService.Object, dataFlow.Object, deviceInfo.Object, connectivity.Object);
+            var viewModel = new ConfirmationCodeEntryViewModel(1, null, accountService.Object, viewService.Object, dataFlow.Object, deviceInfo.Object, connectivity.Object);
             Assert.False(viewModel.CanConfirm(), "Confirm command should be disabled initially");
             viewModel.ConfirmationCode.Value = "87304";
             Assert.True(viewModel.CanConfirm(), "Confirm command should become enabled when confirmation code is entered");
@@ -50,7 +45,7 @@ namespace Agate.Business.Tests
                 .Returns(Task.CompletedTask)
                 .Verifiable("Expected to show an error message when confirmation code is invalid");
 
-            var viewModel = new ConfirmationCodeEntryViewModel(1, accountService.Object, viewService.Object, dataFlow.Object, deviceInfo.Object, connectivity.Object);
+            var viewModel = new ConfirmationCodeEntryViewModel(1, null, accountService.Object, viewService.Object, dataFlow.Object, deviceInfo.Object, connectivity.Object);
             viewModel.View = view.Object;
             viewModel.ConfirmationCode.Value = "an invalid confirmation code";
             await viewModel.Confirm();
@@ -66,8 +61,8 @@ namespace Agate.Business.Tests
             viewService
                 .Setup(m => m.SetCurrentPage(It.Is((BaseViewModel p) => p.GetType() == typeof(SetPinViewModel))))
                 .Verifiable();
-
-            var viewModel = new ConfirmationCodeEntryViewModel(1, accountService.Object, viewService.Object, dataFlow.Object, deviceInfo.Object, connectivity.Object);
+            SetPinViewModel CreateSetPinView() => new SetPinViewModel(null,null,null,null);
+            var viewModel = new ConfirmationCodeEntryViewModel(1, CreateSetPinView, accountService.Object, viewService.Object, dataFlow.Object, deviceInfo.Object, connectivity.Object);
             viewModel.View = view.Object;
             viewModel.ConfirmationCode.Value = ValidCode;
             await viewModel.Confirm();

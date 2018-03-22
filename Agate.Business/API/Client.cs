@@ -2,17 +2,16 @@
 using System.Threading.Tasks;
 using RestSharp;
 
-namespace Agate.Business
+namespace Agate.Business.API
 {
-    public class Services
+    public class Client
     {
-       //public const string BaseAddress = "http://10.1.1.196/api/v1/";
        public static string BaseAddress = "https://oppapi.azurewebsites.net/api/v1/";
 
         public static async Task<TResponse> Post<TRequest,TResponse>(string api, TRequest request)
             where TResponse : class
         {
-            var client = new RestClient(Services.BaseAddress);
+            var client = new RestClient(BaseAddress);
             var restRequest = new RestRequest(api, Method.POST);
             restRequest.AddJsonBody(request);
             var result = await client.ExecuteTaskAsync<TResponse>(restRequest);
@@ -39,7 +38,7 @@ namespace Agate.Business
                 //var result = Newtonsoft.Json.JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
                 //return result;
 
-                var client = new RestClient(Services.BaseAddress);
+                var client = new RestClient(BaseAddress);
                 var restRequest = new RestRequest(api, Method.GET);
                 restRequest.RequestFormat = DataFormat.Json;
                 var result = await client.ExecuteTaskAsync<TResponse>(restRequest);
@@ -63,7 +62,7 @@ namespace Agate.Business
         public static async Task<TResponse> Get<TRequest, TResponse>(string api, TRequest request)
             where TResponse : class
         {
-            var client = new RestClient(Services.BaseAddress);
+            var client = new RestClient(BaseAddress);
             var restRequest = new RestRequest(api, Method.GET);
             restRequest.AddJsonBody(request);
             var result = await client.ExecuteTaskAsync<TResponse>(restRequest);

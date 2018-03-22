@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 using Agate.Business.Api;
 using Agate.Contracts.Models.Account;
@@ -32,28 +33,42 @@ namespace AgateTests
             app = AppInitializer.StartApp(platform);
         }
 
-        [Test]
+        //[Test]
         public void AppLaunches()
         {
             app.Screenshot("First screen.");
         }
 
-        [Test]
+        //[Test]
         public void Repl()
         {
             app.Repl();
         }
 
+        public static string GetLocalIpAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
         [Test]
         public void SignUpFlow()
         {
-            int portNumber = 8085;
-            using (var apiServer = new HttpServerMock.HttpServerMock(8085))
+            var ip = GetLocalIpAddress();   
+            uint portNumber = 80;
+            using (var apiServer = new HttpServerMock.HttpServerMock(portNumber))
             {
                 apiServer.SetUpExpectation(HttpMethod.POST, "/api/v1/account/signup").Response(HttpStatusCode.OK,
                     HttpRequestContentType.Json, new SignUpResponseModel(1));
 
-                app.Invoke("SetServicesAddress", $"http://10.0.2.2:8085/api/v1/");
+                app.Invoke("SetServicesAddress", $"http://{ip}:{portNumber}/api/v1/");
 
                 app.EnterText("FirstNameEntry", "Meysam");
                 app.DismissKeyboard();

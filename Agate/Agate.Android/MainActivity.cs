@@ -1,5 +1,6 @@
 ﻿using System;
 using Agate.Business;
+using Agate.Business.API;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -86,7 +87,7 @@ namespace Agate.Droid
         [Export]
         public void SetServicesAddress(String baseAddress)
         {
-            Services.BaseAddress = baseAddress;
+            Client.BaseAddress = baseAddress;
         }
     }
 }

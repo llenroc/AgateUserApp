@@ -22,8 +22,9 @@ namespace Agate.Business.ViewModels.User
         private readonly IDeviceInfo deviceInfo;
         private readonly IConnectivity connectivity;
         private readonly int requestId;
+        private readonly Func<SetPinViewModel> createSetPinViewModel;
 
-        public ConfirmationCodeEntryViewModel(int requestId, IAccountService accountService, IViewService viewService, IDataFlow dataFlow, IDeviceInfo deviceInfo, IConnectivity connectivity) : base()
+        public ConfirmationCodeEntryViewModel(int requestId, Func<SetPinViewModel> createSetPinViewModel, IAccountService accountService, IViewService viewService, IDataFlow dataFlow, IDeviceInfo deviceInfo, IConnectivity connectivity) : base()
         {
             this.accountService = accountService;
             this.viewService = viewService;
@@ -31,6 +32,7 @@ namespace Agate.Business.ViewModels.User
             this.deviceInfo = deviceInfo;
             this.connectivity = connectivity;
             this.requestId = requestId;
+            this.createSetPinViewModel = createSetPinViewModel;
 
             Initialize();
         }
@@ -80,7 +82,8 @@ namespace Agate.Business.ViewModels.User
                     await dataFlow.UpdateUserId(response.UserId);
                     await dataFlow.UpdateAccessCode(response.AccessCode);
 
-                    viewService.SetCurrentPage(new SetPinViewModel());
+                    var setPinViewModel = createSetPinViewModel();
+                    viewService.SetCurrentPage(setPinViewModel);
                 }
                 else
                 {

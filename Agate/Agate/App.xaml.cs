@@ -5,15 +5,23 @@ using System.Text;
 using Agate.Business;
 using Agate.Business.Api;
 using Agate.Business.AppLogic;
+using Agate.Business.API;
+using Agate.Business.Services;
+using Agate.Business.ViewModels.Main;
 using Agate.Business.ViewModels.User;
 using Agate.ViewBridge;
+using Autofac;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
 using OpalApp.Services;
 using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
 using Plugin.DeviceInfo;
+using Plugin.DeviceInfo.Abstractions;
+using Plugin.SecureStorage;
+using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
@@ -27,9 +35,22 @@ namespace Agate
 		    Resources["DefaultStringResources"] = new Resx.AppResources();
 
             SingltonServices.ViewService = new ViewService();
-            DataAccessServices.Account = new AccountService();
 
-		    var signUpPage = new SignUpPageViewModel(DataAccessServices.Account, new DataFlow(), SingltonServices.ViewService, DependencyService.Get<IPhoneService>(), CrossDeviceInfo.Current, CrossConnectivity.Current);
+            var builder = new ContainerBuilder();
+		    builder.RegisterType<DataFlow>().As<IDataFlow>();
+		    builder.Register(c => CrossSecureStorage.Current).As<ISecureStorage>();
+		    builder.Register(c => CrossConnectivity.Current).As<IConnectivity>();
+		    builder.RegisterType<AccountService>().As<IAccountService>();
+		    builder.RegisterType<ViewService>().As<IViewService>();
+		    builder.Register(c => DependencyService.Get<IPhoneService>()).As<IPhoneService>();
+		    builder.Register(c => CrossDeviceInfo.Current).As<IDeviceInfo>();
+		    builder.RegisterType<SignUpPageViewModel>();
+		    builder.RegisterType<ConfirmationCodeEntryViewModel>();
+		    builder.RegisterType<SetPinViewModel>();
+		    builder.RegisterType<MainViewModel>();
+		    var container = builder.Build();
+
+		    var signUpPage = container.Resolve<SignUpPageViewModel>();
             SingltonServices.ViewService.SetCurrentPage(signUpPage);
 		}
 

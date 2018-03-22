@@ -1,11 +1,19 @@
 ﻿using System.Threading.Tasks;
 using Agate.Business.LocalData;
+using Agate.Business.Services;
 using OpalApp.Services;
+using Plugin.SecureStorage.Abstractions;
 
 namespace Agate.Business.AppLogic
 {
     public class DataFlow : IDataFlow
     {
+        private readonly ISecureStorage secureStorage;
+
+        public DataFlow(ISecureStorage secureStorage)
+        {
+            this.secureStorage = secureStorage;
+        }
         //public static async Task<Asset[]> GetAllAssets()
         //{
         //    var assetsFromFile = await BasicData.ReadAssets();
@@ -66,12 +74,12 @@ namespace Agate.Business.AppLogic
         public async Task UpdateUserId(int userId)
         {
             await UserData.UpdateUserData(u => { u.UserId = userId; });
-            UserAccount.UserId = userId;
+            secureStorage.SetUserId(userId);
         }
 
         public async Task UpdateAccessCode(string accessCode)
         {
-            UserAccount.AccessCode = accessCode;
+            secureStorage.SetAccessCode(accessCode);
         }
     }
 }

@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Agate.Contracts.Models.Assets;
 
-namespace Agate.Business.Api
+namespace Agate.Business.API
 {
     public class AssetsService
     {
         public async Task<List<Asset>> Get() =>
-            await Services.Get<List<Asset>>("assets");
+            await Client.Get<List<Asset>>("assets");
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Agate.Business.Api;
+using Agate.Business.API;
 using Agate.Business.LocalData;
+using Agate.Business.Services;
 using OpalApp.Services;
+using Plugin.SecureStorage.Abstractions;
 
 namespace Agate.Business.AppLogic
 {
@@ -10,16 +13,23 @@ namespace Agate.Business.AppLogic
     {
         public static string UserCurrency = "USD";
 
-        public static Asset[] AllAssets { get; set; }
-        public static UserAsset[] UserAssets { get; set; }
-        public static Rate[] Rates { get; set; }
-        public static decimal BucketAmount { get; set; }
-        public static Card[] Cards { get; set; }
+        private readonly ISecureStorage secureStorage;
 
-        private static bool online = false;
-        private static object _lock = new object();
+        public AppData(ISecureStorage secureStorage)
+        {
+            this.secureStorage = secureStorage;
+        }
 
-        public static async Task LoadOfflineData()
+        public Asset[] AllAssets { get; set; }
+        public UserAsset[] UserAssets { get; set; }
+        public Rate[] Rates { get; set; }
+        public decimal BucketAmount { get; set; }
+        public Card[] Cards { get; set; }
+
+        private bool online = false;
+        private object _lock = new object();
+
+        public async Task LoadOfflineData()
         {
             AllAssets = GetDefaultAssetValues(); // for now we just read a hard coded list of assets
             UserAssets = (await UserData.ReadUserAssets()) ?? new UserAsset[] { };
@@ -28,7 +38,7 @@ namespace Agate.Business.AppLogic
             BucketAmount = (await BucketData.ReadBucketInfo())?.Amount ?? 0;
         }
 
-        public static async Task<bool> LoadOnlineData(bool forceLoad = false)
+        public async Task<bool> LoadOnlineData(bool forceLoad = false)
         {
             lock (_lock)
             {
@@ -49,7 +59,7 @@ namespace Agate.Business.AppLogic
                 // if rates changed
                 await RatesData.SaveRates(Rates);
 
-                var cards = await CardsService.Get(UserAccount.UserId.Value);
+                var cards = await CardsService.Get(secureStorage.GetUserId().Value);
                 if(cards == null)
                 {
                     online = false;
@@ -59,7 +69,7 @@ namespace Agate.Business.AppLogic
                 // if cards changed
                 await CardData.SaveCards(Cards);
 
-                BucketAmount = (await BucketService.GetBalance(UserAccount.UserId.Value))?.Amount ?? 0;
+                BucketAmount = (await BucketService.GetBalance(secureStorage.GetUserId().Value))?.Amount ?? 0;
                 await BucketData.SaveBucketInfo(new BucketInfo { Amount = BucketAmount });
 
                 return true;

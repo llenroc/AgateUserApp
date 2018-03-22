@@ -48,10 +48,10 @@
                     </Grid.RowDefinitions>
 
                     <StackLayout Grid.Row="1" VerticalOptions="Start">
-                        <Entry x:Name="Pin1Entry" AutomationId="Pin1Entry" Placeholder="" Text="{Binding Pin1.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next"/>
+                        <Entry x:Name="Pin1Entry" AutomationId="Pin1Entry" Placeholder="PIN" Text="{Binding Pin1.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next"/>
                     </StackLayout>
                     <StackLayout Grid.Row="2" VerticalOptions="Start">
-                        <Entry x:Name="Pin2Entry" AutomationId="Pin2Entry" Placeholder="" Text="{Binding Pin2.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" />
+                        <Entry x:Name="Pin2Entry" AutomationId="Pin2Entry" Placeholder="Confirm the PIN" Text="{Binding Pin2.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" />
                         <Label Text="{Binding Pin2.ValidationError}" IsVisible="{Binding Pin2.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}" />
                     </StackLayout>
                 </Grid>

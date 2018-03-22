@@ -1,50 +1,57 @@
-﻿using Plugin.SecureStorage;
+﻿using Plugin.SecureStorage.Abstractions;
 
-namespace Agate.Business
+namespace Agate.Business.Services
 {
-    public class UserAccount
+    public static class UserAccount
     {
-        public static int? UserId
+        public static int? GetUserId(this ISecureStorage secureStorage)
         {
-            get
+            if (secureStorage.HasKey("userid"))
             {
-                if (CrossSecureStorage.Current.HasKey("userid"))
-                {
-                    int.TryParse(CrossSecureStorage.Current.GetValue("userid"), out int result);
-                    return result;
-                }
-                return null;
+                int.TryParse(secureStorage.GetValue("userid"), out int result);
+                return result;
             }
-            set
-            {
-                if (value == null)
-                    CrossSecureStorage.Current.DeleteKey("userid");
-                else
-                    CrossSecureStorage.Current.SetValue("userid", value.Value.ToString());
-            }
-        }
-        public static string AccessCode
-        {
-            get => CrossSecureStorage.Current.GetValue("accesscode");
-            set
-            {
-                if (value == null)
-                    CrossSecureStorage.Current.DeleteKey("accesscode");
-                else
-                    CrossSecureStorage.Current.SetValue("accesscode", value);
-            }
+            return null;
         }
 
-        public static string Pin
+        public static void SetUserId(this ISecureStorage secureStorage, int? value)
         {
-            get => CrossSecureStorage.Current.GetValue("pin");
-            set
-            {
-                if (value == null)
-                    CrossSecureStorage.Current.DeleteKey("pin");
-                else
-                    CrossSecureStorage.Current.SetValue("pin", value);
-            }
+            if (value == null)
+                secureStorage.DeleteKey("userid");
+            else
+                secureStorage.SetValue("userid", value.Value.ToString());
+        }
+
+        public static string GetAccessCode(this ISecureStorage secureStorage)
+        {
+            return secureStorage.GetValue("accesscode");
+        }
+
+        public static void SetAccessCode(this ISecureStorage secureStorage, string value)
+        {
+            if (value == null)
+                secureStorage.DeleteKey("accesscode");
+            else
+                secureStorage.SetValue("accesscode", value);
+        }
+
+        public static string GetPin(this ISecureStorage secureStorage)
+        {
+            return secureStorage.GetValue("pin");
+        }
+
+        public static void SetPin(this ISecureStorage secureStorage, string value)
+        {
+            if (value == null)
+                secureStorage.DeleteKey("pin");
+            else
+                secureStorage.SetValue("pin", value);
         }
     }
+
+    //public interface IViewModelFactory
+    //{
+    //    TViewModel Create<TViewModel>();
+    //    TViewModel Create<TInputModel, TViewModel>();
+    //}
 }
