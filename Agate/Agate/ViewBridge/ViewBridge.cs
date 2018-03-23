@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Agate.Business.ViewModels;
+using Agate.Business.ViewModels.Main;
 using Agate.Business.ViewModels.User;
+using Agate.Views.Main;
 using Agate.Views.User;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
@@ -40,6 +42,14 @@ namespace Agate.ViewBridge
             if(viewModel.GetType() == typeof(SetPinViewModel))
             {
                 return new SetPinPage();
+            }
+            if(viewModel.GetType() == typeof(MainViewModel))
+            {
+                return new MainPage();
+            }
+            if(viewModel.GetType() == typeof(HomePageViewModel))
+            {
+                return new HomePage();
             }
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");

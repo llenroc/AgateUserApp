@@ -29,7 +29,7 @@ namespace Triplezerooo.XMVVM
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void Raise(string propertyName)
+        protected void Raise(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

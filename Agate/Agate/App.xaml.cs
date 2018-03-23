@@ -48,10 +48,11 @@ namespace Agate
 		    builder.RegisterType<ConfirmationCodeEntryViewModel>();
 		    builder.RegisterType<SetPinViewModel>();
 		    builder.RegisterType<MainViewModel>();
+		    builder.RegisterType<HomePageViewModel>();
 		    var container = builder.Build();
 
-		    var signUpPage = container.Resolve<SignUpPageViewModel>();
-            SingltonServices.ViewService.SetCurrentPage(signUpPage);
+		    var mainViewModel = container.Resolve<MainViewModel>();
+            SingltonServices.ViewService.SetCurrentPage(mainViewModel);
 		}
 
 		protected override void OnStart ()
