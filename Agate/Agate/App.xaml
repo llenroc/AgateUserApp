@@ -333,14 +333,14 @@
 
             <!-- MAIN MENU STYLES -->
             <Style x:Key="MainMenuStyle" TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="{DynamicResource MainMenuBackgroundColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource MainMenuHeaderBackgroundColor}" />
             </Style>
 
             <Style x:Key="MainMenuListViewStyle" TargetType="ListView">
                 <Setter Property="BackgroundColor" Value="{DynamicResource MainMenuBackgroundColor}" />
                 <Setter Property="SeparatorVisibility" Value="None" />
                 <Setter Property="SeparatorColor" Value="{DynamicResource MainMenuSeparatorColor}" />
-                <Setter Property="RowHeight" Value="55" />
+                <Setter Property="RowHeight" Value="60" />
             </Style>
 
             <Style x:Key="MainMenuIconStyle" TargetType="Label">

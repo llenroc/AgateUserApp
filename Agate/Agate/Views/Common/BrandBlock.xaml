@@ -9,7 +9,7 @@
 		</Grid.ColumnDefinitions>
 
 		
-		<Image Grid.Column="0" HeightRequest="64" WidthRequest="64" Source="{ StaticResource BrandImage }" BackgroundColor="{ DynamicResource AccentColor }" />
+		<Image Grid.Column="0" HeightRequest="64" WidthRequest="64" Source="{ StaticResource BrandImage }" BackgroundColor="White" />
 		
 
 		<StackLayout Grid.Column="1" Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Center" Spacing="0">
