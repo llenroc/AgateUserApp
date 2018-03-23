@@ -32,20 +32,12 @@
 
         </Grid>
 
-        <ListView Grid.Row="1" x:Name="sampleListView" 
-                  ItemSelected="OnItemSelected" 
+        <ListView Grid.Row="1" x:Name="MenuListView" 
                   ItemsSource="{ Binding AllMenuItems }" 
                   SeparatorVisibility="None" 
                   VerticalOptions="FillAndExpand" 
                   Style="{ StaticResource MainMenuListViewStyle }" 
                   CachingStrategy="RecycleElement">
-            <!--<ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Label Margin="24,0" Text="{Binding Name}" Style="{StaticResource MainMenuHeaderStyle}" HorizontalOptions="Start" />
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>-->
 
             <ListView.ItemTemplate>
                 <DataTemplate>

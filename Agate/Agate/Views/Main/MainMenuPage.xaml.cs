@@ -10,39 +10,17 @@ using MenuItem = Agate.Business.ViewModels.Main.MenuItem;
 
 namespace Agate.Views.Main
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainMenuPage : ContentPage
-	{
-	    private readonly INavigation navigation;
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MainMenuPage : ContentPage
+    {
+        public ListView ListView;
 
-	    public MainMenuPage()
-	    {	        
-	    }
-
-	    public MainMenuPage(INavigation navigation)
-	    {
-	        InitializeComponent();
-
-	        this.navigation = navigation;
-
-	        BindingContext = new MainMenuViewModel();
-	    }
-
-        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        public MainMenuPage()
         {
-            //if (sampleListView.SelectedItem is MenuItem sample)
-            //{
-            //    if (sample.PageType == typeof(HomePage))
-            //    {
-            //        await DisplayAlert("Hey", string.Format("You are already here, on sample {0}.", sample.Name), "OK");
-            //    }
-            //    else
-            //    {
-            //        await sample.NavigateToSample(navigation);
-            //    }
-
-            //    sampleListView.SelectedItem = null;
-            //}
+            InitializeComponent();
+            
+            BindingContext = new MainMenuViewModel();
+            ListView = MenuListView;
         }
     }
 }

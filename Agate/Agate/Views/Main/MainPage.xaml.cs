@@ -12,15 +12,15 @@ namespace Agate.Views.Main
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainPage : MasterDetailPage, IView
 	{
+	    private MainMenuPage mainMenuPage;
+
 	    public MainPage()	        
 	    {
 	        InitializeComponent();
 
             // Empty pages are initially set to get optimal launch experience
-            //Master = new ContentPage { Title = "Agate User's App" };
-            //Detail = NavigationPageHelper.Create(new ContentPage());
-	        Master = new MainMenuPage(new NavigationService(Navigation, LaunchSampleInDetail));
-	        Detail = NavigationPageHelper.Create(new HomePage());
+            Master = new ContentPage { Title = "Agate User's App" };
+            Detail = NavigationPageHelper.Create(new ContentPage());
 	    }
 
         public async void OnSettingsTapped(object sender, EventArgs e)
@@ -28,52 +28,41 @@ namespace Agate.Views.Main
 	        //await Navigation.PushAsync(new SettingsPage());
 	    }
 
-	    protected async override void OnAppearing()
+	    protected override async void OnAppearing()
 	    {
 	        base.OnAppearing();
 
-            //SampleCoordinator.SampleSelected += SampleCoordinator_SampleSelected;
-
-            //if (_showWelcome)
-            //{
-            //    _showWelcome = false;
-
-            //    await Navigation.PushModalAsync(NavigationPageHelper.Create(new WelcomePage()));
-
-            //    await Task.Delay(500)
-            //        .ContinueWith(t => NavigationService.BeginInvokeOnMainThreadAsync(InitializeMasterDetail));
-	        //}
-
-	        //await NavigationService.BeginInvokeOnMainThreadAsync(InitializeMasterDetail);
+	        await NavigationService.BeginInvokeOnMainThreadAsync(InitializeMasterDetail);
 	    }
 
 	    protected override void OnDisappearing()
 	    {
 	        base.OnDisappearing();
-
-	        //SampleCoordinator.SampleSelected -= SampleCoordinator_SampleSelected;
 	    }
 
 	    private void InitializeMasterDetail()
 	    {
-	        Master = new MainMenuPage(new NavigationService(Navigation, LaunchSampleInDetail));
+	        mainMenuPage = new MainMenuPage();
+	        mainMenuPage.ListView.ItemSelected += MenuOnItemSelected;
+	        Master = mainMenuPage;
 	        Detail = NavigationPageHelper.Create(new HomePage());
 	    }
 
-	    private void LaunchSampleInDetail(Page page, bool animated)
+	    private void MenuOnItemSelected(object sender, SelectedItemChangedEventArgs e)
+	    {
+	        if (e.SelectedItem is MenuItem sample)
+	        {
+	            //await sample.NavigateToSample(navigation);
+
+	            mainMenuPage.ListView.SelectedItem = null;
+	        }
+        }
+
+        private void LaunchSampleInDetail(Page page, bool animated)
 	    {
 	        Detail = NavigationPageHelper.Create(page);
 	        IsPresented = false;
 	    }
-
-	    //private void SampleCoordinator_SampleSelected(object sender, SampleEventArgs e)
-	    //{
-	    //    if (e.Sample.PageType == typeof(RootPage))
-	    //    {
-	    //        IsPresented = true;
-	    //    }
-	    //}
-
     }
 
     public static class NavigationPageHelper
