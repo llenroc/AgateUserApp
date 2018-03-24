@@ -108,6 +108,9 @@
             <FileImageSource x:Key="LoginBackgroundImagePhone">login_bg.jpg</FileImageSource>
             <FileImageSource x:Key="LoginBackgroundImageTablet">login_bg_tablet.jpg</FileImageSource>
 
+            <FileImageSource x:Key="HomePageBackgroundImagePhone">signup_bg.jpg</FileImageSource>
+            <FileImageSource x:Key="HomePageBackgroundImageTablet">signup_bg_tablet.jpg</FileImageSource>
+
             <FileImageSource x:Key="PasswordRecoveryBackgroundImagePhone">pass_recovery_bg.jpg</FileImageSource>
             <FileImageSource x:Key="PasswordRecoveryBackgroundImageTablet">pass_recovery_bg_tablet.jpg</FileImageSource>
 
@@ -427,7 +430,7 @@
                 <Setter Property="Aspect" Value="AspectFill" />
                 <Setter Property="Source">
                     <Setter.Value>
-                        <OnIdiom x:TypeArguments="ImageSource" Phone="{ StaticResource SignUpBackgroundImagePhone }" Tablet="{ StaticResource LoginBackgroundImageTablet }" />
+                        <OnIdiom x:TypeArguments="ImageSource" Phone="{ StaticResource SignUpBackgroundImagePhone }" Tablet="{ StaticResource SignUpBackgroundImageTablet }" />
                     </Setter.Value>
                 </Setter>
             </Style>
@@ -466,6 +469,16 @@
                 <Setter Property="BackgroundColor" Value="Transparent" />
                 <Setter Property="TextColor" Value="{DynamicResource LabelButtonColor}" />
                 <Setter Property="HeightRequest" Value="{StaticResource BaseButtonHeight}" />
+            </Style>
+
+            <!-- HOME PAGE STYLES -->
+            <Style x:Key="HomePageBackgroundImage" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="ImageSource" Phone="{ StaticResource HomePageBackgroundImagePhone }" Tablet="{ StaticResource HomePageBackgroundImageTablet }" />
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <!-- ENTRY FIELDS -->

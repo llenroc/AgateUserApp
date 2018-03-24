@@ -1,12 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:layouts="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
              x:Class="Agate.Views.Main.HomePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <!---BACKGROUND IMAGE-->
+            <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+            <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+                <!-- MAIN CONTAINER -->
+                <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+
+
+                    <!-- ########## TOTAL BALANCE OF ALL ########## -->
+                    <Frame Grid.Row="0" Margin="10" CornerRadius="0" Padding="4">
+                        <StackLayout Padding="10" BackgroundColor="White" >
+                            <Label Text="{Binding TotalAmount}" FontSize="36" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- ################# ASSETS ################ -->
+                    <Frame Grid.Row="1" Margin="10" CornerRadius="0" Padding="4">
+                        <StackLayout x:Name="AssetsPanel" BackgroundColor="White" >
+                            <StackLayout Orientation="Horizontal" x:Name="AssetsPanelHeader">
+                                <Label Text="Assets" HorizontalOptions="StartAndExpand" Margin="8,2"/>
+                                <Image Source="add.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Fill" Margin="8,2">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Assets.ChooseAssetsCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+
+                            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" />
+
+                            <layouts:RepeatableStack ItemsSource="{Binding Assets.List}">
+                                <layouts:RepeatableStack.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowAssetCommand}"/>
+                                            </Grid.GestureRecognizers>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="48"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="40"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="{Binding Asset.LogoName}" Margin="4,2" WidthRequest="40" HeightRequest="40" />
+                                            <StackLayout Grid.Column="1">
+                                                <Label Text="{Binding Balance}" Margin="8,0" VerticalOptions="Start"/>
+                                                <Label Text="{Binding FiatBalance}" Margin="8,0" VerticalOptions="Start"/>
+                                            </StackLayout>
+                                            <Image Grid.Column="2" Source="downarrow.png" Margin="4,2" HeightRequest="24" WidthRequest="24"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </layouts:RepeatableStack.ItemTemplate>
+                            </layouts:RepeatableStack>
+
+                            <!--<StackLayout x:Name="AssetListPanel" Margin="0" Padding="0">
+
+                        </StackLayout>-->
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- ################### BUCKET #####################-->
+                    <Frame Grid.Row="2" Margin="10" CornerRadius="0" Padding="4">
+                        <StackLayout x:Name="BucketPanel" BackgroundColor="White">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Bucket" HorizontalOptions="StartAndExpand" Margin="8,2"/>
+                                <Image Source="add.png" WidthRequest="16" HeightRequest="16" HorizontalOptions="Fill" Margin="8,2"/>
+                            </StackLayout>
+                            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" />
+                            <StackLayout Padding="10" BackgroundColor="White" >
+                                <Label Text="{Binding Bucket.Balance}" FontSize="20" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- ####################### CARDS ######################### -->
+                    <Frame Grid.Row="3" Margin="10" CornerRadius="0" Padding="4">
+                        <StackLayout x:Name="CardsPanel" BackgroundColor="White">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Card" HorizontalOptions="StartAndExpand" Margin="8,2"/>
+                                <Image Source="add.png" WidthRequest="16" HeightRequest="16" HorizontalOptions="Fill" Margin="8,2"/>
+                            </StackLayout>
+                            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" />
+                            <Grid>
+                                <StackLayout IsVisible="{Binding Cards.NoCardViewIsVisible}">
+                                    <Button Command="{Binding Cards.OrderCardCommand}" Text="Order a card"/>
+                                </StackLayout>
+                                <StackLayout IsVisible="{Binding Cards.OrderPendingViewIsVisible}">
+                                    <Label HorizontalTextAlignment="Center">Soon you will get your card ...</Label>
+                                </StackLayout>
+                            </Grid>
+                            <layouts:RepeatableStack ItemsSource="{Binding Cards.List}">
+                                <layouts:RepeatableStack.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <Label Text="{Binding Card.CardNumberHint}" HorizontalOptions="Fill"/>
+                                            <Label Text="{Binding Balance}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </layouts:RepeatableStack.ItemTemplate>
+                            </layouts:RepeatableStack>
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
