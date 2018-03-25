@@ -20,8 +20,6 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-
-
                     <!-- ########## TOTAL BALANCE OF ALL ########## -->
                     <Frame Grid.Row="0" Margin="10" CornerRadius="0" Padding="4">
                         <StackLayout Padding="10" BackgroundColor="White" >
@@ -33,7 +31,7 @@
                     <Frame Grid.Row="1" Margin="10" CornerRadius="0" Padding="4">
                         <StackLayout x:Name="AssetsPanel" BackgroundColor="White" >
                             <StackLayout Orientation="Horizontal" x:Name="AssetsPanelHeader">
-                                <Label Text="Assets" HorizontalOptions="StartAndExpand" Margin="8,2"/>
+                                <Label Text="Crypto Assets" HorizontalOptions="StartAndExpand" Margin="8,2"/>
                                 <Image Source="add.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Fill" Margin="8,2">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Assets.ChooseAssetsCommand}" />

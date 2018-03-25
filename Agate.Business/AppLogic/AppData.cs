@@ -9,7 +9,7 @@ using Plugin.SecureStorage.Abstractions;
 
 namespace Agate.Business.AppLogic
 {
-    public class AppData
+    public class AppData : IAppData
     {
         public static string UserCurrency = "USD";
 
@@ -92,14 +92,5 @@ namespace Agate.Business.AppLogic
             };
         }
 
-    }
-
-
-    public class Calculations
-    {
-        public static decimal EvaluateTotalAmount(string userCurrency, Asset[] assets, UserAsset[] userAssets, Rate[] rates, Card[] cards, decimal bucketAmount)
-        {
-            return 204843;
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
 namespace Agate.Business.AppLogic
@@ -25,7 +26,7 @@ namespace Agate.Business.AppLogic
             //}
         }
 
-        public static async Task<ContentPage> DecideOrderCardPage()
+        public static async Task<BaseViewModel> DecideOrderCardPage()
         {
             return null;
             //var userAddresses = (await UserData.ReadUserAddresses()) ?? new OpalApp.LocalData.UserAddress[0];
