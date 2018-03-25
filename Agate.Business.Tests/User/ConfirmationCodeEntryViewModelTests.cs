@@ -61,7 +61,7 @@ namespace Agate.Business.Tests.User
             viewService
                 .Setup(m => m.SetCurrentPage(It.Is((BaseViewModel p) => p.GetType() == typeof(SetPinViewModel))))
                 .Verifiable();
-            SetPinViewModel CreateSetPinView() => new SetPinViewModel(null,null,null,null);
+            SetPinViewModel CreateSetPinView() => new SetPinViewModel(null,null,null,null,null);
             var viewModel = new ConfirmationCodeEntryViewModel(1, CreateSetPinView, accountService.Object, viewService.Object, dataFlow.Object, deviceInfo.Object, connectivity.Object);
             viewModel.View = view.Object;
             viewModel.ConfirmationCode.Value = ValidCode;

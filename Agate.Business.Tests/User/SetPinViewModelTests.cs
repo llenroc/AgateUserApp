@@ -22,7 +22,7 @@ namespace Agate.Business.Tests.User
         [Fact(DisplayName = "Validation Test")]
         public void ValidationTest()
         {
-            var viewModel = new SetPinViewModel(accountService.Object, viewService.Object, deviceInfo.Object, secureStorage.Object);
+            var viewModel = new SetPinViewModel(accountService.Object, viewService.Object, deviceInfo.Object, secureStorage.Object, null);
 
             Assert.False(viewModel.CanSetPin(), "Set PIN button should be disabled initially");
 

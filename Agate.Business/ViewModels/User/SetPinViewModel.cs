@@ -17,13 +17,15 @@ namespace Agate.Business.ViewModels.User
         private readonly IViewService viewService;
         private readonly IDeviceInfo deviceInfo;
         private readonly ISecureStorage secureStorage;
+        private readonly Func<MainViewModel> createMainViewModel;
 
-        public SetPinViewModel(IAccountService accountService, IViewService viewService, IDeviceInfo deviceInfo, ISecureStorage secureStorage)
+        public SetPinViewModel(IAccountService accountService, IViewService viewService, IDeviceInfo deviceInfo, ISecureStorage secureStorage, Func<MainViewModel> createMainViewModel)
         {
             this.accountService = accountService;
             this.viewService = viewService;
             this.deviceInfo = deviceInfo;
             this.secureStorage = secureStorage;
+            this.createMainViewModel = createMainViewModel;
             Pin1 = new Property<string>("PIN").RequiredString("Please enter a PIN value");
             Pin2 = new Property<string>("PIN repeat").Check(pin2=>pin2 == Pin1.Value, "The values does not match");
             SetPinCommand = new XCommand(async ()=> await SetPin(), CanSetPin);
@@ -68,7 +70,7 @@ namespace Agate.Business.ViewModels.User
 
                 if (response != null && response.Success)
                 {
-                    viewService.SetCurrentPage(new MainViewModel());
+                    viewService.SetCurrentPage(createMainViewModel());
                 }
                 else
                 {

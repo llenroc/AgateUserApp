@@ -38,6 +38,8 @@ namespace Agate
 
             var builder = new ContainerBuilder();
 		    builder.RegisterType<DataFlow>().As<IDataFlow>();
+		    builder.RegisterType<UXFlow>().As<IUXFlow>();
+		    builder.RegisterType<AppData>().As<IAppData>();
 		    builder.Register(c => CrossSecureStorage.Current).As<ISecureStorage>();
 		    builder.Register(c => CrossConnectivity.Current).As<IConnectivity>();
 		    builder.RegisterType<AccountService>().As<IAccountService>();
@@ -49,10 +51,13 @@ namespace Agate
 		    builder.RegisterType<SetPinViewModel>();
 		    builder.RegisterType<MainViewModel>();
 		    builder.RegisterType<HomePageViewModel>();
+		    builder.RegisterType<ChooseAssetsViewModel>();
+		    builder.RegisterType<AssetHomeViewModel>();
+            
 		    var container = builder.Build();
 
-		    var mainViewModel = container.Resolve<MainViewModel>();
-            SingltonServices.ViewService.SetCurrentPage(mainViewModel);
+		    var uxFlow = container.Resolve<IUXFlow>();
+            uxFlow.DecideOnAppStartPage();
 		}
 
 		protected override void OnStart ()

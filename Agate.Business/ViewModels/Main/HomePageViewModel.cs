@@ -8,20 +8,32 @@ namespace Agate.Business.ViewModels.Main
     public class HomePageViewModel : BaseViewModel
     {
         private readonly IAppData appData;
-        private readonly INavigationService navigationService;
+        private readonly IUXFlow uxFlow;
+        private readonly Func<ChooseAssetsViewModel> createChooseAssetsViewModel;
+        private readonly Func<AssetHomeViewModel> createAssetHomeViewModel;
         private string totalAmount;
 
-        public HomePageViewModel(IView view, IAppData appData, INavigationService navigationService, Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<AssetHomeViewModel> createAssetHomeViewModel)
+        public HomePageViewModel(
+            IAppData appData, 
+            IUXFlow uxFlow,
+            Func<ChooseAssetsViewModel> createChooseAssetsViewModel, 
+            Func<AssetHomeViewModel> createAssetHomeViewModel)
         {
             this.appData = appData;
-            this.navigationService = navigationService;
-            View = view;
+            this.uxFlow = uxFlow;
+            this.createChooseAssetsViewModel = createChooseAssetsViewModel;
+            this.createAssetHomeViewModel = createAssetHomeViewModel;
+        }
+
+        public void Initialize(INavigationService navigationService)
+        {
             Assets = new HomePageAssetsViewModel(this, navigationService, createChooseAssetsViewModel, createAssetHomeViewModel);
             Bucket = new HomePageBucketInfoViewModel(this);
-            Cards = new HomePageCardsViewModel(this, navigationService);
+            Cards = new HomePageCardsViewModel(this, navigationService, uxFlow);
 
             ShowData();
         }
+
 
         public string TotalAmount
         {
@@ -35,9 +47,9 @@ namespace Agate.Business.ViewModels.Main
             }
         }
 
-        public HomePageAssetsViewModel Assets { get; }
-        public HomePageBucketInfoViewModel Bucket { get; }
-        public HomePageCardsViewModel Cards { get; }
+        public HomePageAssetsViewModel Assets { get; set; }
+        public HomePageBucketInfoViewModel Bucket { get; set; }
+        public HomePageCardsViewModel Cards { get; set; }
 
         public async void OnAppearing()
         {

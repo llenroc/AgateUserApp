@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Agate.Views.Main
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainPage : MasterDetailPage, IView
+	public partial class MainPage : MasterDetailPage, IView, INavigationView
 	{
 	    private MainMenuPage mainMenuPage;
 
-	    public MainPage()	        
+	    public MainPage()
 	    {
 	        InitializeComponent();
 
@@ -23,12 +23,7 @@ namespace Agate.Views.Main
             Detail = NavigationPageHelper.Create(new ContentPage());
 	    }
 
-        public async void OnSettingsTapped(object sender, EventArgs e)
-	    {
-	        //await Navigation.PushAsync(new SettingsPage());
-	    }
-
-	    protected override async void OnAppearing()
+        protected override async void OnAppearing()
 	    {
 	        base.OnAppearing();
 
@@ -45,7 +40,6 @@ namespace Agate.Views.Main
 	        mainMenuPage = new MainMenuPage();
 	        mainMenuPage.ListView.ItemSelected += MenuOnItemSelected;
 	        Master = mainMenuPage;
-	        Detail = NavigationPageHelper.Create(new HomePage());
 	    }
 
 	    private void MenuOnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -63,7 +57,20 @@ namespace Agate.Views.Main
 	        Detail = NavigationPageHelper.Create(page);
 	        IsPresented = false;
 	    }
-    }
+
+	    public void SetCurrentPage(Page page)
+	    {
+	        Detail = NavigationPageHelper.Create(page);
+	        IsPresented = false;
+	    }
+
+	    public async Task Push(Page page)
+	    {
+	        if (!(Detail is NavigationPage navigationPage))
+	            return;
+	        await navigationPage.PushAsync(page);
+	    }
+	}
 
     public static class NavigationPageHelper
     {

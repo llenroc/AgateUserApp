@@ -1,32 +1,58 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Agate.Business.Services;
+using Agate.Business.ViewModels.Main;
+using Agate.Business.ViewModels.User;
+using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
 namespace Agate.Business.AppLogic
 {
-    public class UXFlow
+    public class UXFlow : IUXFlow
     {
-        public static void DecideOnAppStartPage()
+        private readonly ISecureStorage secureStorage;
+        private readonly IViewService viewService;
+        private readonly Func<MainViewModel> createMainViewModel;
+        private readonly Func<SetPinViewModel> createSetPinViewModel;
+        private readonly Func<SignUpPageViewModel> createSignUpPageViewModel;
+
+        public UXFlow(ISecureStorage secureStorage, IViewService viewService, Func<MainViewModel> createMainViewModel, Func<SetPinViewModel> createSetPinViewModel, Func<SignUpPageViewModel> createSignUpPageViewModel)
         {
-            //if (UserAccount.UserId != null && UserAccount.AccessCode != null)
-            //{
-            //    if (UserAccount.Pin != null)
-            //    {
-            //        Application.Current.MainPage = new PinSignInPage();
-            //    }
-            //    else
-            //    {
-            //        // User exists but has not set pin
-            //        // demand them to login and set pin                    
-            //    }
-            //}
-            //else
-            //{
-            //    Application.Current.MainPage = new SignUpPage();
-            //}
+            this.secureStorage = secureStorage;
+            this.viewService = viewService;
+            this.createMainViewModel = createMainViewModel;
+            this.createSetPinViewModel = createSetPinViewModel;
+            this.createSignUpPageViewModel = createSignUpPageViewModel;
         }
 
-        public static async Task<BaseViewModel> DecideOrderCardPage()
+        public void DecideOnAppStartPage()
+        {
+            var mainViewModel = createMainViewModel();
+            viewService.SetCurrentPage(mainViewModel);
+            return;
+
+            if (secureStorage.GetUserId() != null && secureStorage.GetAccessCode() != null)
+            {
+                if (secureStorage.GetPin() != null)
+                {
+                    var setPinViewModel = createSetPinViewModel();
+                    viewService.SetCurrentPage(setPinViewModel);
+                }
+                else
+                {
+                    // User exists but has not set pin
+                    // demand them to login and set pin                    
+                }
+            }
+            else
+            {
+                var signUpViewModel = createSignUpPageViewModel();
+                viewService.SetCurrentPage(signUpViewModel);
+            }
+        }
+
+        public async Task<BaseViewModel> DecideOrderCardPage()
         {
             return null;
             //var userAddresses = (await UserData.ReadUserAddresses()) ?? new OpalApp.LocalData.UserAddress[0];

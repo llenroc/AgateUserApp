@@ -17,6 +17,11 @@ namespace Agate.ViewBridge
         {
             Application.Current.MainPage = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
         }
+
+        public INavigationService CreateNavigationService(INavigationView view)
+        {
+            return new NavigationService(view);
+        }
     }
 
     public class ViewModelToViewMapping
@@ -26,6 +31,14 @@ namespace Agate.ViewBridge
             var view = CreateViewBasedOnViewModelType(viewModel);
             view.BindingContext = viewModel;
             viewModel.View = view as IView;
+            
+            if(viewModel is IViewModelLifeTime)
+            {
+                var lifeTimeAwareViewModel = viewModel as IViewModelLifeTime;
+                view.Appearing += (sender, args) => lifeTimeAwareViewModel.OnAppearing();
+                view.Disappearing += (sender, args) => lifeTimeAwareViewModel.OnDisappearing();
+            }
+
             return view;
         }
 
