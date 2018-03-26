@@ -4,11 +4,15 @@ namespace Agate.Business.Services
 {
     public static class UserAccount
     {
+        public const string UserIdkey = "userid";
+        public const string AccessCodeKey = "accesscode";
+        public const string PinKey = "pin";
+
         public static int? GetUserId(this ISecureStorage secureStorage)
         {
-            if (secureStorage.HasKey("userid"))
+            if (secureStorage.HasKey(UserIdkey))
             {
-                int.TryParse(secureStorage.GetValue("userid"), out int result);
+                int.TryParse(secureStorage.GetValue(UserIdkey), out int result);
                 return result;
             }
             return null;
@@ -17,41 +21,35 @@ namespace Agate.Business.Services
         public static void SetUserId(this ISecureStorage secureStorage, int? value)
         {
             if (value == null)
-                secureStorage.DeleteKey("userid");
+                secureStorage.DeleteKey(UserIdkey);
             else
-                secureStorage.SetValue("userid", value.Value.ToString());
+                secureStorage.SetValue(UserIdkey, value.Value.ToString());
         }
 
         public static string GetAccessCode(this ISecureStorage secureStorage)
         {
-            return secureStorage.GetValue("accesscode");
+            return secureStorage.GetValue(AccessCodeKey);
         }
 
         public static void SetAccessCode(this ISecureStorage secureStorage, string value)
         {
             if (value == null)
-                secureStorage.DeleteKey("accesscode");
+                secureStorage.DeleteKey(AccessCodeKey);
             else
-                secureStorage.SetValue("accesscode", value);
+                secureStorage.SetValue(AccessCodeKey, value);
         }
 
         public static string GetPin(this ISecureStorage secureStorage)
         {
-            return secureStorage.GetValue("pin");
+            return secureStorage.GetValue(PinKey);
         }
 
         public static void SetPin(this ISecureStorage secureStorage, string value)
         {
             if (value == null)
-                secureStorage.DeleteKey("pin");
+                secureStorage.DeleteKey(PinKey);
             else
-                secureStorage.SetValue("pin", value);
+                secureStorage.SetValue(PinKey, value);
         }
     }
-
-    //public interface IViewModelFactory
-    //{
-    //    TViewModel Create<TViewModel>();
-    //    TViewModel Create<TInputModel, TViewModel>();
-    //}
 }

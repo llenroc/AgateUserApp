@@ -14,30 +14,26 @@ namespace Agate.Business.AppLogic
         private readonly ISecureStorage secureStorage;
         private readonly IViewService viewService;
         private readonly Func<MainViewModel> createMainViewModel;
-        private readonly Func<SetPinViewModel> createSetPinViewModel;
+        private readonly Func<PinSignInViewModel> createPinSignInViewModel;
         private readonly Func<SignUpPageViewModel> createSignUpPageViewModel;
 
-        public UXFlow(ISecureStorage secureStorage, IViewService viewService, Func<MainViewModel> createMainViewModel, Func<SetPinViewModel> createSetPinViewModel, Func<SignUpPageViewModel> createSignUpPageViewModel)
+        public UXFlow(ISecureStorage secureStorage, IViewService viewService, Func<MainViewModel> createMainViewModel, Func<PinSignInViewModel> createPinSignInViewModel, Func<SignUpPageViewModel> createSignUpPageViewModel)
         {
             this.secureStorage = secureStorage;
             this.viewService = viewService;
             this.createMainViewModel = createMainViewModel;
-            this.createSetPinViewModel = createSetPinViewModel;
+            this.createPinSignInViewModel = createPinSignInViewModel;
             this.createSignUpPageViewModel = createSignUpPageViewModel;
         }
 
         public void DecideOnAppStartPage()
         {
-            var mainViewModel = createMainViewModel();
-            viewService.SetCurrentPage(mainViewModel);
-            return;
-
             if (secureStorage.GetUserId() != null && secureStorage.GetAccessCode() != null)
             {
                 if (secureStorage.GetPin() != null)
                 {
-                    var setPinViewModel = createSetPinViewModel();
-                    viewService.SetCurrentPage(setPinViewModel);
+                    var pinSignInViewModel = createPinSignInViewModel();
+                    viewService.SetCurrentPage(pinSignInViewModel);
                 }
                 else
                 {

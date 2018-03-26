@@ -40,6 +40,7 @@ namespace Agate
 		    builder.RegisterType<DataFlow>().As<IDataFlow>();
 		    builder.RegisterType<UXFlow>().As<IUXFlow>();
 		    builder.RegisterType<AppData>().As<IAppData>();
+		    builder.RegisterType<DataReset>().As<DataReset>();
 		    builder.Register(c => CrossSecureStorage.Current).As<ISecureStorage>();
 		    builder.Register(c => CrossConnectivity.Current).As<IConnectivity>();
 		    builder.RegisterType<AccountService>().As<IAccountService>();
@@ -53,8 +54,12 @@ namespace Agate
 		    builder.RegisterType<HomePageViewModel>();
 		    builder.RegisterType<ChooseAssetsViewModel>();
 		    builder.RegisterType<AssetHomeViewModel>();
+		    builder.RegisterType<PinSignInViewModel>();
             
 		    var container = builder.Build();
+
+		    //var dataReset = container.Resolve<DataReset>();
+		    //dataReset.SetTestUser().Wait();
 
 		    var uxFlow = container.Resolve<IUXFlow>();
             uxFlow.DecideOnAppStartPage();

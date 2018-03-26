@@ -64,6 +64,10 @@ namespace Agate.ViewBridge
             {
                 return new HomePage();
             }
+            if(viewModel.GetType() == typeof(PinSignInViewModel))
+            {
+                return new PinSignInPage();
+            }
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }
