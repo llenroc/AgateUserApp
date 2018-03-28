@@ -76,7 +76,7 @@ namespace Agate.Business.ViewModels.Main
         public void ShowData()
         {
             var newTotalAmount = Calculations.EvaluateTotalAmount(AppData.UserCurrency, appData.AllAssets, appData.UserAssets, appData.Rates, appData.Cards, appData.BucketAmount);
-            TotalAmount = $"{newTotalAmount} {AppData.UserCurrency}";
+            TotalAmount = $"{newTotalAmount:C}";
             Assets.Update(appData.AllAssets, appData.UserAssets, appData.Rates);
             Bucket.Balance = appData.BucketAmount;
             Cards.Update(appData.Cards);
