@@ -14,7 +14,7 @@
                 <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="80" />
+                        <RowDefinition Height="100" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="120" />
                         <RowDefinition Height="Auto" />
@@ -22,8 +22,9 @@
 
                     <!-- ########## TOTAL BALANCE OF ALL ########## -->
                     <Frame Grid.Row="0" Margin="10" CornerRadius="0" Padding="4">
-                        <StackLayout Padding="10" BackgroundColor="White" >
-                            <Label Text="{Binding TotalAmount}" FontSize="36" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+                        <StackLayout Padding="10,0,10,10" BackgroundColor="White" >
+                            <Label Text="Total Asset Value" FontSize="12" VerticalOptions="Start" HorizontalOptions="Start" />
+                            <Label Text="{Binding TotalAmount}" Margin="0" FontSize="36" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
                         </StackLayout>
                     </Frame>
 

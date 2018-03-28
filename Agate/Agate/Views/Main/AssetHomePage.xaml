@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agate.Views.Main.AssetHomePage"
+            xmlns:ce="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+            Title="Asset"
+            BackgroundImage="{StaticResource SignUpBackgroundImagePhone}">
+    <TabbedPage.Children>
+
+        <ContentPage Title="Send" AutomationId="SendPage" >
+            <StackLayout BindingContext="{Binding SendViewModel}">
+                <Label Text="Amount" Margin="0,16,0,0" />
+                <Entry Text="{Binding Amount.Value}" x:Name="SendAmountEntry" AutomationId="SendAmountEntry" Margin="0,8,0,0" ce:CustomReturnEffect.ReturnType="Next" />
+                <Label Text="{Binding Amount.ValidationError}" AutomationId="InvalidAmountLabel" IsVisible="{Binding Amount.IsInvalid}" TextColor="Red" FontSize="Small" />
+                <Label Text="Receiever's Address" Margin="0,8,0,0" />
+                <Entry Text="{Binding SendAddress.Value}" x:Name="ReceiverAddressEntry" AutomationId="ReceiverAddressEntry" Margin="0,8,0,0" ce:CustomReturnEffect.ReturnType="Done"/>
+                <Label Text="{Binding SendAddress.ValidationError}" AutomationId="InvalidReceiverAddressLabel" IsVisible="{Binding Amount.IsInvalid}" TextColor="Red" FontSize="Small" />
+                <Button HorizontalOptions="FillAndExpand" Margin="16,32,16,0" Text="Send" Command="{Binding SendCommand}" />
+            </StackLayout>
+        </ContentPage>
+        <ContentPage Title="Receive" AutomationId="ReceivePage">
+            <StackLayout BindingContext="{Binding ReceiveViewModel}">
+                <Image x:Name="ReceieveAddress" WidthRequest="200" HeightRequest="200"/>
+                <Label  Text="Receive address:"/>
+                <!-- todo : uncomment and implement <Image x:Name="receiveAddressQrImage" WidthRequest="200" HeightRequest="200" Aspect="AspectFill"></Image>-->
+                <Label Text="{Binding DepositAddress}" />
+                <!-- todo : uncomment and implement <Button Command="{Bining GenerateNewAddressCommand}" Text="Generate new address" />-->
+                <!-- todo : uncomment and implement <Button Margin="0,16,0,0" x:Name="shareReceieveAddressButton" Text="Share" />-->
+            </StackLayout>
+        </ContentPage>
+        <ContentPage Title="Transfer" AutomationId="TransferPage">
+            <StackLayout BindingContext="{Binding TransferViewModel}">
+                <Label Text="Amount" Margin="0,16,0,0" />
+                <Entry Text="{Binding Amount.Value}" AutomationId="TransferAmountEntry" Margin="0,8,0,0" />
+                <Label Text="{Binding Amount.ValidationError}" AutomationId="InvalidTransferAmountEntry" IsVisible="{Binding Amount.IsInvalid}" TextColor="Red" FontSize="Small" />
+                <!-- if user has more than one card allow them to select a card -->
+                <Button HorizontalOptions="FillAndExpand" AutomationId="TransferButton" Margin="16,32,16,0" Text="Transfer" Command="{Binding TransferCommand}" />
+            </StackLayout>
+        </ContentPage>
+
+    </TabbedPage.Children>
+</TabbedPage>

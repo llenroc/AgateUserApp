@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using Triplezerooo.XMVVM;
 
 namespace Agate.Business.ViewModels.Main
@@ -16,17 +17,17 @@ namespace Agate.Business.ViewModels.Main
             this.createHomePageViewModel = createHomePageViewModel;
         }
 
-        public void OnAppearing()
+        public async Task OnAppearing()
         {
             var navigationService = viewService.CreateNavigationService(this.View as INavigationView);
 
             var homePageViewModel = createHomePageViewModel();
-            homePageViewModel.Initialize(navigationService);
+            await homePageViewModel.Initialize(navigationService);
 
-            viewService.SetCurrentPage(homePageViewModel);
+            await navigationService.SetCurrentPage(homePageViewModel);
         }
 
-        public void OnDisappearing()
+        public async Task OnDisappearing()
         {
             
         }

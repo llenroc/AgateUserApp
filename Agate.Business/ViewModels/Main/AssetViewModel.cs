@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Agate.Business.LocalData;
 using Triplezerooo.XMVVM;
@@ -19,7 +20,7 @@ namespace Agate.Business.ViewModels.Main
             Asset = asset;
             UserAsset = userAsset;
             Rate = rate;
-            ShowAssetCommand = new Command(ShowAsset);
+            ShowAssetCommand = new Command(async ()=> await ShowAsset());
         }
 
         public HomePageAssetsViewModel Parent { get; }
@@ -29,11 +30,11 @@ namespace Agate.Business.ViewModels.Main
         public string Balance => $"{UserAsset.Balance} ${Asset.AssetSymbol}";
         public string FiatBalance => Rate != null ? $"{Rate.TargetCurrency} {UserAsset.Balance * Rate.Amount}" : "";
         public ICommand ShowAssetCommand { get; }
-        public void ShowAsset()
+        public async Task ShowAsset()
         {
             var assetHomeViewModel = createAssetHomeViewModel();
             assetHomeViewModel.Initialize(Asset, UserAsset, Rate);
-            navigationService.Push(assetHomeViewModel);
+            await navigationService.Push(assetHomeViewModel);
         }
     }
 }

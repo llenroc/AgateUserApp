@@ -7,7 +7,12 @@ namespace Agate.Business.ViewModels.Main
     {
         private decimal balance;
 
-        public HomePageBucketInfoViewModel(HomePageViewModel parent)
+        public HomePageBucketInfoViewModel()
+        {
+            
+        }
+
+        public void Initialize(HomePageViewModel parent)
         {
             Parent = parent;
         }
@@ -24,6 +29,6 @@ namespace Agate.Business.ViewModels.Main
             }
         }
 
-        public HomePageViewModel Parent { get; }
+        public HomePageViewModel Parent { get; set; }
     }
 }

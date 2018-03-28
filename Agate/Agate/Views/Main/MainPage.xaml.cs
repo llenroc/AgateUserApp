@@ -58,7 +58,7 @@ namespace Agate.Views.Main
 	        IsPresented = false;
 	    }
 
-	    public void SetCurrentPage(Page page)
+	    public async Task SetCurrentPage(Page page)
 	    {
 	        Detail = NavigationPageHelper.Create(page);
 	        IsPresented = false;
@@ -70,7 +70,7 @@ namespace Agate.Views.Main
 	            return;
 	        await navigationPage.PushAsync(page);
 	    }
-	}
+    }
 
     public static class NavigationPageHelper
     {

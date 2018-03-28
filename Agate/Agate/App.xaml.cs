@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Agate.Business;
 using Agate.Business.Api;
 using Agate.Business.AppLogic;
@@ -52,16 +53,20 @@ namespace Agate
 		    builder.RegisterType<SetPinViewModel>();
 		    builder.RegisterType<MainViewModel>();
 		    builder.RegisterType<HomePageViewModel>();
+		    builder.RegisterType<HomePageAssetsViewModel>();
+		    builder.RegisterType<HomePageBucketInfoViewModel>();
+		    builder.RegisterType<HomePageCardsViewModel>();
 		    builder.RegisterType<ChooseAssetsViewModel>();
 		    builder.RegisterType<AssetHomeViewModel>();
 		    builder.RegisterType<PinSignInViewModel>();
             
 		    var container = builder.Build();
 
-		    //var dataReset = container.Resolve<DataReset>();
-		    //dataReset.SetTestUser().Wait();
+            var dataReset = container.Resolve<DataReset>();
 
-		    var uxFlow = container.Resolve<IUXFlow>();
+		    //Task.Run((async ()=> await dataReset.SetTestUser()));
+
+            var uxFlow = container.Resolve<IUXFlow>();
             uxFlow.DecideOnAppStartPage();
 		}
 

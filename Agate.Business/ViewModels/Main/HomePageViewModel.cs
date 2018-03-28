@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using Agate.Business.AppLogic;
 using Triplezerooo.XMVVM;
 
@@ -9,29 +10,36 @@ namespace Agate.Business.ViewModels.Main
     {
         private readonly IAppData appData;
         private readonly IUXFlow uxFlow;
-        private readonly Func<ChooseAssetsViewModel> createChooseAssetsViewModel;
-        private readonly Func<AssetHomeViewModel> createAssetHomeViewModel;
         private string totalAmount;
 
         public HomePageViewModel(
             IAppData appData, 
             IUXFlow uxFlow,
             Func<ChooseAssetsViewModel> createChooseAssetsViewModel, 
-            Func<AssetHomeViewModel> createAssetHomeViewModel)
+            Func<AssetHomeViewModel> createAssetHomeViewModel, 
+            HomePageAssetsViewModel assetsViewModel,
+            HomePageBucketInfoViewModel bucketInfoViewModel,
+            HomePageCardsViewModel cardsViewModel)
         {
             this.appData = appData;
             this.uxFlow = uxFlow;
-            this.createChooseAssetsViewModel = createChooseAssetsViewModel;
-            this.createAssetHomeViewModel = createAssetHomeViewModel;
+
+            Assets = assetsViewModel;
+            Bucket = bucketInfoViewModel;
+            Cards = cardsViewModel;
         }
 
-        public void Initialize(INavigationService navigationService)
+        public async Task Initialize(INavigationService navigationService)
         {
-            Assets = new HomePageAssetsViewModel(this, navigationService, createChooseAssetsViewModel, createAssetHomeViewModel);
-            Bucket = new HomePageBucketInfoViewModel(this);
-            Cards = new HomePageCardsViewModel(this, navigationService, uxFlow);
+            Assets.Initialize(this, navigationService);
+            Bucket.Initialize(this);
+            Cards.Initialize(this, navigationService);
+
+            await appData.LoadOfflineData();
 
             ShowData();
+
+            await appData.LoadOnlineData(false);
         }
 
 

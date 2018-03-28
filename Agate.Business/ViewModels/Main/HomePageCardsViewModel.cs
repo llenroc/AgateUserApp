@@ -12,20 +12,26 @@ namespace Agate.Business.ViewModels.Main
 {
     public class HomePageCardsViewModel : BaseViewModel
     {
-        private readonly INavigationService navigationService;
+        private INavigationService navigationService;
         private readonly IUXFlow uxFlow;
         private bool orderPendingViewIsVisible;
         private bool noCardViewIsVisible;
 
-        public HomePageCardsViewModel(HomePageViewModel parent, INavigationService navigationService, IUXFlow uxFlow)
+        public HomePageCardsViewModel(IUXFlow uxFlow)
         {
-            this.navigationService = navigationService;
             this.uxFlow = uxFlow;
-            Parent = parent;
             OrderCardCommand = new Command(async () => await OrderCard());
         }
 
-        public HomePageViewModel Parent { get; }
+        public void Initialize(HomePageViewModel parent, INavigationService navigationService)
+        {
+            this.navigationService = navigationService;
+            Parent = parent;
+        }
+
+        
+
+        public HomePageViewModel Parent { get; set; }
 
         public bool NoCardViewIsVisible
         {

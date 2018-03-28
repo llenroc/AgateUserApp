@@ -35,8 +35,8 @@ namespace Agate.ViewBridge
             if(viewModel is IViewModelLifeTime)
             {
                 var lifeTimeAwareViewModel = viewModel as IViewModelLifeTime;
-                view.Appearing += (sender, args) => lifeTimeAwareViewModel.OnAppearing();
-                view.Disappearing += (sender, args) => lifeTimeAwareViewModel.OnDisappearing();
+                view.Appearing += async (sender, args) => await lifeTimeAwareViewModel.OnAppearing();
+                view.Disappearing += async (sender, args) => await lifeTimeAwareViewModel.OnDisappearing();
             }
 
             return view;
@@ -68,6 +68,11 @@ namespace Agate.ViewBridge
             {
                 return new PinSignInPage();
             }
+            if(viewModel.GetType() == typeof(AssetHomeViewModel))
+            {
+                return new AssetHomePage();
+            }
+
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }

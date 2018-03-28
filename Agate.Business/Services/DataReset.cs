@@ -39,6 +39,7 @@ namespace Agate.Business.Services
             secureStorage.SetPin("1234");
 
             await dataFlow.InitializeUser("Meysam", "Naseri", "+61", "meysamnaseri@live.com", "+61424554644");
+            
         }
     }
 }

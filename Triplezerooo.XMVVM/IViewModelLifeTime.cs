@@ -1,8 +1,10 @@
-﻿namespace Triplezerooo.XMVVM
+﻿using System.Threading.Tasks;
+
+namespace Triplezerooo.XMVVM
 {
     public interface IViewModelLifeTime
     {
-        void OnAppearing();
-        void OnDisappearing();
+        Task OnAppearing();
+        Task OnDisappearing();
     }
 }

@@ -5,7 +5,7 @@ namespace Triplezerooo.XMVVM
 {
     public interface INavigationView
     {
-        void SetCurrentPage(Page page);
+        Task SetCurrentPage(Page page);
         Task Push(Page page);
     }
 }

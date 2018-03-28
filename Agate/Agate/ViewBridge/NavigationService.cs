@@ -11,6 +11,11 @@ namespace Agate.ViewBridge
         {
             this.navigationView = navigationView;
         }
+        public async Task SetCurrentPage(BaseViewModel viewModel)
+        {
+            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
+            await navigationView.SetCurrentPage(view);
+        }
         public async Task Push(BaseViewModel viewModel)
         {
             var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);

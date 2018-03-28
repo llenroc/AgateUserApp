@@ -13,20 +13,24 @@ namespace Agate.Business.ViewModels.Main
 {
     public class HomePageAssetsViewModel : INotifyPropertyChanged
     {
-        private readonly INavigationService navigation;
+        private INavigationService navigation;
         private readonly Func<ChooseAssetsViewModel> createChooseAssetsViewModel;
         private readonly Func<AssetHomeViewModel> createAssetHomeViewModel;
 
-        public HomePageAssetsViewModel(HomePageViewModel parent, INavigationService navigation, Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<AssetHomeViewModel> createAssetHomeViewModel)
+        public HomePageAssetsViewModel(Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<AssetHomeViewModel> createAssetHomeViewModel)
         {
-            this.navigation = navigation;
             this.createChooseAssetsViewModel = createChooseAssetsViewModel;
             this.createAssetHomeViewModel = createAssetHomeViewModel;
-            Parent = parent;
             ChooseAssetsCommand = new Command(async () => await ChooseAssets());
         }
 
-        public HomePageViewModel Parent { get; }
+        public void Initialize(HomePageViewModel parent, INavigationService navigation)
+        {
+            Parent = parent;
+            this.navigation = navigation;
+        }
+
+        public HomePageViewModel Parent { get; set; }
         public List<AssetViewModel> List { get; set; }
         public ICommand ChooseAssetsCommand { get; }
         public async Task ChooseAssets()
