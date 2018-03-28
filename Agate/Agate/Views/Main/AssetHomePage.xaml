@@ -7,7 +7,7 @@
             BackgroundImage="{StaticResource SignUpBackgroundImagePhone}">
     <TabbedPage.Children>
 
-        <ContentPage Title="Send" AutomationId="SendPage" >
+        <ContentPage Title="Send" AutomationId="SendPage" Icon="send.png" >
             <StackLayout BindingContext="{Binding SendViewModel}">
                 <Label Text="Amount" Margin="0,16,0,0" />
                 <Entry Text="{Binding Amount.Value}" x:Name="SendAmountEntry" AutomationId="SendAmountEntry" Margin="0,8,0,0" ce:CustomReturnEffect.ReturnType="Next" />
@@ -18,7 +18,7 @@
                 <Button HorizontalOptions="FillAndExpand" Margin="16,32,16,0" Text="Send" Command="{Binding SendCommand}" />
             </StackLayout>
         </ContentPage>
-        <ContentPage Title="Receive" AutomationId="ReceivePage">
+        <ContentPage Title="Receive" AutomationId="ReceivePage" Icon="receive.png">
             <StackLayout BindingContext="{Binding ReceiveViewModel}">
                 <Image x:Name="ReceieveAddress" WidthRequest="200" HeightRequest="200"/>
                 <Label  Text="Receive address:"/>
@@ -28,7 +28,7 @@
                 <!-- todo : uncomment and implement <Button Margin="0,16,0,0" x:Name="shareReceieveAddressButton" Text="Share" />-->
             </StackLayout>
         </ContentPage>
-        <ContentPage Title="Transfer" AutomationId="TransferPage">
+        <ContentPage Title="Transfer" AutomationId="TransferPage" Icon="transfer.png">
             <StackLayout BindingContext="{Binding TransferViewModel}">
                 <Label Text="Amount" Margin="0,16,0,0" />
                 <Entry Text="{Binding Amount.Value}" AutomationId="TransferAmountEntry" Margin="0,8,0,0" />
