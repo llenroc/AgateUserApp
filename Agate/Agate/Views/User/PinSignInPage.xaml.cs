@@ -21,7 +21,11 @@ namespace Agate.Views.User
 	    {
 	        base.OnAppearing();
 
-	        PinEntry.Focus();
+	        Device.BeginInvokeOnMainThread(async () =>
+	        {
+	            await System.Threading.Tasks.Task.Delay(500);
+	            PinEntry.Focus();
+	        });
 	    }
 	}
 }
