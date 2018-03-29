@@ -6,7 +6,7 @@ using Triplezerooo.XMVVM;
 
 namespace Agate.Business.ViewModels.Main
 {
-    public class HomePageViewModel : BaseViewModel
+    public class HomePageViewModel : BaseViewModel, IViewModelLifeTime
     {
         private readonly IAppData appData;
         private readonly IUXFlow uxFlow;
@@ -59,18 +59,20 @@ namespace Agate.Business.ViewModels.Main
         public HomePageBucketInfoViewModel Bucket { get; set; }
         public HomePageCardsViewModel Cards { get; set; }
 
-        public async void OnAppearing()
+        public async Task OnAppearing()
         {
             ShowData();
 
             var reloaded = await appData.LoadOnlineData();
 
-            // todo : it actually needs to reload only if data is received from server
-            // otherwise changes from other pages should be applied partially only for the parts that changed
             if (reloaded)
             {
                 ShowData();
             }
+        }
+
+        public async Task OnDisappearing()
+        {
         }
 
         public void ShowData()

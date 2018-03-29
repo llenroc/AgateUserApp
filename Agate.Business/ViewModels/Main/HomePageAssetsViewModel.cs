@@ -16,6 +16,8 @@ namespace Agate.Business.ViewModels.Main
         private INavigationService navigation;
         private readonly Func<ChooseAssetsViewModel> createChooseAssetsViewModel;
         private readonly Func<AssetHomeViewModel> createAssetHomeViewModel;
+        private Asset[] assets;
+        private UserAsset[] userAssets;
 
         public HomePageAssetsViewModel(Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<AssetHomeViewModel> createAssetHomeViewModel)
         {
@@ -35,11 +37,19 @@ namespace Agate.Business.ViewModels.Main
         public ICommand ChooseAssetsCommand { get; }
         public async Task ChooseAssets()
         {
-            await navigation.Push(createChooseAssetsViewModel());
+            if (assets == null || userAssets == null)
+                return;
+
+            var chooseAssetsViewModel = createChooseAssetsViewModel();
+            chooseAssetsViewModel.Initialize(assets, userAssets);
+            await navigation.Push(chooseAssetsViewModel);
         }
 
         public void Update(Asset[] assets, UserAsset[] userAssets, Rate[] rates)
         {
+            this.assets = assets;
+            this.userAssets = userAssets;
+
             var list = new List<AssetViewModel>();
             if (userAssets.Any())
             {

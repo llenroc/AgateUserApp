@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
+             x:Class="Agate.Views.Main.ChooseAssetsPage">
+    <ContentPage.Content>
+        <Grid>
+            <!---BACKGROUND IMAGE-->
+            <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+            <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+                <StackLayout>
+                    <Label Margin="16" HeightRequest="40" Text="Please add/remove your desired crypto assets." TextColor="White"></Label>
+                    <ListView AutomationId="AssetsListView" ItemsSource="{Binding Assets}" Margin="10" BackgroundColor="White" VerticalOptions="Start" HasUnevenRows="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Margin="10,8,20,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="60"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Source="{Binding AssetLogoImageSource}" VerticalOptions="CenterAndExpand" />
+                                        <Label Grid.Column="1" Text="{Binding AssetName}" VerticalOptions="CenterAndExpand" />
+                                        <Switch Grid.Column="2" IsToggled="{Binding Selected}" VerticalOptions="CenterAndExpand" artina:SwitchProperties.TintColor="#f4bb4f" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

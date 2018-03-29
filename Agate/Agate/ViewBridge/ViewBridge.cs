@@ -72,6 +72,10 @@ namespace Agate.ViewBridge
             {
                 return new AssetHomePage();
             }
+            if(viewModel.GetType() == typeof(ChooseAssetsViewModel))
+            {
+                return new ChooseAssetsPage();
+            }
 
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
