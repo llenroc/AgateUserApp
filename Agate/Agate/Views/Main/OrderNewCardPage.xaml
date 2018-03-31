@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
+             xmlns:local="clr-namespace:Agate;assembly=Agate"
+             xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+             x:Class="Agate.Views.Main.OrderNewCardPage">
+    <ContentPage.Content>
+        <!--MAIN CONTAINER-->
+        <Grid>
+            <!---BACKGROUND IMAGE-->
+            <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+            <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+                <!-- MAIN CONTAINER -->
+                <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--CLAIM TEXT-->
+                    <StackLayout Grid.Row="0" Spacing="10" Padding="20,10" Orientation="Vertical" VerticalOptions="Center">
+
+                        <Label LineBreakMode="WordWrap" Text="We will send an Agate debit card to below address, by confirming this you agree to our Terms and Conditions." TextColor="{ DynamicResource OverImageTextColor }" VerticalTextAlignment="Center" AbsoluteLayout.LayoutFlags="All">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="17" Tablet="27" />
+                            </Label.FontSize>
+                        </Label>
+
+                    </StackLayout>
+
+                    <!---CONTENTS CONTAINER-->
+                    <Grid Grid.Row="1" Padding="40,0" VerticalOptions="CenterAndExpand" HeightRequest="260" BackgroundColor="White">
+
+                        <Label x:Name="AddressLabel" AutomationId="AddressLabel" Text="{Binding Address}" TextColor="Black"></Label>
+
+                    </Grid>
+
+                    <!-- FOOTER -->
+                    <StackLayout Grid.Row="2" x:Name="LoginStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0">
+
+                        <!-- CONFIRM BUTTON -->
+                        <artina:Button AutomationId="ConfirmButton" Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Send" 
+                                       WidthRequest="{ artina:OnOrientationDouble LandscapePhone=200, LandscapeTablet=400 }" 
+                                       HorizontalOptions="{ artina:OnOrientationLayoutOptions PortraitPhone=Fill, LandscapePhone=Center, PortraitTablet=Fill, LandscapeTablet=Center }" 
+                                       Command="{Binding ConfirmCommand}" />
+
+                        <!-- EDIT BUTTON -->
+                        <artina:Button AutomationId="EditButton" Style="{StaticResource SecondaryActionButtonStyle}" VerticalOptions="End" Text="Edit" 
+                                       WidthRequest="{ artina:OnOrientationDouble LandscapePhone=200, LandscapeTablet=400 }" 
+                                       HorizontalOptions="{ artina:OnOrientationLayoutOptions PortraitPhone=Fill, LandscapePhone=Center, PortraitTablet=Fill, LandscapeTablet=Center }"
+                                       Command="{Binding EditCommand}"/>
+                    </StackLayout>
+
+                </Grid>
+
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -11,18 +11,19 @@ namespace Agate.Business.ViewModels.Main
     public class ChooseAssetsViewModel : BaseViewModel
     {
         private readonly IAppData appData;
+        private readonly IUserData userData;
         private Asset[] allAssets;
         private List<UserAsset> userAssets;
         private object _lock = new object();
 
-        public ChooseAssetsViewModel(IAppData appData)
+        public ChooseAssetsViewModel(IAppData appData, IUserData userData)
         {
             this.appData = appData;
+            this.userData = userData;
         }
 
         public void Initialize(Asset[] allAssets, UserAsset[] userAssets)
         {
-
             this.allAssets = allAssets;
             this.userAssets = userAssets.ToList();
 
@@ -47,7 +48,7 @@ namespace Agate.Business.ViewModels.Main
 
             appData.UserAssets = userAssets.ToArray();
 
-            await UserData.SaveUserAssets(appData.UserAssets);
+            await userData.SaveUserAssets(appData.UserAssets);
         }
     }
 

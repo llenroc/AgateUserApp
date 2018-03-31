@@ -14,12 +14,14 @@ namespace Agate.Business.ViewModels.Main
     {
         private INavigationService navigationService;
         private readonly IUXFlow uxFlow;
+        private readonly IGeneralData generalData;
         private bool orderPendingViewIsVisible;
         private bool noCardViewIsVisible;
 
-        public HomePageCardsViewModel(IUXFlow uxFlow)
+        public HomePageCardsViewModel(IUXFlow uxFlow, IGeneralData generalData)
         {
             this.uxFlow = uxFlow;
+            this.generalData = generalData;
             OrderCardCommand = new Command(async () => await OrderCard());
         }
 
@@ -57,14 +59,14 @@ namespace Agate.Business.ViewModels.Main
         public ICommand OrderCardCommand { get; }
         public async Task OrderCard()
         {
-            await navigationService.Push(await uxFlow.DecideOrderCardPage());
+            await navigationService.Push(await uxFlow.DecideOrderCardPage(navigationService));
         }
 
         internal async void Update(Card[] cards)
         {
             if (cards == null || !cards.Any())
             {
-                var generalInfo = await GeneralData.ReadGeneralInfo();
+                var generalInfo = await generalData.ReadGeneralInfo();
                 if (generalInfo != null && generalInfo.ImpendingCardOrder)
                 {
                     OrderPendingViewIsVisible = true;

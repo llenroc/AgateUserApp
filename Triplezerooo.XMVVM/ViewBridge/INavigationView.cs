@@ -7,5 +7,7 @@ namespace Triplezerooo.XMVVM
     {
         Task SetCurrentPage(Page page);
         Task Push(Page page);
+        Task Pop();
+        Task Replace(Page view);
     }
 }

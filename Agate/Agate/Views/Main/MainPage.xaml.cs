@@ -70,7 +70,23 @@ namespace Agate.Views.Main
 	            return;
 	        await navigationPage.PushAsync(page);
 	    }
-    }
+
+	    public async Task Pop()
+	    {
+	        if (!(Detail is NavigationPage navigationPage))
+	            return;
+	        await navigationPage.Navigation.PopAsync();
+        }
+
+        public async Task Replace(Page view)
+	    {
+	        if (!(Detail is NavigationPage navigationPage))
+	            return;
+
+	        navigationPage.Navigation.InsertPageBefore(view,navigationPage.Navigation.NavigationStack.Last());
+	        await view.Navigation.PopAsync();
+        }
+	}
 
     public static class NavigationPageHelper
     {

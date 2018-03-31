@@ -5,9 +5,9 @@ using Agate.Contracts.Models.Transactions;
 
 namespace Agate.Business.API
 {
-    public class CardOrderService
+    public class CardOrderService : ICardOrderService
     {
-        public static async Task<OrderCardResponse> CreateOrder(OrderCardRequest request) =>
+        public async Task<OrderCardResponse> CreateOrder(OrderCardRequest request) =>
             await Client.Post<OrderCardRequest, OrderCardResponse>("CardOrder", request);
     }
 

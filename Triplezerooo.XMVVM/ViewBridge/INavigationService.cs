@@ -6,5 +6,7 @@ namespace Triplezerooo.XMVVM
     {
         Task SetCurrentPage(BaseViewModel viewModel);
         Task Push(BaseViewModel viewModel);
+        Task Pop();
+        void Replace(BaseViewModel viewModel);
     }
 }

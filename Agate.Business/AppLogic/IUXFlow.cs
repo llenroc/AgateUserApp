@@ -6,6 +6,6 @@ namespace Agate.Business.AppLogic
     public interface IUXFlow
     {
         void DecideOnAppStartPage();
-        Task<BaseViewModel> DecideOrderCardPage();
+        Task<BaseViewModel> DecideOrderCardPage(INavigationService navigationService);
     }
 }

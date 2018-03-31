@@ -7,6 +7,7 @@ using Agate.Business;
 using Agate.Business.Api;
 using Agate.Business.AppLogic;
 using Agate.Business.API;
+using Agate.Business.LocalData;
 using Agate.Business.Services;
 using Agate.Business.ViewModels.Main;
 using Agate.Business.ViewModels.User;
@@ -38,13 +39,17 @@ namespace Agate
             SingltonServices.ViewService = new ViewService();
 
             var builder = new ContainerBuilder();
+		    builder.RegisterType<UserData>().As<IUserData>();
 		    builder.RegisterType<DataFlow>().As<IDataFlow>();
 		    builder.RegisterType<UXFlow>().As<IUXFlow>();
 		    builder.RegisterType<AppData>().As<IAppData>();
+		    builder.RegisterType<GeneralData>().As<IGeneralData>();
 		    builder.RegisterType<DataReset>().As<DataReset>();
 		    builder.Register(c => CrossSecureStorage.Current).As<ISecureStorage>();
 		    builder.Register(c => CrossConnectivity.Current).As<IConnectivity>();
 		    builder.RegisterType<AccountService>().As<IAccountService>();
+		    builder.RegisterType<UserAddressesServices>().As<IUserAddressesServices>();
+		    builder.RegisterType<CardOrderService>().As<ICardOrderService>();
 		    builder.RegisterType<ViewService>().As<IViewService>();
 		    builder.Register(c => DependencyService.Get<IPhoneService>()).As<IPhoneService>();
 		    builder.Register(c => CrossDeviceInfo.Current).As<IDeviceInfo>();
@@ -59,7 +64,9 @@ namespace Agate
 		    builder.RegisterType<ChooseAssetsViewModel>();
 		    builder.RegisterType<AssetHomeViewModel>();
 		    builder.RegisterType<PinSignInViewModel>();
-            
+		    builder.RegisterType<EditAddressViewModel>();
+		    builder.RegisterType<OrderNewCardViewModel>();
+
 		    var container = builder.Build();
 
             var dataReset = container.Resolve<DataReset>();

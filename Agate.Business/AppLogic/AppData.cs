@@ -14,10 +14,12 @@ namespace Agate.Business.AppLogic
         public static string UserCurrency = "USD";
 
         private readonly ISecureStorage secureStorage;
+        private readonly IUserData userData;
 
-        public AppData(ISecureStorage secureStorage)
+        public AppData(ISecureStorage secureStorage,IUserData userData)
         {
             this.secureStorage = secureStorage;
+            this.userData = userData;
         }
 
         public Asset[] AllAssets { get; set; }
@@ -32,7 +34,7 @@ namespace Agate.Business.AppLogic
         public async Task LoadOfflineData()
         {
             AllAssets = GetDefaultAssetValues(); // for now we just read a hard coded list of assets
-            UserAssets = (await UserData.ReadUserAssets()) ?? new UserAsset[] { };
+            UserAssets = (await userData.ReadUserAssets()) ?? new UserAsset[] { };
             Rates = (await RatesData.ReadRates()) ?? new Rate[] { };
             Cards = (await CardData.ReadCards()) ?? new Card[] { };
             BucketAmount = (await BucketData.ReadBucketInfo())?.Amount ?? 0;

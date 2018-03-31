@@ -21,5 +21,16 @@ namespace Agate.ViewBridge
             var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
             await navigationView.Push(view);
         }
+
+        public async Task Pop()
+        {
+            await navigationView.Pop();
+        }
+
+        public async void Replace(BaseViewModel viewModel)
+        {
+            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
+            await navigationView.Replace(view);
+        }
     }
 }

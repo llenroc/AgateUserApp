@@ -76,7 +76,14 @@ namespace Agate.ViewBridge
             {
                 return new ChooseAssetsPage();
             }
-
+            if(viewModel.GetType() == typeof(EditAddressViewModel))
+            {
+                return new EditAddressPage();
+            }
+            if(viewModel.GetType() == typeof(OrderNewCardViewModel))
+            {
+                return new OrderNewCardPage();
+            }
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }

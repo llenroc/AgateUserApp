@@ -2,13 +2,13 @@
 
 namespace Agate.Business.LocalData
 {
-    public class GeneralData
+    public class GeneralData : IGeneralData
     {
         public const string GeneralInfoFileName = "general.json";
 
-        public static async Task<GeneralInfo> ReadGeneralInfo() => await FilesFacade.ReadObject<GeneralInfo>(GeneralInfoFileName);
+        public async Task<GeneralInfo> ReadGeneralInfo() => await FilesFacade.ReadObject<GeneralInfo>(GeneralInfoFileName);
 
-        public static async Task SaveGeneralInfo(GeneralInfo generalInfo) => await FilesFacade.SaveObject(GeneralInfoFileName, generalInfo);
+        public async Task SaveGeneralInfo(GeneralInfo generalInfo) => await FilesFacade.SaveObject(GeneralInfoFileName, generalInfo);
     }
 
     public class GeneralInfo

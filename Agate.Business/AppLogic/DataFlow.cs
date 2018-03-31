@@ -9,10 +9,12 @@ namespace Agate.Business.AppLogic
     public class DataFlow : IDataFlow
     {
         private readonly ISecureStorage secureStorage;
+        private readonly IUserData userData;
 
-        public DataFlow(ISecureStorage secureStorage)
+        public DataFlow(ISecureStorage secureStorage, IUserData userData)
         {
             this.secureStorage = secureStorage;
+            this.userData = userData;
         }
         //public static async Task<Asset[]> GetAllAssets()
         //{
@@ -52,7 +54,7 @@ namespace Agate.Business.AppLogic
 
         public async Task InitializeUser(string firstname, string lastname, string countryCode, string emailAddress, string mobileNumber)
         {
-            await UserData.SaveUserData(new UserProfile
+            await userData.SaveUserData(new UserProfile
             {
                 UserId = int.MinValue,
                 FirstName = firstname,
@@ -61,7 +63,7 @@ namespace Agate.Business.AppLogic
                 EmailAddress = emailAddress,
                 MobileNumber = mobileNumber,
             });
-            await UserData.SaveUserAssets(new[] {
+            await userData.SaveUserAssets(new[] {
                         new UserAsset { AssetId = 1, Balance = 0, Favorited = true },
                         new UserAsset { AssetId = 2, Balance = 0, Favorited = true },
                         new UserAsset { AssetId = 3, Balance = 0, Favorited = true },
@@ -73,7 +75,7 @@ namespace Agate.Business.AppLogic
 
         public async Task UpdateUserId(int userId)
         {
-            await UserData.UpdateUserData(u => { u.UserId = userId; });
+            await userData.UpdateUserData(u => { u.UserId = userId; });
             secureStorage.SetUserId(userId);
         }
 
