@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
+using Agate.Contracts.Models.Cards;
+using Microsoft.AppCenter.Crashes;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
@@ -28,18 +31,17 @@ namespace Agate.Business.ViewModels.Main
         public void Initialize(INavigationService navigationService, UserAddress[] userAddresses, UserAddress shippingAddress)
         {
             this.navigationService = navigationService;
-            EditCommand = new XCommand(async () => await Edit());
-            ConfirmCommand = new XCommand(async () => await Confirm());
+            EditCommand = new XCommand(async () => await Edit(), CanEdit);
+            ConfirmCommand = new XCommand(async () => await Confirm(), CanConfirm);
             this.userAddresses = userAddresses;
             this.shippingAddress = shippingAddress;
 
             var addressText = "";
-            addressText += $"{shippingAddress.FirstName} {shippingAddress.LastName}";
+            addressText += $"{shippingAddress.FirstName} {shippingAddress.LastName}" + "\r\n";
             addressText += $"{shippingAddress.AddressLine1}" + "\r\n";
             if (!string.IsNullOrEmpty(shippingAddress.AddressLine2))
                 addressText += shippingAddress.AddressLine2 + "\r\n";
-            addressText += $"{shippingAddress.City}, {shippingAddress.State}";
-            addressText += $"{shippingAddress.Country}";
+            addressText += $"{shippingAddress.City}, {shippingAddress.State} {shippingAddress.Country}" + "\r\n";
             addressText += $"{shippingAddress.PostCode}";
             Address = addressText;
 
@@ -49,34 +51,44 @@ namespace Agate.Business.ViewModels.Main
 
         public IXCommand EditCommand { get; set; }
 
-        private async Task Edit()
+        public bool CanEdit() => IsNotBusy;
+        public async Task Edit()
         {
             var editAddressViewModel = createEditAddressViewModel();
-            editAddressViewModel.InitiaizeForEdit(navigationService, userAddresses, shippingAddress, null);            
+            editAddressViewModel.InitiaizeForEdit(navigationService, userAddresses, shippingAddress, null);
             await navigationService.Push(editAddressViewModel);
         }
 
         public Command ConfirmCommand { get; set; }
 
-        private async Task Confirm()
+        public bool CanConfirm() => IsNotBusy;
+        public async Task Confirm()
         {
-            IsWorking = true;
             try
             {
-                var result = await cardOrderService.CreateOrder(new Contracts.Models.Cards.OrderCardRequest
+                OrderCardResponse result;
+                using (WorkingScope.Enter())
                 {
-                    UserId = secureStorage.GetUserId().Value
-                });
-
+                    result = await cardOrderService.CreateOrder(new Contracts.Models.Cards.OrderCardRequest
+                    {
+                        UserId = secureStorage.GetUserId().Value
+                    });
+                }
                 if (result.Success == true)
                 {
                     await navigationService.Pop();
                 }
             }
-            finally
+            catch (Exception ex)
             {
-                IsWorking = false;
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                {
+                    {"page", "home page"},
+                    {"operation", $"{nameof(OrderNewCardViewModel)}.{nameof(Confirm)}"}
+                });
+                await View.DisplayAlert("Error", "An error occurred while processing your request" + ex, "Ok");
             }
+
         }
 
     }

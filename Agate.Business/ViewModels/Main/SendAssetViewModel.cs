@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Agate.Business.API;
 using Agate.Business.Services;
 using Agate.Contracts.Models.Transactions;
+using Microsoft.AppCenter.Crashes;
 using Plugin.Connectivity.Abstractions;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
@@ -50,28 +52,35 @@ namespace Agate.Business.ViewModels.Main
         {
             try
             {
+                if (!connectivity.IsConnected)
+                {
+                    await View.DisplayAlert("...", "Internet connection required", "Ok");
+                    return;
+                }
+                var request = new SendOrderRequest
+                {
+                    Amount = Amount.Value,
+                    TargetAddress = SendAddress.Value,
+                    AssetId = Parent.Asset.AssetId,
+                    UserId = secureStorage.GetUserId().Value
+                };
+                SendOrderResponse response;
                 using (WorkingScope.Enter())
                 {
-                    if (!connectivity.IsConnected)
-                    {
-                        await View.DisplayAlert("...", "Internet connection required", "Ok");
-                        return;
-                    }
-                    var request = new SendOrderRequest
-                    {
-                        Amount = Amount.Value,
-                        TargetAddress = SendAddress.Value,
-                        AssetId = Parent.Asset.AssetId,
-                        UserId = secureStorage.GetUserId().Value
-                    };
-                    var response = await transactionService.SendOrder(request);
-                    Parent.UserAsset.Balance = response.AssetNewBalance;
-                    await View.DisplayAlert("Done", "Send order submitted.", "Ok");
+                    response = await transactionService.SendOrder(request);
                 }
+
+                Parent.UserAsset.Balance = response.AssetNewBalance;
+                await View.DisplayAlert("Done", "Send order submitted.", "Ok");
             }
             catch (Exception ex)
             {
-                await View.DisplayErrorAlert(ex.Message);
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                    {
+                        {"page", "asset page"},
+                        {"operation", $"{nameof(SendAssetViewModel)}.{nameof(Send)}"}
+                    });
+                await View.DisplayAlert("Error", "An error occurred while processing your request" + ex, "Ok");
             }
         }
     }

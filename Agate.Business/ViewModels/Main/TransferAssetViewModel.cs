@@ -1,6 +1,9 @@
-﻿using Agate.Business.API;
+﻿using System;
+using System.Collections.Generic;
+using Agate.Business.API;
 using Agate.Business.Services;
 using Agate.Contracts.Models.Transactions;
+using Microsoft.AppCenter.Crashes;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 
@@ -34,15 +37,33 @@ namespace Agate.Business.ViewModels.Main
         }
         public async void Transfer()
         {
-            var request = new TransferOrderRequest
+            try
             {
-                Amount = Amount.Value,
-                AssetId = Parent.Asset.AssetId,
-                UserId = secureStorage.GetUserId().Value
-            };
-            var response = await transactionService.TransferOrder(request);
-            Parent.UserAsset.Balance = response.AssetNewBalance;
-            // todo : find the local instance of Card and update it Balance value
+                var request = new TransferOrderRequest
+                {
+                    Amount = Amount.Value,
+                    AssetId = Parent.Asset.AssetId,
+                    UserId = secureStorage.GetUserId().Value
+                };
+                TransferOrderResponse response;
+                using (WorkingScope.Enter())
+                {
+                    response = await transactionService.TransferOrder(request);
+                }
+
+                Parent.UserAsset.Balance = response.AssetNewBalance;
+                // todo : find the local instance of Card and update it Balance value
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                {
+                    {"page", "asset page"},
+                    {"operation", $"{nameof(TransferAssetViewModel)}.{nameof(Transfer)}"}
+                });
+                await View.DisplayAlert("Error", "An error occurred while processing your request" + ex, "Ok");
+            }
+
         }
     }
 }

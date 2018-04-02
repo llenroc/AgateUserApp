@@ -35,7 +35,7 @@
                     </StackLayout>
 
                     <!---CONTENTS CONTAINER-->
-                    <Grid Grid.Row="1" Padding="40,0" VerticalOptions="CenterAndExpand" HeightRequest="260" BackgroundColor="White">
+                    <Grid Grid.Row="1" Margin="20" Padding="40,20" VerticalOptions="CenterAndExpand" HeightRequest="260" BackgroundColor="White">
 
                         <Label x:Name="AddressLabel" AutomationId="AddressLabel" Text="{Binding Address}" TextColor="Black"></Label>
 
