@@ -2,11 +2,11 @@
 
 namespace Agate.Business.LocalData
 {
-    public class CardData
+    public class CardData : ICardData
     {
         public const string CardsFileName = "cards.json";
-        public static async Task<Card[]> ReadCards() => await FilesFacade.ReadObject<Card[]>(CardsFileName);
-        public static async Task SaveCards(Card[] cards) => await FilesFacade.SaveObject(CardsFileName, cards);
+        public async Task<Card[]> ReadCards() => await FilesFacade.ReadObject<Card[]>(CardsFileName);
+        public async Task SaveCards(Card[] cards) => await FilesFacade.SaveObject(CardsFileName, cards);
     }
 
     public class Card

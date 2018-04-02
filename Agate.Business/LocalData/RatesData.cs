@@ -2,10 +2,10 @@
 
 namespace Agate.Business.LocalData
 {
-    public class RatesData
+    public class RatesData : IRatesData
     {
         public const string RatesFileName = "rates.json";
-        public static async Task<Rate[]> ReadRates() => await FilesFacade.ReadObject<Rate[]>(RatesFileName);
-        public static async Task SaveRates(Rate[] rates) => await FilesFacade.SaveObject(RatesFileName, rates);
+        public async Task<Rate[]> ReadRates() => await FilesFacade.ReadObject<Rate[]>(RatesFileName);
+        public async Task SaveRates(Rate[] rates) => await FilesFacade.SaveObject(RatesFileName, rates);
     }
 }

@@ -1,19 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Agate.Contracts.Models.Bucket;
-using Agate.Contracts.Models.Rates;
+using Agate.Business.LocalData;
+using Rate = Agate.Contracts.Models.Rates.Rate;
 
 namespace Agate.Business.API
 {
-    public class RatesService
+    public class RatesService : IRatesService
     {
-        public static async Task<List<Rate>> Get() =>
+        public async Task<List<Rate>> Get() =>
             await Client.Get<List<Rate>>("rates");
-    }
-
-    public class BucketService
-    {
-        public static async Task<BalanceResponse> GetBalance(int userId) =>
-            await Client.Post<BalanceRequest, BalanceResponse>("bucket", new BalanceRequest { UserId = userId });
     }
 }

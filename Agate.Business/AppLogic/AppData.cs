@@ -15,11 +15,23 @@ namespace Agate.Business.AppLogic
 
         private readonly ISecureStorage secureStorage;
         private readonly IUserData userData;
+        private readonly ICardsService cardsService;
+        private readonly IRatesService ratesService;
+        private readonly IBucketService bucketService;
+        private readonly IRatesData ratesData;
+        private readonly ICardData cardData;
+        private readonly IBucketData bucketData;
 
-        public AppData(ISecureStorage secureStorage,IUserData userData)
+        public AppData(ISecureStorage secureStorage,IUserData userData, ICardsService cardsService, IRatesService ratesService, IBucketService bucketService, IRatesData ratesData, ICardData cardData, IBucketData bucketData)
         {
             this.secureStorage = secureStorage;
             this.userData = userData;
+            this.cardsService = cardsService;
+            this.ratesService = ratesService;
+            this.bucketService = bucketService;
+            this.ratesData = ratesData;
+            this.cardData = cardData;
+            this.bucketData = bucketData;
         }
 
         public Asset[] AllAssets { get; set; }
@@ -35,9 +47,9 @@ namespace Agate.Business.AppLogic
         {
             AllAssets = GetDefaultAssetValues(); // for now we just read a hard coded list of assets
             UserAssets = (await userData.ReadUserAssets()) ?? new UserAsset[] { };
-            Rates = (await RatesData.ReadRates()) ?? new Rate[] { };
-            Cards = (await CardData.ReadCards()) ?? new Card[] { };
-            BucketAmount = (await BucketData.ReadBucketInfo())?.Amount ?? 0;
+            Rates = (await ratesData.ReadRates()) ?? new Rate[] { };
+            Cards = (await cardData.ReadCards()) ?? new Card[] { };
+            BucketAmount = (await bucketData.ReadBucketInfo())?.Amount ?? 0;
         }
 
         public async Task<bool> LoadOnlineData(bool forceLoad = false)
@@ -51,7 +63,7 @@ namespace Agate.Business.AppLogic
 
             try
             {
-                var rates = await RatesService.Get();
+                var rates = await ratesService.Get();
                 if(rates== null)
                 {
                     online = false;
@@ -59,9 +71,9 @@ namespace Agate.Business.AppLogic
                 }
                 Rates = rates.Select(r => new Rate(r.AssetId, r.TargetCurrency, r.Amount, r.Fee)).ToArray();
                 // if rates changed
-                await RatesData.SaveRates(Rates);
+                await ratesData.SaveRates(Rates);
 
-                var cards = await CardsService.Get(secureStorage.GetUserId().Value);
+                var cards = await cardsService.Get(secureStorage.GetUserId().Value);
                 if(cards == null)
                 {
                     online = false;
@@ -69,10 +81,10 @@ namespace Agate.Business.AppLogic
                 }
                 Cards = cards.Select(c => new Card(c.Id, c.Name, c.CardNumberHint, (CardState)(int)c.State, c.Balance, c.BalanceCurrency)).ToArray();
                 // if cards changed
-                await CardData.SaveCards(Cards);
+                await cardData.SaveCards(Cards);
 
-                BucketAmount = (await BucketService.GetBalance(secureStorage.GetUserId().Value))?.Amount ?? 0;
-                await BucketData.SaveBucketInfo(new BucketInfo { Amount = BucketAmount });
+                BucketAmount = (await bucketService.GetBalance(secureStorage.GetUserId().Value))?.Amount ?? 0;
+                await bucketData.SaveBucketInfo(new BucketInfo { Amount = BucketAmount });
 
                 return true;
             }

@@ -44,12 +44,18 @@ namespace Agate
 		    builder.RegisterType<UXFlow>().As<IUXFlow>();
 		    builder.RegisterType<AppData>().As<IAppData>();
 		    builder.RegisterType<GeneralData>().As<IGeneralData>();
+		    builder.RegisterType<CardData>().As<ICardData>();
+		    builder.RegisterType<RatesData>().As<IRatesData>();
+		    builder.RegisterType<BucketData>().As<IBucketData>();
 		    builder.RegisterType<DataReset>().As<DataReset>();
 		    builder.Register(c => CrossSecureStorage.Current).As<ISecureStorage>();
 		    builder.Register(c => CrossConnectivity.Current).As<IConnectivity>();
 		    builder.RegisterType<AccountService>().As<IAccountService>();
 		    builder.RegisterType<UserAddressesServices>().As<IUserAddressesServices>();
 		    builder.RegisterType<CardOrderService>().As<ICardOrderService>();
+		    builder.RegisterType<CardsService>().As<ICardsService>();
+		    builder.RegisterType<RatesService>().As<IRatesService>();
+		    builder.RegisterType<BucketService>().As<IBucketService>();
 		    builder.RegisterType<ViewService>().As<IViewService>();
 		    builder.Register(c => DependencyService.Get<IPhoneService>()).As<IPhoneService>();
 		    builder.Register(c => CrossDeviceInfo.Current).As<IDeviceInfo>();
