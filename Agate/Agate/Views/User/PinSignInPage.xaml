@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
+             xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
              x:Class="Agate.Views.User.PinSignInPage">
     <ContentPage.Content>
         <Grid>
@@ -32,7 +33,7 @@
                         </Grid.RowDefinitions>
 
                         <StackLayout Grid.Row="0" VerticalOptions="Start">
-                            <Entry x:Name="PinEntry" AutomationId="PinEntry" Text="{Binding Pin.Value}" IsPassword="True" Keyboard="Numeric" Style="{StaticResource ArtinaLoginEntryStyle}" FontSize="70" HorizontalTextAlignment="Center" />
+                            <Entry x:Name="PinEntry" AutomationId="PinEntry" Text="{Binding Pin.Value}" IsPassword="True" Keyboard="Numeric" Style="{StaticResource ArtinaLoginEntryStyle}" FontSize="70" HorizontalTextAlignment="Center" ecr:CustomReturnEffect.ReturnType="Go" ecr:CustomReturnEffect.ReturnCommand="{Binding SignInCommand}" />
                         </StackLayout>
 
                     </Grid>
