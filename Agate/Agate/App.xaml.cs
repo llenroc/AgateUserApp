@@ -42,7 +42,7 @@ namespace Agate
 		    builder.RegisterType<UserData>().As<IUserData>();
 		    builder.RegisterType<DataFlow>().As<IDataFlow>();
 		    builder.RegisterType<UXFlow>().As<IUXFlow>();
-		    builder.RegisterType<AppData>().As<IAppData>();
+		    builder.RegisterType<AppData>().SingleInstance().As<IAppData>();
 		    builder.RegisterType<GeneralData>().As<IGeneralData>();
 		    builder.RegisterType<CardData>().As<ICardData>();
 		    builder.RegisterType<RatesData>().As<IRatesData>();

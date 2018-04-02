@@ -15,8 +15,6 @@ namespace Agate.Business.ViewModels.Main
         public HomePageViewModel(
             IAppData appData, 
             IUXFlow uxFlow,
-            Func<ChooseAssetsViewModel> createChooseAssetsViewModel, 
-            Func<AssetHomeViewModel> createAssetHomeViewModel, 
             HomePageAssetsViewModel assetsViewModel,
             HomePageBucketInfoViewModel bucketInfoViewModel,
             HomePageCardsViewModel cardsViewModel)
@@ -29,17 +27,11 @@ namespace Agate.Business.ViewModels.Main
             Cards = cardsViewModel;
         }
 
-        public async Task Initialize(INavigationService navigationService)
+        public void Initialize(INavigationService navigationService)
         {
             Assets.Initialize(this, navigationService);
             Bucket.Initialize(this);
             Cards.Initialize(this, navigationService);
-
-            await appData.LoadOfflineData();
-
-            ShowData();
-
-            await appData.LoadOnlineData(false);
         }
 
 

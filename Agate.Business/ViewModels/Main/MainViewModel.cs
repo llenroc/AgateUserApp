@@ -22,7 +22,7 @@ namespace Agate.Business.ViewModels.Main
             var navigationService = viewService.CreateNavigationService(this.View as INavigationView);
 
             var homePageViewModel = createHomePageViewModel();
-            await homePageViewModel.Initialize(navigationService);
+            homePageViewModel.Initialize(navigationService);
 
             await navigationService.SetCurrentPage(homePageViewModel);
         }
