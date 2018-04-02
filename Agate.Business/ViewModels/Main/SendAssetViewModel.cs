@@ -11,11 +11,13 @@ namespace Agate.Business.ViewModels.Main
 {
     public class SendAssetViewModel : BaseViewModel
     {
+        private readonly ITransactionService transactionService;
         private readonly ISecureStorage secureStorage;
         private readonly IConnectivity connectivity;
 
-        public SendAssetViewModel(ISecureStorage secureStorage, IConnectivity connectivity)
+        public SendAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage, IConnectivity connectivity)
         {
+            this.transactionService = transactionService;
             this.secureStorage = secureStorage;
             this.connectivity = connectivity;
         }
@@ -62,8 +64,9 @@ namespace Agate.Business.ViewModels.Main
                         AssetId = Parent.Asset.AssetId,
                         UserId = secureStorage.GetUserId().Value
                     };
-                    var response = await TransactionService.SendOrder(request);
+                    var response = await transactionService.SendOrder(request);
                     Parent.UserAsset.Balance = response.AssetNewBalance;
+                    await View.DisplayAlert("Done", "Send order submitted.", "Ok");
                 }
             }
             catch (Exception ex)

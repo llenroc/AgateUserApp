@@ -8,10 +8,12 @@ namespace Agate.Business.ViewModels.Main
 {
     public class TransferAssetViewModel : BaseViewModel
     {
+        private readonly ITransactionService transactionService;
         private readonly ISecureStorage secureStorage;
 
-        public TransferAssetViewModel(ISecureStorage secureStorage)
+        public TransferAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage)
         {
+            this.transactionService = transactionService;
             this.secureStorage = secureStorage;
         }
 
@@ -38,7 +40,7 @@ namespace Agate.Business.ViewModels.Main
                 AssetId = Parent.Asset.AssetId,
                 UserId = secureStorage.GetUserId().Value
             };
-            var response = await TransactionService.TransferOrder(request);
+            var response = await transactionService.TransferOrder(request);
             Parent.UserAsset.Balance = response.AssetNewBalance;
             // todo : find the local instance of Card and update it Balance value
         }
