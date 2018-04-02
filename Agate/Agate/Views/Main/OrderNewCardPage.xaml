@@ -4,7 +4,8 @@
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
              xmlns:local="clr-namespace:Agate;assembly=Agate"
              xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
-             x:Class="Agate.Views.Main.OrderNewCardPage">
+             x:Class="Agate.Views.Main.OrderNewCardPage"
+             Title="Address Confirmation">
     <ContentPage.Content>
         <!--MAIN CONTAINER-->
         <Grid>
