@@ -17,6 +17,7 @@ namespace Agate.Business.ViewModels.Main
         private readonly IGeneralData generalData;
         private bool orderPendingViewIsVisible;
         private bool noCardViewIsVisible;
+        private List<CardRowViewModel> list;
 
         public HomePageCardsViewModel(IUXFlow uxFlow, IGeneralData generalData)
         {
@@ -31,7 +32,7 @@ namespace Agate.Business.ViewModels.Main
             Parent = parent;
         }
 
-        
+
 
         public HomePageViewModel Parent { get; set; }
 
@@ -54,7 +55,16 @@ namespace Agate.Business.ViewModels.Main
                 Raise(nameof(OrderPendingViewIsVisible));
             }
         }
-        public List<CardRowViewModel> List { get; }
+
+        public List<CardRowViewModel> List
+        {
+            get => list;
+            set
+            {
+                list = value;
+                Raise(nameof(List));
+            }
+        }
 
         public ICommand OrderCardCommand { get; }
         public async Task OrderCard()
@@ -64,6 +74,26 @@ namespace Agate.Business.ViewModels.Main
 
         internal async void Update(Card[] cards)
         {
+            if (cards == null)
+                return;
+
+            if (cards.Any())
+            {
+                if (cards.Any(c => c.State == CardState.Ordered))
+                {
+                    OrderPendingViewIsVisible = true;
+                }
+                else
+                {
+                    List = cards.Select(c => new CardRowViewModel(this, c)).ToList();
+                }
+            }
+            else
+            {
+                NoCardViewIsVisible = true;
+            }
+
+
             if (cards == null || !cards.Any())
             {
                 var generalInfo = await generalData.ReadGeneralInfo();

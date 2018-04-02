@@ -12,6 +12,6 @@ namespace Agate.Business.ViewModels.Main
 
         public HomePageCardsViewModel Parent { get; }
         public Card Card { get; }
-        public string Balance { get => $"{Card.Balance} {Card.BalanceCurrency}"; }
+        public string Balance => $"{Card.Balance:N} {Card.BalanceCurrency}";
     }
 }
