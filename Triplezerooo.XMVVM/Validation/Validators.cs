@@ -29,16 +29,19 @@ namespace Triplezerooo.XMVVM
 
     public class Required<T> : IValidator<T>
     {
-        public Required()
+        private readonly T nullValue;
+
+        public Required(T nullValue = default(T))
         {
-            
+            this.nullValue = nullValue;
         }
-        public Required(string errorTemplate)
+        public Required(string errorTemplate, T nullValue = default(T))
         {
+            this.nullValue = nullValue;
             ErrorTemplate = errorTemplate;
         }
         public string ErrorTemplate { get; set; } = "{0} is required.";
-        public string[] IsValid(T value) => null != value ? ErrorTemplate.SingleToArray() : null;
+        public string[] IsValid(T value) => (value == null || value.Equals(nullValue) ) ?  ErrorTemplate.SingleToArray() : null;
     }
 
     public class RequiredString : IValidator<string>

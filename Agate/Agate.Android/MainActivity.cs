@@ -56,6 +56,8 @@ namespace Agate.Droid
 
             base.OnCreate(bundle);
 
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();
+
             // Initializing FFImageLoading
             CachedImageRenderer.Init(true);
 
@@ -83,6 +85,12 @@ namespace Agate.Droid
                 Recreate();
             }
         }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            ZXing.Net.Mobile.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
 
         [Export]
         public void SetServicesAddress(String baseAddress)

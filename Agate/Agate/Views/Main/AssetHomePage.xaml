@@ -2,40 +2,134 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Agate.Views.Main.AssetHomePage"
-            xmlns:ce="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
-            Title="Asset"
-            BackgroundImage="{StaticResource SignUpBackgroundImagePhone}">
+            xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+            xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+            xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
+            Title="{Binding Asset.AssetName}">
     <TabbedPage.Children>
 
-        <ContentPage Title="Send" AutomationId="SendPage" Icon="send.png" >
-            <StackLayout BindingContext="{Binding SendViewModel}">
-                <Label Text="Amount" Margin="0,16,0,0" />
-                <Entry Text="{Binding Amount.Value}" x:Name="SendAmountEntry" AutomationId="SendAmountEntry" Margin="0,8,0,0" ce:CustomReturnEffect.ReturnType="Next" />
-                <Label Text="{Binding Amount.ValidationError}" AutomationId="InvalidAmountLabel" IsVisible="{Binding Amount.IsInvalid}" TextColor="Red" FontSize="Small" />
-                <Label Text="Receiever's Address" Margin="0,8,0,0" />
-                <Entry Text="{Binding SendAddress.Value}" x:Name="ReceiverAddressEntry" AutomationId="ReceiverAddressEntry" Margin="0,8,0,0" ce:CustomReturnEffect.ReturnType="Done"/>
-                <Label Text="{Binding SendAddress.ValidationError}" AutomationId="InvalidReceiverAddressLabel" IsVisible="{Binding Amount.IsInvalid}" TextColor="Red" FontSize="Small" />
-                <Button HorizontalOptions="FillAndExpand" Margin="16,32,16,0" Text="Send" Command="{Binding SendCommand}" />
-            </StackLayout>
+        <ContentPage Title="Send" AutomationId="SendPage" Icon="send.png" BindingContext="{Binding SendViewModel}">
+
+            <!--MAIN CONTAINER-->
+            <Grid>
+                <!---BACKGROUND IMAGE-->
+                <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+                <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+                    <!-- MAIN CONTAINER -->
+                    <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1" Padding="40,0" VerticalOptions="Start">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Row="0" VerticalOptions="Start" HeightRequest="60">
+                                <Entry x:Name="SendAmountEntry" AutomationId="SendAmountEntry" Placeholder="Amount" Text="{Binding Amount.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
+
+                                <Label Text="{Binding Amount.ValidationError}" IsVisible="{Binding Amount.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle2}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="1" VerticalOptions="Start" HeightRequest="60">
+                                <Entry x:Name="ReceiverAddressEntry" AutomationId="ReceiverAddressEntry" Placeholder="Receiver's Address" Text="{Binding SendAddress.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
+
+                                <Label AutomationId="InvalidReceiverAddressLabel" Text="{Binding SendAddress.ValidationError}" IsVisible="{Binding SendAddress.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle2}" />
+                            </StackLayout>
+
+                        </Grid>
+
+                        <!-- FOOTER -->
+                        <StackLayout Grid.Row="2" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 30">
+
+                            <!-- SEND BUTTON -->
+                            <artina:Button AutomationId="SendButton" Style="{StaticResource PrimaryActionButtonStyle}" 
+                                           VerticalOptions="End" Text="Send" 
+                                           WidthRequest="{ artina:OnOrientationDouble LandscapePhone=200, LandscapeTablet=400 }" 
+                                           HorizontalOptions="{ artina:OnOrientationLayoutOptions PortraitPhone=Fill, LandscapePhone=Center, PortraitTablet=Fill, LandscapeTablet=Center }" 
+                                           Command="{Binding SendCommand}" />
+
+                        </StackLayout>
+
+                    </Grid>
+
+                </ScrollView>
+            </Grid>
+
         </ContentPage>
-        <ContentPage Title="Receive" AutomationId="ReceivePage" Icon="receive.png">
-            <StackLayout BindingContext="{Binding ReceiveViewModel}">
-                <Image x:Name="ReceieveAddress" WidthRequest="200" HeightRequest="200"/>
-                <Label  Text="Receive address:"/>
-                <!-- todo : uncomment and implement <Image x:Name="receiveAddressQrImage" WidthRequest="200" HeightRequest="200" Aspect="AspectFill"></Image>-->
-                <Label Text="{Binding DepositAddress}" />
-                <!-- todo : uncomment and implement <Button Command="{Bining GenerateNewAddressCommand}" Text="Generate new address" />-->
-                <!-- todo : uncomment and implement <Button Margin="0,16,0,0" x:Name="shareReceieveAddressButton" Text="Share" />-->
-            </StackLayout>
+        <ContentPage Title="Receive" AutomationId="ReceivePage" Icon="receive.png" BindingContext="{Binding ReceiveViewModel}">
+            <!--MAIN CONTAINER-->
+            <Grid>
+                <!---BACKGROUND IMAGE-->
+                <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+                <!-- MAIN CONTAINER -->
+                <Grid Padding="40,0" VerticalOptions="FillAndExpand">
+
+                    <StackLayout>
+                        <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeFormat="QR_CODE" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BarcodeValue="This is good!!!jhsadjhsdbj in skjnkj 987346uh k,kj sdiuh7iiuh 892 jk ksjdn kjsdo nkj nkjd sui">
+                        </zxing:ZXingBarcodeImageView>
+                        <Label  Text="Receive address:" TextColor="White"/>
+                        <Label Text="{Binding DepositAddress}" TextColor="White" />
+                        <!-- todo : uncomment and implement <Button Command="{Bining GenerateNewAddressCommand}" Text="Generate new address" />-->
+                        <!-- todo : uncomment and implement <Button Margin="0,16,0,0" x:Name="shareReceieveAddressButton" Text="Share" />-->
+                    </StackLayout>
+                </Grid>
+
+            </Grid>
         </ContentPage>
-        <ContentPage Title="Transfer" AutomationId="TransferPage" Icon="transfer.png">
-            <StackLayout BindingContext="{Binding TransferViewModel}">
-                <Label Text="Amount" Margin="0,16,0,0" />
-                <Entry Text="{Binding Amount.Value}" AutomationId="TransferAmountEntry" Margin="0,8,0,0" />
-                <Label Text="{Binding Amount.ValidationError}" AutomationId="InvalidTransferAmountEntry" IsVisible="{Binding Amount.IsInvalid}" TextColor="Red" FontSize="Small" />
-                <!-- if user has more than one card allow them to select a card -->
-                <Button HorizontalOptions="FillAndExpand" AutomationId="TransferButton" Margin="16,32,16,0" Text="Transfer" Command="{Binding TransferCommand}" />
-            </StackLayout>
+        <ContentPage Title="Transfer" AutomationId="TransferPage" Icon="transfer.png" BindingContext="{Binding TransferViewModel}">
+            <!--MAIN CONTAINER-->
+            <Grid>
+                <!---BACKGROUND IMAGE-->
+                <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+                <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+                    <!-- MAIN CONTAINER -->
+                    <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1" Padding="40,0" VerticalOptions="Start">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Row="0" VerticalOptions="Start" HeightRequest="60">
+                                <Entry x:Name="TransferAmountEntry" AutomationId="TransferAmountEntry" Placeholder="Amount" Text="{Binding Amount.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
+
+                                <Label Text="{Binding Amount.ValidationError}" IsVisible="{Binding Amount.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle2}" />
+                            </StackLayout>
+
+                        </Grid>
+
+                        <!-- FOOTER -->
+                        <StackLayout Grid.Row="2" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 30">
+
+                            <!-- SEND BUTTON -->
+                            <artina:Button AutomationId="TransferButton" Style="{StaticResource PrimaryActionButtonStyle}" 
+                                           VerticalOptions="End" Text="Transfer" 
+                                           WidthRequest="{ artina:OnOrientationDouble LandscapePhone=200, LandscapeTablet=400 }" 
+                                           HorizontalOptions="{ artina:OnOrientationLayoutOptions PortraitPhone=Fill, LandscapePhone=Center, PortraitTablet=Fill, LandscapeTablet=Center }" 
+                                           Command="{Binding TransferCommand}" />
+
+                        </StackLayout>
+
+                    </Grid>
+                </ScrollView>
+            </Grid>
         </ContentPage>
 
     </TabbedPage.Children>

@@ -538,6 +538,13 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
 
+            <Style x:Key="ValidationEntryErrorStyle2" TargetType="Label">
+                <Setter Property="TextColor" Value="{ DynamicResource ErrorColor }" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+
             <Style x:Key="ValidationEntryWarningStyle" TargetType="Label">
                 <Setter Property="BackgroundColor" Value="{ DynamicResource WarningColor }" />
                 <Setter Property="TextColor" Value="{ DynamicResource OverImageTextColor }" />

@@ -15,6 +15,11 @@ namespace Agate.Views.Main
 		public AssetHomePage ()
 		{
 			InitializeComponent ();
+
+		    BarcodeImageView.BarcodeOptions.Margin = 4;
+		    BarcodeImageView.BarcodeOptions.Width = 400;
+		    BarcodeImageView.BarcodeOptions.Height = 400;
+
 		}
 	}
 }

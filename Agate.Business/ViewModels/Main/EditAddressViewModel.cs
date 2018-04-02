@@ -43,6 +43,7 @@ namespace Agate.Business.ViewModels.Main
         private void Initialize(INavigationService navigationService, UserAddress[] currentAddresses, UserAddress addressToEdit, Func<IView, Task> onConfirmAction,
             bool newAddress)
         {
+            Title = "Shipping Address";
             FirstName = new Property<string>("First Name").RequiredString("Please enter first name");
             LastName = new Property<string>("Last Name").RequiredString("Please enter last name");
             AddressLine1 = new Property<string>("Address Line 1").RequiredString("Please enter address");
@@ -62,6 +63,7 @@ namespace Agate.Business.ViewModels.Main
             existingAddress = !newAddress;
         }
 
+        public string Title { get; set; }
         public Property<string> FirstName { get; set; }
         public Property<string> LastName { get; set; }
         public Property<string> AddressLine1 { get; set; }

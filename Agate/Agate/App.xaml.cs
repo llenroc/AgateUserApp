@@ -66,6 +66,9 @@ namespace Agate
 		    builder.RegisterType<PinSignInViewModel>();
 		    builder.RegisterType<EditAddressViewModel>();
 		    builder.RegisterType<OrderNewCardViewModel>();
+		    builder.RegisterType<SendAssetViewModel>();
+		    builder.RegisterType<ReceiveAssetViewModel>();
+		    builder.RegisterType<TransferAssetViewModel>();
 
 		    var container = builder.Build();
 
