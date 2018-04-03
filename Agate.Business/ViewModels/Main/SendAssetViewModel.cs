@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Agate.Business.AppLogic;
 using Agate.Business.API;
+using Agate.Business.LocalData;
 using Agate.Business.Services;
 using Agate.Contracts.Models.Transactions;
 using Microsoft.AppCenter.Crashes;
@@ -14,23 +16,30 @@ namespace Agate.Business.ViewModels.Main
     public class SendAssetViewModel : BaseViewModel
     {
         private readonly ITransactionService transactionService;
+        private readonly IAppData appData;
+        private readonly IUserData userData;
         private readonly ISecureStorage secureStorage;
         private readonly IConnectivity connectivity;
+        private Asset asset;
+        private UserAsset userAsset;
 
-        public SendAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage, IConnectivity connectivity)
+        public SendAssetViewModel(ITransactionService transactionService, IAppData appData, IUserData userData, ISecureStorage secureStorage, IConnectivity connectivity)
         {
             this.transactionService = transactionService;
+            this.appData = appData;
+            this.userData = userData;
             this.secureStorage = secureStorage;
             this.connectivity = connectivity;
         }
 
-        public void Initialize(AssetHomeViewModel parent)
+        public void Initialize(Asset asset, UserAsset userAsset)
         {
-            Parent = parent;
+            this.asset = asset;
+            this.userAsset = userAsset;
 
             Amount = new Property<decimal>("amount")
                 .Required("Please enter an amount.")
-                .Check(amount => (Parent.UserAsset.Balance >= amount), "Insufficient funds");
+                .Check(amount => (userAsset.Balance >= amount), "Insufficient funds");
             SendAddress = new Property<string>("address").RequiredString("Please specify address.");
             SendCommand = new XCommand(async () => await Send(), CanSend);
 
@@ -38,7 +47,6 @@ namespace Agate.Business.ViewModels.Main
         }
 
 
-        public AssetHomeViewModel Parent { get; set; }
         public Property<decimal> Amount { get; set; }
         public Property<string> SendAddress { get; set; }
         public IXCommand SendCommand { get; set; }
@@ -57,20 +65,25 @@ namespace Agate.Business.ViewModels.Main
                     await View.DisplayAlert("...", "Internet connection required", "Ok");
                     return;
                 }
+
                 var request = new SendOrderRequest
                 {
                     Amount = Amount.Value,
                     TargetAddress = SendAddress.Value,
-                    AssetId = Parent.Asset.AssetId,
+                    AssetId = asset.AssetId,
                     UserId = secureStorage.GetUserId().Value
                 };
+
                 SendOrderResponse response;
                 using (WorkingScope.Enter())
                 {
                     response = await transactionService.SendOrder(request);
                 }
 
-                Parent.UserAsset.Balance = response.AssetNewBalance;
+                userAsset.Balance = response.AssetNewBalance;
+
+                await userData.SaveUserAssets(appData.UserAssets);
+                
                 await View.DisplayAlert("Done", "Send order submitted.", "Ok");
             }
             catch (Exception ex)

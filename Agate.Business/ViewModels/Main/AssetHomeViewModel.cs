@@ -17,7 +17,7 @@ namespace Agate.Business.ViewModels.Main
             UserAsset = userAsset;
             Rate = rate;
 
-            SendViewModel.Initialize(this);
+            SendViewModel.Initialize(asset, userAsset);
             ReceiveViewModel.Initialize(this);
             TransferViewModel.Initialize(this);
         }
