@@ -57,7 +57,7 @@
                 </Grid>
 
                 <!-- FOOTER -->
-                <StackLayout x:Name="ButtonsStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0" Grid.Row="3">
+                <StackLayout x:Name="ButtonsStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 30" Grid.Row="3">
 
                     <!-- SINGUP BUTTON -->
                     <artina:Button AutomationId="SetPinButton" Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Set PIN" WidthRequest="{ artina:OnOrientationDouble

@@ -46,7 +46,7 @@ namespace Agate.Business.ViewModels.User
         {
             try
             {
-                if (Pin1 != Pin2)
+                if (Pin1.Value != Pin2.Value)
                 {
                     await View.DisplayAlert("PINs don't match", "The PIN values entered does not match", "Ok");
                     return;
