@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Agate.Business.AppLogic;
 using Agate.Business.API;
+using Agate.Business.LocalData;
 using Agate.Business.Services;
 using Agate.Contracts.Models.Transactions;
 using Microsoft.AppCenter.Crashes;
+using Plugin.Connectivity.Abstractions;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 
@@ -13,21 +17,37 @@ namespace Agate.Business.ViewModels.Main
     {
         private readonly ITransactionService transactionService;
         private readonly ISecureStorage secureStorage;
+        private readonly IAppData appData;
+        private readonly ICardData cardData;
+        private readonly IUserData userData;
+        private readonly IConnectivity connectivity;
+        private Asset asset;
+        private UserAsset userAsset;
+        private Rate rate;
+        private Card card;
 
-        public TransferAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage)
+        public TransferAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage, IAppData appData, ICardData cardData, IUserData userData, IConnectivity connectivity)
         {
             this.transactionService = transactionService;
             this.secureStorage = secureStorage;
+            this.appData = appData;
+            this.cardData = cardData;
+            this.userData = userData;
+            this.connectivity = connectivity;
         }
 
-        public void Initialize(AssetHomeViewModel parent)
+        public void Initialize(Asset asset, UserAsset userAsset)
         {
-            Parent = parent;
+            this.asset = asset;
+            this.userAsset = userAsset;
+            this.card = appData.Cards.FirstOrDefault();  // currently we assume there is only one card
+            this.rate = appData.Rates.SingleOrDefault(r => r.AssetId == asset.AssetId && r.TargetCurrency == card.BalanceCurrency);
+
             TransferCommand = new XCommand(Transfer, CanTransfer);
 
             Amount = new Property<decimal>().Required("Please enter an amount.");
         }
-        public AssetHomeViewModel Parent { get; set; }
+
         public Property<decimal> Amount { get; set; }
         public IXCommand TransferCommand { get; set; }
 
@@ -39,20 +59,32 @@ namespace Agate.Business.ViewModels.Main
         {
             try
             {
+                if (!connectivity.IsConnected)
+                {
+                    await View.DisplayAlert("...", "Internet connection required", "Ok");
+                    return;
+                }
+
                 var request = new TransferOrderRequest
                 {
                     Amount = Amount.Value,
-                    AssetId = Parent.Asset.AssetId,
+                    AssetId = asset.AssetId,
+                    CardId = card.Id,
+                    AcceptedFee = rate.Fee,
                     UserId = secureStorage.GetUserId().Value
                 };
-                TransferOrderResponse response;
+
                 using (WorkingScope.Enter())
                 {
-                    response = await transactionService.TransferOrder(request);
-                }
+                    var response = await transactionService.TransferOrder(request);
 
-                Parent.UserAsset.Balance = response.AssetNewBalance;
-                // todo : find the local instance of Card and update it Balance value
+                    userAsset.Balance = response.AssetNewBalance;
+
+                    await userData.SaveUserAssets(appData.UserAssets);
+
+                    card.Balance = response.CardNewBalance;
+                    await cardData.SaveCards(appData.Cards);
+                }
             }
             catch (Exception ex)
             {

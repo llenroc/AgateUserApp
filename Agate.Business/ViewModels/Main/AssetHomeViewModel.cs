@@ -19,7 +19,7 @@ namespace Agate.Business.ViewModels.Main
 
             SendViewModel.Initialize(asset, userAsset);
             ReceiveViewModel.Initialize(this);
-            TransferViewModel.Initialize(this);
+            TransferViewModel.Initialize(asset, userAsset);
         }
 
         public Asset Asset { get; set; }
