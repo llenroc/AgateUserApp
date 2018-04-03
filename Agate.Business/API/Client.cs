@@ -6,7 +6,7 @@ namespace Agate.Business.API
 {
     public class Client
     {
-       public static string BaseAddress = "https://oppapi.azurewebsites.net/api/v1/";
+       public static string BaseAddress = "http://10.0.2.2:62217/api/v1/";
 
         public static async Task<TResponse> Post<TRequest,TResponse>(string api, TRequest request)
             where TResponse : class

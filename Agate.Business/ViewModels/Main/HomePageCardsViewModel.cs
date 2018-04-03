@@ -82,29 +82,19 @@ namespace Agate.Business.ViewModels.Main
                 if (cards.Any(c => c.State == CardState.Ordered))
                 {
                     OrderPendingViewIsVisible = true;
+                    NoCardViewIsVisible = false;
                 }
                 else
                 {
                     List = cards.Select(c => new CardRowViewModel(this, c)).ToList();
+                    NoCardViewIsVisible = false;
+                    OrderPendingViewIsVisible = false;
                 }
             }
             else
             {
                 NoCardViewIsVisible = true;
-            }
-
-
-            if (cards == null || !cards.Any())
-            {
-                var generalInfo = await generalData.ReadGeneralInfo();
-                if (generalInfo != null && generalInfo.ImpendingCardOrder)
-                {
-                    OrderPendingViewIsVisible = true;
-                }
-                else
-                {
-                    NoCardViewIsVisible = true;
-                }
+                OrderPendingViewIsVisible = false;
             }
         }
     }
