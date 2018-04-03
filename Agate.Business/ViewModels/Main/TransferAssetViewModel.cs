@@ -25,6 +25,8 @@ namespace Agate.Business.ViewModels.Main
         private UserAsset userAsset;
         private Rate rate;
         private Card card;
+        private string transferAmount;
+        private bool showTransferAmount;
 
         public TransferAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage, IAppData appData, ICardData cardData, IUserData userData, IConnectivity connectivity)
         {
@@ -46,10 +48,43 @@ namespace Agate.Business.ViewModels.Main
             TransferCommand = new XCommand(Transfer, CanTransfer);
 
             Amount = new Property<decimal>().Required("Please enter an amount.");
+            Amount.PropertyChanged += Amount_Changed;
+        }
+
+        private void Amount_Changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            TransferAmount = $"{Amount.Value * rate.Amount - rate.Fee}";
+            ShowTransferAmount = Amount.Value > 0;
         }
 
         public Property<decimal> Amount { get; set; }
         public IXCommand TransferCommand { get; set; }
+
+        public string TransferAmount
+        {
+            get => transferAmount;
+            set
+            {
+                if (value == transferAmount)
+                    return;
+
+                transferAmount = value;
+                Raise(nameof(TransferAmount));
+            }
+        }
+
+        public bool ShowTransferAmount
+        {
+            get => showTransferAmount;
+            set
+            {
+                if(value == showTransferAmount)
+                    return;
+                
+                showTransferAmount = value;
+                Raise(nameof(ShowTransferAmount));
+            }
+        }
 
         public bool CanTransfer()
         {
