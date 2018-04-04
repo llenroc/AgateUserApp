@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Agate.Business.AppLogic;
 using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
+using Microsoft.AppCenter.Crashes;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
@@ -50,17 +52,29 @@ namespace Agate.Business.ViewModels.Main
 
         private async Task Save(AssetSelectionRow changedAsset)
         {
-            if (!userAssets.Contains(changedAsset.UserAsset))
-                userAssets.Add(changedAsset.UserAsset);
+            try
+            {
+                if (!userAssets.Contains(changedAsset.UserAsset))
+                    userAssets.Add(changedAsset.UserAsset);
 
-            appData.UserAssets = userAssets.ToArray();
+                appData.UserAssets = userAssets.ToArray();
 
-            bool ignoreBalanceCheck = false;
+                bool ignoreBalanceCheck = false;
 
-            var request = userAssets.Select(a => new Agate.Contracts.Models.User.UpdateUserAssetRequest { AssetId = a.AssetId, Favorited = a.Favorited, IgnoreBalanceCheck = ignoreBalanceCheck}).ToArray();
-            await userAssetsService.Save(secureStorage.GetUserId().Value, request);
+                var request = userAssets.Select(a => new Agate.Contracts.Models.User.UpdateUserAssetRequest { AssetId = a.AssetId, Favorited = a.Favorited, IgnoreBalanceCheck = ignoreBalanceCheck}).ToArray();
+                await userAssetsService.Save(secureStorage.GetUserId().Value, request);
 
-            await userData.SaveUserAssets(appData.UserAssets);
+                await userData.SaveUserAssets(appData.UserAssets);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                {
+                    {"page", "choose asset page"},
+                    {"operation", $"saving changes"}
+                });
+                await View.DisplayAlert("Error", "An error occurred while processing your request" + ex, "Ok");
+            }
         }
     }
 
