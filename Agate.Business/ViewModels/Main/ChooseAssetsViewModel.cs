@@ -2,9 +2,14 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Agate.Business.AppLogic;
+using Agate.Business.API;
 using Agate.Business.LocalData;
+using Agate.Business.Services;
+using Agate.Contracts.Models.User;
+using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
+using UserAsset = Agate.Business.LocalData.UserAsset;
 
 namespace Agate.Business.ViewModels.Main
 {
@@ -12,14 +17,18 @@ namespace Agate.Business.ViewModels.Main
     {
         private readonly IAppData appData;
         private readonly IUserData userData;
+        private readonly ISecureStorage secureStorage;
+        private readonly IUserAssetsService userAssetsService;
         private Asset[] allAssets;
         private List<UserAsset> userAssets;
         private object _lock = new object();
 
-        public ChooseAssetsViewModel(IAppData appData, IUserData userData)
+        public ChooseAssetsViewModel(IAppData appData, IUserData userData, ISecureStorage secureStorage, IUserAssetsService userAssetsService)
         {
             this.appData = appData;
             this.userData = userData;
+            this.secureStorage = secureStorage;
+            this.userAssetsService = userAssetsService;
         }
 
         public void Initialize(Asset[] allAssets, UserAsset[] userAssets)
@@ -47,6 +56,11 @@ namespace Agate.Business.ViewModels.Main
                 userAssets.Add(changedAsset.UserAsset);
 
             appData.UserAssets = userAssets.ToArray();
+
+            bool ignoreBalanceCheck = false;
+
+            var request = userAssets.Select(a => new UpdateUserAssetRequest {AssetId = a.AssetId, Favorited = a.Favorited, IgnoreBalanceCheck = ignoreBalanceCheck}).ToArray();
+            await userAssetsService.Save(secureStorage.GetUserId().Value, request);
 
             await userData.SaveUserAssets(appData.UserAssets);
         }

@@ -7,5 +7,6 @@ namespace Agate.Business.API
     public interface IUserAssetsService
     {
         Task<List<UserAsset>> Get(int userId);
+        Task<UpdateUserAssetsResponse> Save(int userId, UpdateUserAssetRequest[] updateUserAssetRequests);
     }
 }
