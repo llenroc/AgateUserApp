@@ -5,11 +5,9 @@ using Agate.Business.AppLogic;
 using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
-using Agate.Contracts.Models.User;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
-using UserAsset = Agate.Business.LocalData.UserAsset;
 
 namespace Agate.Business.ViewModels.Main
 {
@@ -59,7 +57,7 @@ namespace Agate.Business.ViewModels.Main
 
             bool ignoreBalanceCheck = false;
 
-            var request = userAssets.Select(a => new UpdateUserAssetRequest {AssetId = a.AssetId, Favorited = a.Favorited, IgnoreBalanceCheck = ignoreBalanceCheck}).ToArray();
+            var request = userAssets.Select(a => new Agate.Contracts.Models.User.UpdateUserAssetRequest { AssetId = a.AssetId, Favorited = a.Favorited, IgnoreBalanceCheck = ignoreBalanceCheck}).ToArray();
             await userAssetsService.Save(secureStorage.GetUserId().Value, request);
 
             await userData.SaveUserAssets(appData.UserAssets);
