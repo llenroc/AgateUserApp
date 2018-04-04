@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Agate.Business.AppLogic;
 using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
-using Agate.Contracts.Models.Cards;
 using Microsoft.AppCenter.Crashes;
 using Plugin.Connectivity.Abstractions;
 using Plugin.SecureStorage.Abstractions;
@@ -18,16 +19,20 @@ namespace Agate.Business.ViewModels.Main
         private readonly ISecureStorage secureStorage;
         private readonly IConnectivity connectivity;
         private readonly ICardOrderService cardOrderService;
+        private readonly ICardData cardData;
+        private readonly IAppData appData;
         private INavigationService navigationService;
         private readonly Func<EditAddressViewModel> createEditAddressViewModel;
         UserAddress[] userAddresses;
         UserAddress shippingAddress;
 
-        public OrderNewCardViewModel(ISecureStorage secureStorage, IConnectivity connectivity, ICardOrderService cardOrderService, Func<EditAddressViewModel> createEditAddressViewModel)
+        public OrderNewCardViewModel(ISecureStorage secureStorage, IConnectivity connectivity, ICardOrderService cardOrderService, ICardData cardData, IAppData appData, Func<EditAddressViewModel> createEditAddressViewModel)
         {
             this.secureStorage = secureStorage;
             this.connectivity = connectivity;
             this.cardOrderService = cardOrderService;
+            this.cardData = cardData;
+            this.appData = appData;
             this.createEditAddressViewModel = createEditAddressViewModel;
         }
 
@@ -74,7 +79,7 @@ namespace Agate.Business.ViewModels.Main
                     return;
                 }
 
-                OrderCardResponse result;
+                Contracts.Models.Cards.OrderCardResponse result;
                 using (WorkingScope.Enter())
                 {
                     result = await cardOrderService.CreateOrder(new Contracts.Models.Cards.OrderCardRequest
@@ -84,6 +89,9 @@ namespace Agate.Business.ViewModels.Main
                 }
                 if (result.Success == true)
                 {
+                    appData.Cards = appData.Cards.Union(new[] {new Card {State = CardState.Ordered, Id = -1, Name = "Order Pending"}}).ToArray();
+                    await cardData.SaveCards(appData.Cards);
+
                     await navigationService.Pop();
                 }
             }
