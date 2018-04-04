@@ -18,22 +18,21 @@ namespace Agate.Business.ViewModels.Main
         private readonly ITransactionService transactionService;
         private readonly ISecureStorage secureStorage;
         private readonly IAppData appData;
-        private readonly ICardData cardData;
+        private readonly IBucketData bucketData;
         private readonly IUserData userData;
         private readonly IConnectivity connectivity;
         private Asset asset;
         private UserAsset userAsset;
         private Rate rate;
-        private Card card;
         private string transferAmount;
         private bool showTransferAmount;
 
-        public TransferAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage, IAppData appData, ICardData cardData, IUserData userData, IConnectivity connectivity)
+        public TransferAssetViewModel(ITransactionService transactionService, ISecureStorage secureStorage, IAppData appData, IBucketData bucketData, IUserData userData, IConnectivity connectivity)
         {
             this.transactionService = transactionService;
             this.secureStorage = secureStorage;
             this.appData = appData;
-            this.cardData = cardData;
+            this.bucketData = bucketData;
             this.userData = userData;
             this.connectivity = connectivity;
         }
@@ -42,8 +41,7 @@ namespace Agate.Business.ViewModels.Main
         {
             this.asset = asset;
             this.userAsset = userAsset;
-            this.card = appData.Cards.FirstOrDefault();  // currently we assume there is only one card
-            this.rate = appData.Rates.SingleOrDefault(r => r.AssetId == asset.AssetId && r.TargetCurrency == card.BalanceCurrency);
+            this.rate = appData.Rates.SingleOrDefault(r => r.AssetId == asset.AssetId && r.TargetCurrency == "iBucket");
 
             TransferCommand = new XCommand(Transfer, CanTransfer);
 
@@ -104,7 +102,6 @@ namespace Agate.Business.ViewModels.Main
                 {
                     Amount = Amount.Value,
                     AssetId = asset.AssetId,
-                    CardId = card.Id,
                     AcceptedFee = rate.Fee,
                     UserId = secureStorage.GetUserId().Value
                 };
@@ -117,8 +114,8 @@ namespace Agate.Business.ViewModels.Main
 
                     await userData.SaveUserAssets(appData.UserAssets);
 
-                    card.Balance = response.CardNewBalance;
-                    await cardData.SaveCards(appData.Cards);
+                    appData.BucketAmount = response.BucketNewBalance;
+                    await bucketData.SaveBucketInfo(new BucketInfo() {Amount = appData.BucketAmount});
                 }
             }
             catch (Exception ex)
