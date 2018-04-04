@@ -6,6 +6,7 @@ using Agate.Business.LocalData;
 using Agate.Business.Services;
 using Agate.Contracts.Models.Cards;
 using Microsoft.AppCenter.Crashes;
+using Plugin.Connectivity.Abstractions;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
@@ -15,15 +16,17 @@ namespace Agate.Business.ViewModels.Main
     public class OrderNewCardViewModel : BaseViewModel
     {
         private readonly ISecureStorage secureStorage;
+        private readonly IConnectivity connectivity;
         private readonly ICardOrderService cardOrderService;
         private INavigationService navigationService;
         private readonly Func<EditAddressViewModel> createEditAddressViewModel;
         UserAddress[] userAddresses;
         UserAddress shippingAddress;
 
-        public OrderNewCardViewModel(ISecureStorage secureStorage, ICardOrderService cardOrderService, Func<EditAddressViewModel> createEditAddressViewModel)
+        public OrderNewCardViewModel(ISecureStorage secureStorage, IConnectivity connectivity, ICardOrderService cardOrderService, Func<EditAddressViewModel> createEditAddressViewModel)
         {
             this.secureStorage = secureStorage;
+            this.connectivity = connectivity;
             this.cardOrderService = cardOrderService;
             this.createEditAddressViewModel = createEditAddressViewModel;
         }
@@ -44,7 +47,6 @@ namespace Agate.Business.ViewModels.Main
             addressText += $"{shippingAddress.City}, {shippingAddress.State} {shippingAddress.Country}" + "\r\n";
             addressText += $"{shippingAddress.PostCode}";
             Address = addressText;
-
         }
 
         public string Address { get; set; }
@@ -66,6 +68,12 @@ namespace Agate.Business.ViewModels.Main
         {
             try
             {
+                if (!connectivity.IsConnected)
+                {
+                    await View.DisplayAlert("...", "Internet connection required", "Ok");
+                    return;
+                }
+
                 OrderCardResponse result;
                 using (WorkingScope.Enter())
                 {
