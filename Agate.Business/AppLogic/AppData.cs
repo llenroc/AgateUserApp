@@ -148,6 +148,7 @@ namespace Agate.Business.AppLogic
         private static Asset[] GetDefaultAssetValues()
         {
             return new[] {
+                new Asset{AssetId = 0, AssetSymbol = "AGT", AssetName = "Agate", LogoName = "logo.png"},
                 new Asset{AssetId = 1, AssetSymbol = "BTC",AssetName="Bitcoin", LogoName ="btc.png"},
                 new Asset{AssetId = 2, AssetSymbol = "ETH",AssetName="Ethereum", LogoName = "eth.png"},
                 new Asset{AssetId = 3, AssetSymbol = "XRP", AssetName="Ripple", LogoName="xrp.png"},
