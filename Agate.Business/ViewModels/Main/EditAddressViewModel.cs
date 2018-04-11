@@ -127,8 +127,7 @@ namespace Agate.Business.ViewModels.Main
         public IXCommand ConfirmCommand { get; set; }
         private bool CanConfirm()
         {
-            return IsNotBusy && FirstName.IsValid && LastName.IsValid && AddressLine1.IsValid &&
-                   AddressLine2.IsValid && City.IsValid && Country.IsValid && PostCode.IsValid && State.IsValid;
+            return IsNotBusy && Validation.Check(FirstName, LastName, AddressLine1, AddressLine2, City, Country, PostCode, State);
         }
         public async Task Confirm()
         {
