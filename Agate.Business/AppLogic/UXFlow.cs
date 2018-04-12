@@ -67,7 +67,7 @@ namespace Agate.Business.AppLogic
                     {
                         var newUserAddresses = await userData.ReadUserAddresses();
                         var orderNewCardViewModel = createOrderNewCardViewModel();
-                        orderNewCardViewModel.Initialize(navigationService, newUserAddresses, userAddresses.FirstOrDefault(x => x.Type == AddressType.Shipping));
+                        orderNewCardViewModel.Initialize(navigationService, newUserAddresses, newUserAddresses.FirstOrDefault(x => x.Type == AddressType.Shipping));
                         navigationService.Replace(orderNewCardViewModel);
                     });
                 return editAddressViewModel;
