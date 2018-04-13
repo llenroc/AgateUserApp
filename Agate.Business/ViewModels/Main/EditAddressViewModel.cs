@@ -76,14 +76,14 @@ namespace Agate.Business.ViewModels.Main
         private void LoadAddressIntoView(UserAddress userAddress)
         {
             currentAddress = userAddress;
-            FirstName.Value = userAddress.FirstName;
-            LastName.Value = userAddress.LastName;
-            AddressLine1.Value = userAddress.AddressLine1;
-            AddressLine2.Value = userAddress.AddressLine2;
-            City.Value = userAddress.City;
-            Country.Value = userAddress.Country;
-            PostCode.Value = userAddress.PostCode;
-            State.Value = userAddress.State;
+            FirstName.InitializeValue( userAddress.FirstName);
+            LastName.InitializeValue(userAddress.LastName);
+            AddressLine1.InitializeValue(userAddress.AddressLine1);
+            AddressLine2.InitializeValue(userAddress.AddressLine2);
+            City.InitializeValue(userAddress.City);
+            Country.InitializeValue(userAddress.Country);
+            PostCode.InitializeValue(userAddress.PostCode);
+            State.InitializeValue(userAddress.State);
         }
         private void ReadAddressFromView(UserAddress currentAddress)
         {
