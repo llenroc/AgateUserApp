@@ -5,8 +5,13 @@
         public decimal Amount { get; set; }
     }
 
-    public class ChargeCardResponse : BaseResponseModel
+    public class ChargeCardResponse : ApiResponse
     {
         public decimal NewCardBalance { get; set; }
+    }
+
+    public enum ChargeCardErrorCodes
+    {
+        InsufficientBalance
     }
 }

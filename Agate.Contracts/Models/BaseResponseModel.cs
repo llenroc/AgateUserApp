@@ -8,30 +8,56 @@ namespace Agate.Contracts.Models
         public string Error { get; set; }
     }
 
-    public class ErrorResponse : BaseResponseModel
+    public class ApiResponse
     {
-        public ErrorResponse(string error)
+        public int StatusCode { get; set; }
+        public string Error { get; set; }
+    }
+
+    public class ErrorResponse : ApiResponse
+    {
+        public ErrorResponse(int statusCode, string error = null)
         {
-            this.Success = false;
-            this.Error = error;
+            StatusCode = statusCode;
+            Error = error ?? GetDefaultMessageForStatusCode(statusCode);
+        }
+
+        private static string GetDefaultMessageForStatusCode(int statusCode)
+        {
+            switch (statusCode)
+            {
+                case 404:
+                    return "Resource not found";
+                case 500:
+                    return "An unhandled error occurred";
+                default:
+                    return null;
+            }
         }
     }
 
-    public class BaseAuthenticatedRequestModel
+    public class ApiRequest
+    {
+        public Credentials Credentials { get; set; }
+    }
+
+    public class Credentials
     {
         public int UserId { get; set; }
+        public string DeviceId { get; set; }
         public string AccessCode { get; set; }
     }
 
-    public class DefaultReponses
+    public static class DefaultReponses
     {
         public static ErrorResponse GenericError(Exception ex)
         {
-            return new ErrorResponse("an unhandled error occurered. " + ex.Message);
+            return new ErrorResponse(500, "an unhandled error occurered. " + ex.Message);
         }
-        public static ErrorResponse Error(string error)
+        public static ErrorResponse Error(int statusCode, string error = null)
         {
-            return new ErrorResponse(error);
+            return new ErrorResponse(statusCode, error);
         }
+
     }
 }
