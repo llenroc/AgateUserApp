@@ -45,23 +45,10 @@ namespace AgateTests
             app.Repl();
         }
 
-        public static string GetLocalIpAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
-
         [Test]
         public void SignUpFlow()
         {
-            var ip = GetLocalIpAddress();   
+            var ip = "10.0.2.2";   
             uint portNumber = 80;
             using (var apiServer = new HttpServerMock.HttpServerMock(portNumber))
             {

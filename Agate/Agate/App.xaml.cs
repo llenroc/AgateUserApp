@@ -82,8 +82,11 @@ namespace Agate
 
             var dataReset = container.Resolve<DataReset>();
 
-		    //Task.Run((async () => await dataReset.Reset()));
-            Task.Run((async ()=> await dataReset.SetTestUser()));
+		    Task.Run((async () =>
+		    {
+		        //await dataReset.Reset();
+		        //await dataReset.SetTestUser();
+		    }));
 
             var uxFlow = container.Resolve<IUXFlow>();
             uxFlow.DecideOnAppStartPage();
