@@ -54,6 +54,7 @@ namespace Agate
 		    builder.RegisterType<UserAddressesServices>().As<IUserAddressesServices>();
 		    builder.RegisterType<CardOrderService>().As<ICardOrderService>();
 		    builder.RegisterType<CardsService>().As<ICardsService>();
+		    builder.RegisterType<UserCardsService>().As<IUserCardsService>();
 		    builder.RegisterType<RatesService>().As<IRatesService>();
 		    builder.RegisterType<BucketService>().As<IBucketService>();
 		    builder.RegisterType<TransactionService>().As<ITransactionService>();

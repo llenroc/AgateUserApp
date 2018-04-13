@@ -16,7 +16,7 @@ namespace Agate.Business.AppLogic
 
         private readonly ISecureStorage secureStorage;
         private readonly IUserData userData;
-        private readonly ICardsService cardsService;
+        private readonly IUserCardsService userCardsService;
         private readonly IRatesService ratesService;
         private readonly IBucketService bucketService;
         private readonly IUserAssetsService userAssetsService;
@@ -24,11 +24,11 @@ namespace Agate.Business.AppLogic
         private readonly ICardData cardData;
         private readonly IBucketData bucketData;
 
-        public AppData(ISecureStorage secureStorage,IUserData userData, ICardsService cardsService, IRatesService ratesService, IBucketService bucketService, IUserAssetsService userAssetsService, IRatesData ratesData, ICardData cardData, IBucketData bucketData)
+        public AppData(ISecureStorage secureStorage,IUserData userData, IUserCardsService userCardsService, IRatesService ratesService, IBucketService bucketService, IUserAssetsService userAssetsService, IRatesData ratesData, ICardData cardData, IBucketData bucketData)
         {
             this.secureStorage = secureStorage;
             this.userData = userData;
-            this.cardsService = cardsService;
+            this.userCardsService = userCardsService;
             this.ratesService = ratesService;
             this.bucketService = bucketService;
             this.userAssetsService = userAssetsService;
@@ -90,7 +90,7 @@ namespace Agate.Business.AppLogic
 
             async Task<bool> LoadCards()
             {
-                var cards = await cardsService.Get(secureStorage.GetUserId().Value);
+                var cards = await userCardsService.Get(secureStorage.GetUserId().Value);
                 if (cards == null)
                 {
                     online = false;
