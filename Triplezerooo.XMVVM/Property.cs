@@ -40,6 +40,13 @@ namespace Triplezerooo.XMVVM
             }
         }
 
+        public void InitializeValue(T value)
+        {
+            // Allows setting property value without performing validation
+            this.value = value;
+            Raise(nameof(Value));
+        }
+
         public bool IsValid => string.IsNullOrEmpty(ValidationError);
         public bool IsInvalid => !IsValid;
 
