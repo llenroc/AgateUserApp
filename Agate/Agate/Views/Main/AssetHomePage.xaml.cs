@@ -17,8 +17,8 @@ namespace Agate.Views.Main
 			InitializeComponent ();
 
 		    BarcodeImageView.BarcodeOptions.Margin = 4;
-		    BarcodeImageView.BarcodeOptions.Width = 400;
-		    BarcodeImageView.BarcodeOptions.Height = 400;
+		    BarcodeImageView.BarcodeOptions.Width = 320;
+		    BarcodeImageView.BarcodeOptions.Height = 320;
 
 		}
 	}
