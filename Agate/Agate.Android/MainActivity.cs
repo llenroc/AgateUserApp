@@ -31,7 +31,7 @@ namespace Agate.Droid
     //}
 
     [Activity(
-    Label = "Agate Users Wallet",
+    Label = "Agate User's Wallet",
     Icon = "@drawable/icon",
     Theme = "@style/Theme.Splash",
     MainLauncher = true,
