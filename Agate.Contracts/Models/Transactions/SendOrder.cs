@@ -6,10 +6,18 @@
         public int AssetId { get; set; }
         public string TargetAddress { get; set; }
         public decimal Amount { get; set; }
+        public decimal AcceptedFee { get; set; }
     }
 
     public class SendOrderResponse : BaseResponseModel
     {
         public decimal AssetNewBalance { get; set; }
+    }
+
+    public enum SendOrderErrorCodes
+    {
+        InvalidUserIdAndAssetId,
+        InsufficientFunds,
+        FeeHasChanged
     }
 }
