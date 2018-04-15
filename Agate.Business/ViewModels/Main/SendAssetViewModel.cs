@@ -71,7 +71,8 @@ namespace Agate.Business.ViewModels.Main
                     Amount = Amount.Value,
                     TargetAddress = SendAddress.Value,
                     AssetId = asset.AssetId,
-                    UserId = secureStorage.GetUserId().Value
+                    UserId = secureStorage.GetUserId().Value,
+                    AcceptedFee = 0,
                 };
 
                 SendOrderResponse response;
