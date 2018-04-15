@@ -51,7 +51,15 @@ namespace Agate.Business.ViewModels.Main
 
         private void Amount_Changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            TransferAmount = $"{Amount.Value * rate.Amount - rate.Fee}";
+            if (rate != null)
+            {
+                TransferAmount = $"{Amount.Value * rate.Amount - rate.Fee}";
+            }
+            else
+            {
+                TransferAmount = "No exchange rate found";
+            }
+
             ShowTransferAmount = Amount.Value > 0;
         }
 
