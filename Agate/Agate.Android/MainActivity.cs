@@ -22,22 +22,21 @@ namespace Agate.Droid
     MainLauncher = true,
     LaunchMode = LaunchMode.SingleTask,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Locale | ConfigChanges.LayoutDirection
-    )
-]
+    )]
 
     public class MainActivity : FormsAppCompatActivity
     {
-        private Locale _locale;
+        private Locale locale;
 
         protected override void OnCreate(Bundle bundle)
         {
             // Changing to App's theme since we are OnCreate and we are ready to 
             // "hide" the splash
-            base.Window.RequestFeature(WindowFeatures.ActionBar);
-            base.SetTheme(Resource.Style.AppTheme);
+            Window.RequestFeature(WindowFeatures.ActionBar);
+            SetTheme(Resource.Style.AppTheme);
 
-            FormsAppCompatActivity.ToolbarResource = Resource.Layout.Toolbar;
-            FormsAppCompatActivity.TabLayoutResource = Resource.Layout.Tabs;
+            ToolbarResource = Resource.Layout.Toolbar;
+            TabLayoutResource = Resource.Layout.Tabs;
 
             base.OnCreate(bundle);
 
@@ -46,12 +45,12 @@ namespace Agate.Droid
             // Initializing FFImageLoading
             CachedImageRenderer.Init(true);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            Xamarin.Forms.Forms.Init(this, bundle);
             GrialKit.Init(this, "Agate.Droid.GrialLicense");
 
             FormsHelper.ForceLoadingAssemblyContainingType(typeof(UXDivers.Effects.Effects));
 
-            _locale = Resources.Configuration.Locale;
+            locale = Resources.Configuration.Locale;
 
             LoadApplication(new App());
         }
@@ -63,7 +62,7 @@ namespace Agate.Droid
             GrialKit.NotifyConfigurationChanged(newConfig);
 
             if ((int)Build.VERSION.SdkInt <= 19 &&
-                !_locale.Equals(newConfig.Locale))
+                !locale.Equals(newConfig.Locale))
             {
                 // Need to recreate the activity when locale has changed for APIs 18 and 19 
                 // as changes in ConfigChanges.Locale break images used in the app
