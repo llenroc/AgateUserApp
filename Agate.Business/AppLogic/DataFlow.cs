@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
-using OpalApp.Services;
 using Plugin.SecureStorage.Abstractions;
 
 namespace Agate.Business.AppLogic

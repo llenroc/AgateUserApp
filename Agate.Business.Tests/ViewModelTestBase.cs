@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Agate.Business.AppLogic;
+using Agate.Business.Services;
 using Moq;
-using OpalApp.Services;
 using Plugin.Connectivity.Abstractions;
 using Plugin.DeviceInfo.Abstractions;
 using Plugin.SecureStorage.Abstractions;

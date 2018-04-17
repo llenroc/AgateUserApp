@@ -22,7 +22,7 @@
 
 // copied from  https://github.com/XLabs/Xamarin-Forms-Labs/blob/master/src/Platform/XLabs.Platform/Services/IPhoneService.cs
 
-namespace OpalApp.Services
+namespace Agate.Business.Services
 {
     /// <summary>
     /// Interface for phone functionality and information.

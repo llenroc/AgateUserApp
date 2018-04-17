@@ -17,7 +17,6 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
-using OpalApp.Services;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Plugin.DeviceInfo;
@@ -31,7 +30,7 @@ namespace Agate
 {
 	public partial class App : Application
 	{
-		public App ()
+        public App ()
 		{
 			InitializeComponent();
 		    Resources["DefaultStringResources"] = new Resx.AppResources();
@@ -81,13 +80,13 @@ namespace Agate
 
 		    var container = builder.Build();
 
-            var dataReset = container.Resolve<DataReset>();
+		    var dataReset = container.Resolve<DataReset>();
 
-		    Task.Run((async () =>
-		    {
-		        //await dataReset.Reset();
-		        //await dataReset.SetTestUser();
-		    }));
+            Task.Run((async () =>
+            {
+                //await dataReset.Reset();
+                //await dataReset.SetTestUser();
+            }));
 
             var uxFlow = container.Resolve<IUXFlow>();
             uxFlow.DecideOnAppStartPage();

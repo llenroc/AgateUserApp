@@ -8,7 +8,6 @@ using Agate.Business.AppLogic;
 using Agate.Business.Services;
 using Agate.Contracts.Models.Account;
 using Microsoft.AppCenter.Crashes;
-using OpalApp.Services;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Plugin.DeviceInfo.Abstractions;

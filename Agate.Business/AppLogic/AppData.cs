@@ -5,7 +5,6 @@ using Agate.Business.Api;
 using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
-using OpalApp.Services;
 using Plugin.SecureStorage.Abstractions;
 
 namespace Agate.Business.AppLogic

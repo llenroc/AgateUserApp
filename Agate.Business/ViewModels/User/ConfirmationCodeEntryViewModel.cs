@@ -7,7 +7,6 @@ using Agate.Business.AppLogic;
 using Agate.Business.LocalData;
 using Agate.Contracts.Models.Account;
 using Microsoft.AppCenter.Crashes;
-using OpalApp.Services;
 using Plugin.Connectivity.Abstractions;
 using Plugin.DeviceInfo.Abstractions;
 using Triplezerooo.XMVVM;
