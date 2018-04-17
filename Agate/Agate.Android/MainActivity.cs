@@ -15,21 +15,6 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Agate.Droid
 {
-    //[Activity(Label = "Agate", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    //public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
-    //{
-    //    protected override void OnCreate(Bundle bundle)
-    //    {
-    //        TabLayoutResource = Resource.Layout.Tabbar;
-    //        ToolbarResource = Resource.Layout.Toolbar;
-
-    //        base.OnCreate(bundle);
-
-    //        global::Xamarin.Forms.Forms.Init(this, bundle);
-    //        LoadApplication(new App());
-    //    }
-    //}
-
     [Activity(
     Label = "Agate User's Wallet",
     Icon = "@drawable/icon",
