@@ -93,7 +93,7 @@ namespace Agate.Business.ViewModels.User
 
                 if (result != null)
                 {
-                    if (result.Success)
+                    if (result.StatusCode == 0)
                     {
                         using (WorkingScope.Enter())
                         {

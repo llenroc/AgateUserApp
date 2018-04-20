@@ -11,7 +11,7 @@
         public bool RequestForNewCode { get; set; }
     }
 
-    public class SignUpResponseModel : BaseResponseModel
+    public class SignUpResponseModel : ApiResponse
     {
         public SignUpResponseModel()
         {
@@ -20,13 +20,7 @@
 
         public SignUpResponseModel(int requestId)
         {
-            Success = true;
             RequestId = requestId;
-        }
-
-        public SignUpResponseModel(string error)
-        {
-            Error = error;
         }
 
         public int RequestId { get; set; }
