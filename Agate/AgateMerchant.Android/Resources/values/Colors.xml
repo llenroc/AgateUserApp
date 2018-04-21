@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Colors in this file are automatically synchronized against the colors in the Current
+	Theme XAML file by Grial UIKit build task. Please, do not modify colors manually.
+-->
+<resources>
+	<color name="AccentColor">#FF14597D</color>
+	<color name="ComplementColor">#FF525ABB</color>
+	<color name="BaseTextColor">#FF666666</color>
+	<color name="ListViewSelectedItemBackgroundColor">#FFD4ECF8</color>
+	<color name="SplashBackgroundColor">#FFFFFFFF</color>
+</resources>
