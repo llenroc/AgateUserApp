@@ -14,17 +14,38 @@ namespace Agate.Business.ViewModels.Main
         public MainMenuViewModel(IAppInfo appInfo, Func<NotImplementedFeatureViewModel> createNotImplementedFeatureViewModel)
         {
             this.appInfo = appInfo;
-            AllMenuItems = new List<MenuItem>(new[]
+            if (appInfo.Mode == AppMode.User)
             {
-                new MenuItem("Manage Assets", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
-                new MenuItem("Manage Cards", createNotImplementedFeatureViewModel, "#921243", "\ue870"),
-                new MenuItem("Trader Bot", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
-                new MenuItem("AI Engine", createNotImplementedFeatureViewModel, "#921243", "\ue906"),
-                new MenuItem("Settings", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
-                new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
-                new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
-                new MenuItem("Feedback", createNotImplementedFeatureViewModel, "#921243", "\ue0ca"),
-            });
+                AllMenuItems = new List<MenuItem>(new[]
+                {
+                    new MenuItem("Manage Assets", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
+                    new MenuItem("Manage Cards", createNotImplementedFeatureViewModel, "#921243", "\ue870"),
+                    new MenuItem("Trader Bot", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
+                    new MenuItem("AI Engine", createNotImplementedFeatureViewModel, "#921243", "\ue906"),
+                    new MenuItem("Settings", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
+                    new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
+                    new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
+                    new MenuItem("Feedback", createNotImplementedFeatureViewModel, "#921243", "\ue0ca"),
+                    new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
+                });
+            }
+            else
+            {
+                AllMenuItems = new List<MenuItem>(new[]
+                {
+                    new MenuItem("Merchant Home", createNotImplementedFeatureViewModel,  "#921243", "\ue80c"),
+                    new MenuItem("Manage Assets", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
+                    new MenuItem("Manage Cards", createNotImplementedFeatureViewModel, "#921243", "\ue870"),
+                    new MenuItem("Manage iBucket", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
+                    new MenuItem("Trader Bot", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
+                    new MenuItem("AI Engine", createNotImplementedFeatureViewModel, "#921243", "\ue906"),
+                    new MenuItem("Settings", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
+                    new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
+                    new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
+                    new MenuItem("Feedback", createNotImplementedFeatureViewModel, "#921243", "\ue0ca"),
+                    new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
+                });
+            }
         }
 
         public void Initialize(INavigationService navigationService)

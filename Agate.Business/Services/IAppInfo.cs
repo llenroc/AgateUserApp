@@ -6,6 +6,13 @@ namespace Agate.Business.Services
 {
     public interface IAppInfo
     {
+        AppMode Mode { get; }
         string AppName { get; }
+    }
+
+    public enum AppMode
+    {
+        User,
+        Merchant
     }
 }

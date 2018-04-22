@@ -17,6 +17,7 @@ namespace Agate.Droid.Implementations
 {
     public class AppInfo : IAppInfo
     {
+        public AppMode Mode => AppMode.User;
         public string AppName => "Agate User";
     }
 }

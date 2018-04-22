@@ -17,6 +17,7 @@ namespace AgateMerchant.Droid.Implementations
 {
     public class AppInfo : IAppInfo
     {
+        public AppMode Mode => AppMode.Merchant;
         public string AppName => "Agate Merchant";
     }
 }
