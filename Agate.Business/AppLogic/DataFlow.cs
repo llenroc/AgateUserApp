@@ -67,11 +67,11 @@ namespace Agate.Business.AppLogic
             });
             await userData.SaveUserAssets(new[] {
                         new UserAsset { AssetId = 0, Balance = 0, Favorited = true },
-                        new UserAsset { AssetId = 1, Balance = 0, Favorited = true },
-                        new UserAsset { AssetId = 2, Balance = 0, Favorited = true },
-                        new UserAsset { AssetId = 3, Balance = 0, Favorited = true },
-                        new UserAsset { AssetId = 4, Balance = 0, Favorited = false },
-                        new UserAsset { AssetId = 5, Balance = 0, Favorited = false },
+                        new UserAsset { AssetId = 1, Balance = 0, Favorited = true, CurrentReceiveAddress = "37JG5sdbjji39BARLwyaCF9doSEUgFXMX9"},
+                        new UserAsset { AssetId = 2, Balance = 0, Favorited = true, CurrentReceiveAddress = "0x350C8a737dF3947a624B049D1DCe34790AE00F86" },
+                        new UserAsset { AssetId = 3, Balance = 0, Favorited = true, CurrentReceiveAddress = "" },
+                        new UserAsset { AssetId = 4, Balance = 0, Favorited = false, CurrentReceiveAddress = "pp2r04n9nwwl6p8hhc9euz6lxwu3vrxun5hsg7sxf7" },
+                        new UserAsset { AssetId = 5, Balance = 0, Favorited = false, CurrentReceiveAddress = "LRHyQFVnYaVnkp9PtCA2f7hxunmsCw37Mh" },
                     });
 
             await appData.LoadOfflineData();
