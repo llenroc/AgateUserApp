@@ -9,11 +9,13 @@ namespace Agate.Business.AppLogic
     {
         private readonly ISecureStorage secureStorage;
         private readonly IUserData userData;
+        private readonly IAppData appData;
 
-        public DataFlow(ISecureStorage secureStorage, IUserData userData)
+        public DataFlow(ISecureStorage secureStorage, IUserData userData, IAppData appData)
         {
             this.secureStorage = secureStorage;
             this.userData = userData;
+            this.appData = appData;
         }
         //public static async Task<Asset[]> GetAllAssets()
         //{
@@ -72,6 +74,7 @@ namespace Agate.Business.AppLogic
                         new UserAsset { AssetId = 5, Balance = 0, Favorited = false },
                     });
 
+            await appData.LoadOfflineData();
         }
 
         public async Task UpdateUserId(int userId)
