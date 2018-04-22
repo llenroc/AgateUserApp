@@ -5,6 +5,6 @@
                   xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"                   
                   IsPresented="false" 
                   MasterBehavior="Popover"
-                  Title="Agate User's App">
+                  Title="{Binding Title}">
 
 </MasterDetailPage>

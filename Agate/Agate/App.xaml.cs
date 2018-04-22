@@ -60,6 +60,7 @@ namespace Agate
 		    builder.RegisterType<UserAssetsService>().As<IUserAssetsService>();
             builder.RegisterType<ViewService>().As<IViewService>();
 		    builder.Register(c => DependencyService.Get<IPhoneService>()).As<IPhoneService>();
+		    builder.Register(c => DependencyService.Get<IAppInfo>()).As<IAppInfo>();
 		    builder.Register(c => CrossDeviceInfo.Current).As<IDeviceInfo>();
 		    builder.RegisterType<SignUpPageViewModel>();
 		    builder.RegisterType<ConfirmationCodeEntryViewModel>();

@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agate.Business.Services;
 using Triplezerooo.XMVVM;
 
 namespace Agate.Business.ViewModels.Main
 {
     public class MainMenuViewModel : BaseViewModel
     {
+        private readonly IAppInfo appInfo;
         private INavigationService navigationService;
         private List<MenuItem> allMenuItems;
 
-        public MainMenuViewModel(Func<NotImplementedFeatureViewModel> createNotImplementedFeatureViewModel)
+        public MainMenuViewModel(IAppInfo appInfo, Func<NotImplementedFeatureViewModel> createNotImplementedFeatureViewModel)
         {
+            this.appInfo = appInfo;
             AllMenuItems = new List<MenuItem>(new[]
             {
                 new MenuItem("Manage Assets", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
@@ -28,6 +31,8 @@ namespace Agate.Business.ViewModels.Main
         {
             this.navigationService = navigationService;
         }
+
+        public string Title => appInfo.AppName;
 
         public List<MenuItem> AllMenuItems
         {

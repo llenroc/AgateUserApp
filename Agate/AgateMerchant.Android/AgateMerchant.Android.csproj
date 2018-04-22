@@ -18,7 +18,7 @@
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidKeyStore>false</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Users\Sam\AppData\Local\Xamarin\Mono for Android\Keystore\agatemerchantsigningkey\agatemerchantsigningkey.keystore</AndroidSigningKeyStore>
     <AndroidSigningKeyAlias>agatemerchantsigningkey</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>123hsyij#@52</AndroidSigningKeyPass>
@@ -120,6 +120,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\AppInfo.cs" />
     <Compile Include="Implementations\PhoneService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
