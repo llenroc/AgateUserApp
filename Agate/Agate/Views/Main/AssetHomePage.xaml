@@ -82,7 +82,8 @@
                     </Grid>
 
                     <StackLayout Grid.Row="1" Padding="40,0">
-                        <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeFormat="QR_CODE" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BarcodeValue="This is good!!!jhsadjhsdbj in skjnkj 987346uh k,kj sdiuh7iiuh 892 jk ksjdn kjsdo nkj nkjd sui">
+                        <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeFormat="QR_CODE" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                                     BarcodeValue="{Binding DepositAddress}">
                         </zxing:ZXingBarcodeImageView>
                         <Label  Text="Receive address:" TextColor="White"/>
                         <Label Text="{Binding DepositAddress}" TextColor="White" />
