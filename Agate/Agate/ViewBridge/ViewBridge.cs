@@ -84,6 +84,10 @@ namespace Agate.ViewBridge
             {
                 return new OrderNewCardPage();
             }
+            if(viewModel.GetType() == typeof(NotImplementedFeatureViewModel))
+            {
+                return new NotImplementedFeaturePage();
+            }
 
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }

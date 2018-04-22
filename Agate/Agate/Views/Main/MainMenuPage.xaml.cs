@@ -13,14 +13,9 @@ namespace Agate.Views.Main
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainMenuPage : ContentPage
     {
-        public ListView ListView;
-
         public MainMenuPage()
         {
             InitializeComponent();
-            
-            BindingContext = new MainMenuViewModel();
-            ListView = MenuListView;
         }
     }
 }

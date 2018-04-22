@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 
 namespace Agate.Business.ViewModels.Main
@@ -8,14 +9,14 @@ namespace Agate.Business.ViewModels.Main
     {
         public const string ArrowRight = "\ue315";
 
-        public MenuItem(string name, Type viewModelType, string backgroundImage, string icon = ArrowRight,
+        public MenuItem(string name, Func<BaseViewModel> createViewModelFunc, string backgroundImage, string icon = ArrowRight,
             bool isNew = false,
             bool justNotifyNavigateIntent = false,
             Action<INavigation> customNavigation = null
         )
         {
             Name = name;
-            ViewModelType = viewModelType;
+            CreateViewModelFunc = createViewModelFunc;
             Icon = icon;
             BackgroundImage = backgroundImage;
             IsNew = isNew;
@@ -23,13 +24,11 @@ namespace Agate.Business.ViewModels.Main
 
         public string Name { get; }
 
-        public Type ViewModelType { get; }
+        public Func<BaseViewModel> CreateViewModelFunc { get; }
 
         public string Icon { get; }
 
         public string BackgroundImage { get; }
-
-        public Type PageType { get; }
 
         public bool IsNew { get; }
     }

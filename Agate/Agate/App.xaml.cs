@@ -65,6 +65,7 @@ namespace Agate
 		    builder.RegisterType<ConfirmationCodeEntryViewModel>();
 		    builder.RegisterType<SetPinViewModel>();
 		    builder.RegisterType<MainViewModel>();
+		    builder.RegisterType<MainMenuViewModel>();
 		    builder.RegisterType<HomePageViewModel>();
 		    builder.RegisterType<HomePageAssetsViewModel>();
 		    builder.RegisterType<HomePageBucketInfoViewModel>();
@@ -77,6 +78,7 @@ namespace Agate
 		    builder.RegisterType<SendAssetViewModel>();
 		    builder.RegisterType<ReceiveAssetViewModel>();
 		    builder.RegisterType<TransferAssetViewModel>();
+		    builder.RegisterType<NotImplementedFeatureViewModel>();
 
 		    var container = builder.Build();
 
