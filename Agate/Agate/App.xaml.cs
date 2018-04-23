@@ -81,6 +81,7 @@ namespace Agate
 		    builder.RegisterType<TransferAssetViewModel>();
 		    builder.RegisterType<NotImplementedFeatureViewModel>();
 		    builder.RegisterType<ManageBucketViewModel>();
+		    builder.RegisterType<FeedbackViewModel>();
 
 		    var container = builder.Build();
 

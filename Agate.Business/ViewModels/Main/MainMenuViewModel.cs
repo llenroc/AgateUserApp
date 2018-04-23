@@ -12,15 +12,17 @@ namespace Agate.Business.ViewModels.Main
         private readonly IAppData appData;
         private readonly Func<ChooseAssetsViewModel> createChooseAssetsViewModel;
         private readonly Func<ManageBucketViewModel> createManageBucketViewModelFunc;
+        private readonly Func<FeedbackViewModel> createFeedbackViewModelFunc;
         private INavigationService navigationService;
         private List<MenuItem> allMenuItems;
 
-        public MainMenuViewModel(IAppInfo appInfo, IAppData appData, Func<NotImplementedFeatureViewModel> createNotImplementedFeatureViewModel, Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<ManageBucketViewModel> createManageBucketViewModelFunc)
+        public MainMenuViewModel(IAppInfo appInfo, IAppData appData, Func<NotImplementedFeatureViewModel> createNotImplementedFeatureViewModel, Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<ManageBucketViewModel> createManageBucketViewModelFunc, Func<FeedbackViewModel> createFeedbackViewModelFunc)
         {
             this.appInfo = appInfo;
             this.appData = appData;
             this.createChooseAssetsViewModel = createChooseAssetsViewModel;
             this.createManageBucketViewModelFunc = createManageBucketViewModelFunc;
+            this.createFeedbackViewModelFunc = createFeedbackViewModelFunc;
             if (appInfo.Mode == AppMode.User)
             {
                 AllMenuItems = new List<MenuItem>(new[]
@@ -33,7 +35,7 @@ namespace Agate.Business.ViewModels.Main
                     new MenuItem("Settings", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
                     new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
                     new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
-                    new MenuItem("Feedback", createNotImplementedFeatureViewModel, "#921243", "\ue0ca"),
+                    new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "\ue0ca"),
                     new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
                 });
             }
@@ -50,7 +52,7 @@ namespace Agate.Business.ViewModels.Main
                     new MenuItem("Settings", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
                     new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
                     new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
-                    new MenuItem("Feedback", createNotImplementedFeatureViewModel, "#921243", "\ue0ca"),
+                    new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "\ue0ca"),
                     new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
                 });
             }

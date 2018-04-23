@@ -92,6 +92,10 @@ namespace Agate.ViewBridge
             {
                 return new ManageBucketPage();
             }
+            if(viewModel.GetType() == typeof(FeedbackViewModel))
+            {
+                return new FeedbackPage();
+            }
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }
     }

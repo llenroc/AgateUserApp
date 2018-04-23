@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
+             xmlns:local="clr-namespace:Agate;assembly=Agate"
+             xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+             x:Class="Agate.Views.Main.FeedbackPage"
+             Title="Feedback">
+    <ContentPage.Content>
+        <!--MAIN CONTAINER-->
+        <Grid>
+            <!---BACKGROUND IMAGE-->
+            <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+            <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+                <!-- MAIN CONTAINER -->
+                <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="0" Spacing="10" Padding="20,10" Orientation="Vertical" VerticalOptions="Center">
+
+                        <Label LineBreakMode="WordWrap" Text="We love to know what do you think about our Services this will helping us to improve it everyday." 
+                               TextColor="{ DynamicResource OverImageTextColor }" VerticalTextAlignment="Center" AbsoluteLayout.LayoutFlags="All">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Phone="17" Tablet="27" />
+                            </Label.FontSize>
+                        </Label>
+
+                        <BoxView Style="{DynamicResource BrandNameOrnamentStyle}" BackgroundColor="{DynamicResource OverImageTextColor}" />
+
+                    </StackLayout>
+
+                    <!---FIELDS CONTAINER-->
+                    <Grid Grid.Row="1" Padding="40,0" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="250" />
+                            <RowDefinition Height="60" />
+                        </Grid.RowDefinitions>
+
+                        <!-- First Name -->
+                        <StackLayout Grid.Row="0" VerticalOptions="Start" HeightRequest="55">
+                            <Editor x:Name="FeedbackEntry" AutomationId="FirstNameEntry" Text="{Binding Feedback.Value}" BackgroundColor="White" TextColor="Black" HeightRequest="250" VerticalOptions="FillAndExpand" />
+                        </StackLayout>
+
+                    </Grid>
+
+                    <!-- FOOTER -->
+                    <StackLayout Grid.Row="2" x:Name="SubmitStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0" HeightRequest="80">
+
+                        <!-- SINGUP BUTTON -->
+                        <artina:Button AutomationId="SubmitButton" Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Submit" 
+                                       WidthRequest="{ artina:OnOrientationDouble LandscapePhone=200, LandscapeTablet=400 }" 
+                                       HorizontalOptions="{ artina:OnOrientationLayoutOptions PortraitPhone=Fill, LandscapePhone=Center, PortraitTablet=Fill, LandscapeTablet=Center }" 
+                                       Command="{Binding SubmitCommand}" />
+
+                    </StackLayout>
+
+                </Grid>
+
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
