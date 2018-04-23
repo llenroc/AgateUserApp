@@ -16,6 +16,13 @@ namespace Agate.Views.Main
         public MainMenuPage()
         {
             InitializeComponent();
+
+            MenuListView.ItemSelected += MenuListView_ItemSelected;
+        }
+
+        private void MenuListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            MenuListView.SelectedItem = null;
         }
     }
 }

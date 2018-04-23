@@ -34,11 +34,11 @@
 
         <ListView Grid.Row="1" x:Name="MenuListView" 
                   ItemsSource="{ Binding AllMenuItems }" 
-                  SelectedItem="{Binding SelectedMenuItem}"
+                  SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}"
                   SeparatorVisibility="None" 
                   VerticalOptions="FillAndExpand" 
                   Style="{ StaticResource MainMenuListViewStyle }" 
-                  CachingStrategy="RecycleElement" x:FieldModifier="public">
+                  CachingStrategy="RecycleElement">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
