@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agate.Views.Main.BucketView">
+  <ContentView.Content>
+      <StackLayout x:Name="BucketPanel" BackgroundColor="White">
+          <StackLayout Orientation="Horizontal">
+              <Label Text="iBucket" HorizontalOptions="StartAndExpand" Margin="8,2"/>
+          </StackLayout>
+          <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" />
+          <StackLayout Padding="10" BackgroundColor="White" >
+              <Label Text="{Binding Balance, StringFormat='{0:N}'}" FontSize="20" 
+                     VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+          </StackLayout>
+      </StackLayout>
+    </ContentView.Content>
+</ContentView>

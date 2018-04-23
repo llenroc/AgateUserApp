@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:main="clr-namespace:Agate.Views.Main;assembly=Agate"
+             x:Class="Agate.Views.Main.ManageBucketPage"
+             Title="Manage your bucket">
+    <ContentPage.Content>
+        <Grid>
+            <!---BACKGROUND IMAGE-->
+            <Image Style="{StaticResource SignUpBackgroundImage}" />
+            <StackLayout Padding="20">
+                <main:BucketView BindingContext="{Binding Bucket}"></main:BucketView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
