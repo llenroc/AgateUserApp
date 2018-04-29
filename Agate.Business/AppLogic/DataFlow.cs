@@ -63,7 +63,7 @@ namespace Agate.Business.AppLogic
                 LastName = lastname,
                 CountryCode = countryCode,
                 EmailAddress = emailAddress,
-                MobileNumber = mobileNumber,
+                MobileNumber = mobileNumber,                
             });
             await userData.SaveUserAssets(new[] {
                         new UserAsset { AssetId = 0, Balance = 0, Favorited = true },
@@ -74,6 +74,16 @@ namespace Agate.Business.AppLogic
                         new UserAsset { AssetId = 5, Balance = 0, Favorited = false, CurrentReceiveAddress = "LRHyQFVnYaVnkp9PtCA2f7hxunmsCw37Mh" },
                     });
 
+            await userData.SaveSettings(new UserSettings{
+                NotifyByEmailOnPaymentSuccessful = true,
+                NotifyBySMSOnPaymentSuccessful = true,
+                NotifyByEmailOnPaymentFailed = true,
+                NotifyBySMSOnPaymentFailed = true,
+                NotifyByEmailOnIncomingTransfer = true,
+                NotifyBySMSOnIncomingTransfer = true,
+                NotifyByEmailOnOutgoingTransfer = true,
+                NotifyBySMSOnOutgoingTransfer = true,
+            });
             await appData.LoadOfflineData();
         }
 

@@ -2,9 +2,13 @@
 {
     public class UserSettings
     {
-        public bool NotifyOnPaymentSuccessful { get; set; }
-        public bool NotifyOnPaymentFailed { get; set; }
-        public bool NotifyOnIncomingTransfer { get; set; }
-        public bool NotifyOnOutgoingTransfer { get; set; }
+        public bool NotifyByEmailOnPaymentSuccessful { get; set; }
+        public bool NotifyByEmailOnPaymentFailed { get; set; }
+        public bool NotifyByEmailOnIncomingTransfer { get; set; }
+        public bool NotifyByEmailOnOutgoingTransfer { get; set; }
+        public bool NotifyBySMSOnPaymentSuccessful { get; set; }
+        public bool NotifyBySMSOnPaymentFailed { get; set; }
+        public bool NotifyBySMSOnIncomingTransfer { get; set; }
+        public bool NotifyBySMSOnOutgoingTransfer { get; set; }
     }
 }

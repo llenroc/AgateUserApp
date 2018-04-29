@@ -13,16 +13,18 @@ namespace Agate.Business.ViewModels.Main
         private readonly Func<ChooseAssetsViewModel> createChooseAssetsViewModel;
         private readonly Func<ManageBucketViewModel> createManageBucketViewModelFunc;
         private readonly Func<FeedbackViewModel> createFeedbackViewModelFunc;
+        private readonly Func<SettingsViewModel> createSettingsViewModelFunc;
         private INavigationService navigationService;
         private List<MenuItem> allMenuItems;
 
-        public MainMenuViewModel(IAppInfo appInfo, IAppData appData, Func<NotImplementedFeatureViewModel> createNotImplementedFeatureViewModel, Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<ManageBucketViewModel> createManageBucketViewModelFunc, Func<FeedbackViewModel> createFeedbackViewModelFunc)
+        public MainMenuViewModel(IAppInfo appInfo, IAppData appData, Func<NotImplementedFeatureViewModel> createNotImplementedFeatureViewModel, Func<ChooseAssetsViewModel> createChooseAssetsViewModel, Func<ManageBucketViewModel> createManageBucketViewModelFunc, Func<FeedbackViewModel> createFeedbackViewModelFunc, Func<SettingsViewModel> createSettingsViewModelFunc)
         {
             this.appInfo = appInfo;
             this.appData = appData;
             this.createChooseAssetsViewModel = createChooseAssetsViewModel;
             this.createManageBucketViewModelFunc = createManageBucketViewModelFunc;
             this.createFeedbackViewModelFunc = createFeedbackViewModelFunc;
+            this.createSettingsViewModelFunc = createSettingsViewModelFunc;
             if (appInfo.Mode == AppMode.User)
             {
                 AllMenuItems = new List<MenuItem>(new[]
@@ -32,7 +34,7 @@ namespace Agate.Business.ViewModels.Main
                     new MenuItem("Manage iBucket", createManageBucketViewModelFunc, "#921243", "\ue80c"),
                     new MenuItem("Trader Bot", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
                     new MenuItem("AI Engine", createNotImplementedFeatureViewModel, "#921243", "\ue906"),
-                    new MenuItem("Settings", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
+                    new MenuItem("Settings", createSettingsViewModelFunc, "#921243", "\ue90f"),
                     new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
                     new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
                     new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "\ue0ca"),
@@ -49,7 +51,7 @@ namespace Agate.Business.ViewModels.Main
                     new MenuItem("Manage iBucket", createManageBucketViewModelFunc, "#921243", "\ue80c"),
                     new MenuItem("Trader Bot", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
                     new MenuItem("AI Engine", createNotImplementedFeatureViewModel, "#921243", "\ue906"),
-                    new MenuItem("Settings", createNotImplementedFeatureViewModel, "#921243", "\ue90f"),
+                    new MenuItem("Settings", createSettingsViewModelFunc, "#921243", "\ue90f"),
                     new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
                     new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
                     new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "\ue0ca"),

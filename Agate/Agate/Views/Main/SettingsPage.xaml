@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
+             xmlns:local="clr-namespace:Agate;assembly=Agate"
+             xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+             x:Class="Agate.Views.Main.SettingsPage"
+             Title="Settings">
+    <ContentPage.Content>
+        <!--MAIN CONTAINER-->
+        <Grid>
+            <!---BACKGROUND IMAGE-->
+            <Image Style="{StaticResource SignUpBackgroundImage}" />
+
+            <ScrollView Padding="{ StaticResource MainWrapperPadding }">
+
+                <!-- MAIN CONTAINER -->
+                <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!---FIELDS CONTAINER-->
+                    <Grid Grid.Row="1" Padding="40,0" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Grid.Row="0" VerticalOptions="Start">
+                            <Label Text="General" FontAttributes="Bold" TextColor="White"/>
+                            <Label Text="{Binding EmailAddress.Value}" TextColor="White"/>
+                            <Label Text="{Binding PhoneNUmber.Value}" TextColor="White"/>
+                        </StackLayout>
+
+                        <!-- First Name -->
+                        <StackLayout Grid.Row="1" VerticalOptions="Start">
+                            <Label Text="Security" FontAttributes="Bold" TextColor="White"/>
+                            <Button Text="Manage PIN code" Command="{Binding ManagePINCommand}" FontSize="12" BorderWidth="0" BackgroundColor="Transparent" BorderColor="Transparent" TextColor="#f4bb4f"/>
+                            <Button Text="Verification" Command="{Binding VerificationCommand}" FontSize="12" BorderWidth="0"  BackgroundColor="Transparent" BorderColor="Transparent" TextColor="#f4bb4f"/>
+                            <Button Text="Backup" Command="{Binding BackupCommand}"  FontSize="12" BorderWidth="0"  BackgroundColor="Transparent" BorderColor="Transparent" TextColor="#f4bb4f"/>
+                        </StackLayout>
+
+                        <!-- First Name -->
+                        <StackLayout Grid.Row="2" VerticalOptions="Start">
+                            <Grid BackgroundColor="#00000022">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="1" Text="Email"  TextColor="White"/>
+                                <Label Grid.Row="0" Grid.Column="2" Text="SMS"  TextColor="White"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="Payment Successful"  TextColor="White"/>
+                                <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding PaymentSuccessfulViaEmail.Value}" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Switch Grid.Row="1" Grid.Column="2" IsToggled="{Binding PaymentSuccessfulViaSMS.Value}" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Label Grid.Row="2" Grid.Column="0" Text="Payment failed"  TextColor="White" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding PaymentFailedViaEmail.Value}" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Switch Grid.Row="2" Grid.Column="2" IsToggled="{Binding PaymentFailedViaSMS.Value}" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Label Grid.Row="3" Grid.Column="0" Text="Incoming Transfer"  TextColor="White" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Switch Grid.Row="3" Grid.Column="1" IsToggled="{Binding IncomingTransferViaEmail.Value}" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Switch Grid.Row="3" Grid.Column="2" IsToggled="{Binding IncomingTransferViaSMS.Value}" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Label Grid.Row="4" Grid.Column="0" Text="Outgoing Transfer"  TextColor="White" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding OutgoingTransferViaEmail.Value}" artina:SwitchProperties.TintColor="#f4bb4f"/>
+                                <Switch Grid.Row="4" Grid.Column="2" IsToggled="{Binding OutgoingTransferViaSMS.Value}"/>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+
+                    <!-- FOOTER -->
+                    <StackLayout Grid.Row="2" x:Name="LoginStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0">
+
+                        <!-- SINGUP BUTTON -->
+                        <artina:Button AutomationId="SaveButton" Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" Text="Save" 
+                                       WidthRequest="{ artina:OnOrientationDouble LandscapePhone=200, LandscapeTablet=400 }" 
+                                       HorizontalOptions="{ artina:OnOrientationLayoutOptions PortraitPhone=Fill, LandscapePhone=Center, PortraitTablet=Fill, LandscapeTablet=Center }" 
+                                       Command="{Binding SaveCommand}" />
+
+                    </StackLayout>
+
+                </Grid>
+
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

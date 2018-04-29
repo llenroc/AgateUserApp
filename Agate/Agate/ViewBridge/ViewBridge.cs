@@ -96,6 +96,10 @@ namespace Agate.ViewBridge
             {
                 return new FeedbackPage();
             }
+            if(viewModel.GetType() == typeof(SettingsViewModel))
+            {
+                return new SettingsPage();
+            }
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }
     }
