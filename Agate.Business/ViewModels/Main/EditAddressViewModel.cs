@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
+using Microsoft.AppCenter.Crashes;
 using Plugin.SecureStorage.Abstractions;
 using Triplezerooo.XMVVM;
 
@@ -159,6 +160,13 @@ namespace Agate.Business.ViewModels.Main
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex, new Dictionary<string, string>
+                {
+                    {"page", "edit address"},
+                    {"operation", $"saving changes"}
+                });
+                await View.DisplayAlert("Error", "An error occurred while processing your request" + ex, "Ok");
+
                 await View.DisplayErrorAlert("An error occurred. Please try again." + ex.Message);
             }
         }
