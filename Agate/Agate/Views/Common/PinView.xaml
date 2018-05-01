@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
+             xmlns:common="clr-namespace:Agate.Views.Common;assembly=Agate"
+             x:Class="Agate.Views.Common.PinView">
+    <ContentView.Content>
+        <Grid Margin="16" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout x:Name="CodeStackLayout" Grid.Row="0" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                <Entry x:Name="Text1" InputTransparent="true" IsPassword="true" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" TextColor="White" WidthRequest="50" HeightRequest="50" artina:EntryProperties.BorderColor="White" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderCornerRadius="4" artina:EntryProperties.BorderWidth="2" Margin="16,0,16,0" />
+                <Entry x:Name="Text2" InputTransparent="true" IsPassword="true" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" TextColor="White" WidthRequest="50" HeightRequest="50" artina:EntryProperties.BorderColor="White" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderCornerRadius="4" artina:EntryProperties.BorderWidth="2" Margin="16,0,16,0" />
+                <Entry x:Name="Text3" InputTransparent="true" IsPassword="true" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" TextColor="White" WidthRequest="50" HeightRequest="50" artina:EntryProperties.BorderColor="White" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderCornerRadius="4" artina:EntryProperties.BorderWidth="2" Margin="16,0,16,0" />
+                <Entry x:Name="Text4" InputTransparent="true" IsPassword="true" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" TextColor="White" WidthRequest="50" HeightRequest="50" artina:EntryProperties.BorderColor="White" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderCornerRadius="4" artina:EntryProperties.BorderWidth="2" Margin="16,0,16,0" />
+            </StackLayout>
+
+            <Label x:Name="MessageEntry" Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Grid.ColumnSpan="3" TextColor="White" ></Label>
+
+            <Button Clicked="Handle_Clicked" Text="1" Grid.Row="2" Grid.Column="0" CommandParameter="1" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="2" Grid.Row="2" Grid.Column="1" CommandParameter="2" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="3" Grid.Row="2" Grid.Column="2" CommandParameter="3" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="4" Grid.Row="3" Grid.Column="0" CommandParameter="4" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="5" Grid.Row="3" Grid.Column="1" CommandParameter="5" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="6" Grid.Row="3" Grid.Column="2" CommandParameter="6" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="7" Grid.Row="4" Grid.Column="0" CommandParameter="7" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="8" Grid.Row="4" Grid.Column="1" CommandParameter="8" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="9" Grid.Row="4" Grid.Column="2" CommandParameter="9" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Clicked" Text="0" Grid.Row="5" Grid.Column="1" CommandParameter="0" FontSize="36" BackgroundColor="Transparent" TextColor="White" />
+            <Button Clicked="Handle_Tapped" Text="&#xe314;" Grid.Row="5" Grid.Column="2" FontFamily="{ StaticResource GrialShapesFontFamily }" FontSize="36" BackgroundColor="Transparent" TextColor="White"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

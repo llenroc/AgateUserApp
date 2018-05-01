@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+             xmlns:common="clr-namespace:Agate.Views.Common;assembly=Agate"
              x:Class="Agate.Views.User.PinSignInPage">
     <ContentPage.Content>
         <Grid>
@@ -17,7 +18,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="140" />
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="100" />
                     </Grid.RowDefinitions>
 
                     <!-- LOGO -->
@@ -25,33 +25,7 @@
                         <Image Style="{StaticResource LogoImage}" />
                     </Grid>
 
-                    <!---FIELDS CONTAINER-->
-                    <Grid Grid.Row="1" Padding="60,0" VerticalOptions="StartAndExpand" HeightRequest="100">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <StackLayout Grid.Row="0" VerticalOptions="Start">
-                            <Entry x:Name="PinEntry" AutomationId="PinEntry" Text="{Binding Pin.Value}" IsPassword="True" Keyboard="Numeric" Style="{StaticResource ArtinaLoginEntryStyle}" FontSize="70" HorizontalTextAlignment="Center" ecr:CustomReturnEffect.ReturnType="Go" ecr:CustomReturnEffect.ReturnCommand="{Binding SignInCommand}" />
-                        </StackLayout>
-
-                    </Grid>
-
-                    <!-- FOOTER -->
-                    <StackLayout Grid.Row="2" x:Name="ButtonsStack" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 0" HeightRequest="100">
-
-                        <!-- SINGUP BUTTON -->
-                        <artina:Button AutomationId="SignInButton" Text="Sign In" Style="{StaticResource PrimaryActionButtonStyle}" VerticalOptions="End" WidthRequest="{ artina:OnOrientationDouble
-						        LandscapePhone=200,
-						        LandscapeTablet=400 }" HorizontalOptions="{ artina:OnOrientationLayoutOptions
-						        PortraitPhone=Fill,
-						        LandscapePhone=Center,
-						        PortraitTablet=Fill,
-						        LandscapeTablet=Center }" 
-                                Command="{Binding SignInCommand}" />
-
-                    </StackLayout>
+                    <common:PinView Grid.Row="1" Message="{Binding Message}" EnterCommand="{Binding SignInCommand}" PinValue="{Binding PinValue}" />
 
                 </Grid>
 

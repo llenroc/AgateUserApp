@@ -16,16 +16,5 @@ namespace Agate.Views.User
 		{
 			InitializeComponent ();
 		}
-
-	    protected override void OnAppearing()
-	    {
-	        base.OnAppearing();
-
-	        Device.BeginInvokeOnMainThread(async () =>
-	        {
-	            await System.Threading.Tasks.Task.Delay(500);
-	            PinEntry.Focus();
-	        });
-	    }
 	}
 }

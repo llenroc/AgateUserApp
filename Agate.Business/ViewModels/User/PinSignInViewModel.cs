@@ -16,6 +16,8 @@ namespace Agate.Business.ViewModels.User
         private readonly ISecureStorage secureStorage;
         private readonly IAppData appData;
         private readonly Func<MainViewModel> createMainViewModel;
+        private string message;
+        private string pinValue;
 
         public PinSignInViewModel(IViewService viewService, ISecureStorage secureStorage, IAppData appData, Func<MainViewModel> createMainViewModel)
         {
@@ -23,22 +25,35 @@ namespace Agate.Business.ViewModels.User
             this.secureStorage = secureStorage;
             this.appData = appData;
             this.createMainViewModel = createMainViewModel;
-            Pin = new Property<string>("Pin").RequiredString("Pin is required");
-            SignInCommand = new XCommand(SignIn, CanSignIn);
-            SignInCommand.SetDependency(this, Pin);
+            SignInCommand = new XCommand(SignIn);
+            SignInCommand.SetDependency(this);
         }
 
-        public Property<string> Pin { get; set; }
-        public IXCommand SignInCommand { get; set; }
-
-        public bool CanSignIn()
+        public string Message
         {
-            return IsNotBusy && Validation.Check(Pin);
+            get => message;
+            set
+            {
+                message = value;
+                Raise(nameof(Message));
+            }
         }
+
+        public string PinValue
+        {
+            get => pinValue;
+            set
+            {
+                pinValue = value;
+                Raise(nameof(PinValue));
+            }
+        }
+
+        public IXCommand SignInCommand { get; set; }
 
         public async void SignIn()
         {
-            if (Pin.Value == secureStorage.GetPin())
+            if (PinValue == secureStorage.GetPin())
             {
                 await appData.LoadOfflineData();
                 var mainViewModel = createMainViewModel();
@@ -46,7 +61,8 @@ namespace Agate.Business.ViewModels.User
             }
             else
             {
-                Pin.Value = "";
+                Message = "Try Again";
+                PinValue = null;
             }
         }
     }
