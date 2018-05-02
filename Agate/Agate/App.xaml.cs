@@ -10,6 +10,7 @@ using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
 using Agate.Business.ViewModels.Main;
+using Agate.Business.ViewModels.Merchant;
 using Agate.Business.ViewModels.User;
 using Agate.ViewBridge;
 using Autofac;
@@ -83,6 +84,7 @@ namespace Agate
 		    builder.RegisterType<ManageBucketViewModel>();
 		    builder.RegisterType<FeedbackViewModel>();
 		    builder.RegisterType<SettingsViewModel>();
+		    builder.RegisterType<ReceivePaymentViewModel>();
 
 		    var container = builder.Build();
 

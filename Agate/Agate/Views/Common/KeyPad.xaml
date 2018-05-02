@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
+             x:Class="Agate.Views.Common.KeyPad">
+    <ContentView.Content>
+        <Grid BackgroundColor="Transparent" Padding="0" Margin="0" RowSpacing="2" ColumnSpacing="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Text="1"        Grid.Row="0" Grid.Column="1" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand" artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent" />
+            <Button Text="2"        Grid.Row="0" Grid.Column="2" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="3"        Grid.Row="0" Grid.Column="3" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="4"        Grid.Row="1" Grid.Column="1" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="5"        Grid.Row="1" Grid.Column="2" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="6"        Grid.Row="1" Grid.Column="3" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="7"        Grid.Row="2" Grid.Column="1" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="8"        Grid.Row="2" Grid.Column="2" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="9"        Grid.Row="2" Grid.Column="3" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="."        Grid.Row="3" Grid.Column="1" Clicked="DotButton_OnClicked" FontSize="24"  TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand" artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="0"        Grid.Row="3" Grid.Column="2" Clicked="NumberButton_OnClicked" FontSize="24" TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand" artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent"  />
+            <Button Text="&#xe314;" Grid.Row="3" Grid.Column="3" Clicked="BackButton_OnClicked" FontSize="24"  TextColor="White" Margin="0" BackgroundColor="#52B4E4" VerticalOptions="FillAndExpand" FontFamily="{ StaticResource GrialShapesFontFamily }"  artina:EntryProperties.BorderCornerRadius="5" artina:EntryProperties.BorderStyle="RoundRect" artina:EntryProperties.BorderColor="Transparent" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

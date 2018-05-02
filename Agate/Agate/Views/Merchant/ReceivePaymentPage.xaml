@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:Agate.Views.Common;assembly=Agate"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
+             x:Class="Agate.Views.Merchant.ReceivePaymentPage">
+    <ContentPage.Content>
+        <Grid>
+            <Image Style="{StaticResource SignUpBackgroundImage}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="220" />
+                </Grid.RowDefinitions>
+
+                <Grid BackgroundColor="White" Margin="8" HorizontalOptions="FillAndExpand">
+                    <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeValue="{Binding Amount}" />
+                </Grid>
+
+                <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Margin="8">
+                    <Label Text="{Binding Amount}" TextColor="Black" FontSize="24" HorizontalOptions="Center"/>
+                </StackLayout>
+                
+                <common:KeyPad Grid.Row="2" BackgroundColor="Transparent" Amount="{Binding Amount}" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using Agate.Business.ViewModels;
 using Agate.Business.ViewModels.Main;
+using Agate.Business.ViewModels.Merchant;
 using Agate.Business.ViewModels.User;
 using Agate.Views.Main;
+using Agate.Views.Merchant;
 using Agate.Views.User;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
@@ -99,6 +101,10 @@ namespace Agate.ViewBridge
             if(viewModel.GetType() == typeof(SettingsViewModel))
             {
                 return new SettingsPage();
+            }
+            if(viewModel.GetType() == typeof(ReceivePaymentViewModel))
+            {
+                return new ReceivePaymentPage();
             }
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }
