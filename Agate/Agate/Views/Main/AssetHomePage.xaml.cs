@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Agate.Infrastructure;
 using Triplezerooo.XMVVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,6 +21,7 @@ namespace Agate.Views.Main
 		    BarcodeImageView.BarcodeOptions.Width = 320;
 		    BarcodeImageView.BarcodeOptions.Height = 320;
 
+            FormHelpers.ChainEntries(SendAmountEntry, ReceiverAddressEntry);
 		}
 	}
 }

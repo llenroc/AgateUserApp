@@ -165,10 +165,10 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Include="ZXing.Net.Mobile">
-      <Version>2.3.2</Version>
+      <Version>2.4.1</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net.Mobile.Forms">
-      <Version>2.3.2</Version>
+      <Version>2.4.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

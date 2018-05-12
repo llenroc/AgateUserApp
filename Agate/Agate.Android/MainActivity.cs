@@ -41,6 +41,7 @@ namespace Agate.Droid
             base.OnCreate(bundle);
 
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
+            ZXing.Mobile.MobileBarcodeScanner.Initialize(this.Application);
 
             // Initializing FFImageLoading
             CachedImageRenderer.Init(true);

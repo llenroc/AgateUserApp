@@ -28,26 +28,50 @@
 
                         <Grid Grid.Row="1" Padding="40,0" VerticalOptions="Start">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="60" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
                             <StackLayout Grid.Row="0" VerticalOptions="Start" HeightRequest="60">
-                                <Entry x:Name="SendAmountEntry" AutomationId="SendAmountEntry" Placeholder="Amount" Text="{Binding Amount.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
-
-                                <Label Text="{Binding Amount.ValidationError}" IsVisible="{Binding Amount.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle2}" />
+                                <Entry x:Name="SendAmountEntry" AutomationId="SendAmountEntry" 
+                                       Placeholder="Amount" 
+                                       Text="{Binding Amount.Value}" 
+                                       Style="{StaticResource ArtinaLoginEntryStyle}" />
+                                <Label Text="{Binding Amount.ValidationError}" IsVisible="{Binding Amount.IsInvalid}" 
+                                       Style="{StaticResource ValidationEntryErrorStyle2}" />
                             </StackLayout>
 
-                            <StackLayout Grid.Row="1" VerticalOptions="Start" HeightRequest="60">
-                                <Entry x:Name="ReceiverAddressEntry" AutomationId="ReceiverAddressEntry" Placeholder="Receiver's Address" Text="{Binding SendAddress.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
+                            <StackLayout Grid.Row="1" VerticalOptions="Start" >
+                                <StackLayout Orientation="Horizontal">
+                                    <Entry x:Name="ReceiverAddressEntry" AutomationId="ReceiverAddressEntry" 
+                                           Placeholder="Receiver's Address" 
+                                           Text="{Binding SendAddress.Value}" 
+                                           Style="{StaticResource ArtinaLoginEntryStyle}" 
+                                           ecr:CustomReturnEffect.ReturnType="Next"
+                                           HorizontalOptions="FillAndExpand" />
 
-                                <Label AutomationId="InvalidReceiverAddressLabel" Text="{Binding SendAddress.ValidationError}" IsVisible="{Binding SendAddress.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle2}" />
+                                    <Button Text="&#xe412;" FontFamily="{ StaticResource GrialShapesFontFamily }"
+                                            WidthRequest="40" HeightRequest="40" Margin="0" HorizontalOptions="End"
+                                            TextColor="White" BackgroundColor="#52B4E4" 
+                                            Command="{Binding CameraCommand}" />
+                                </StackLayout>
+                                <Label AutomationId="InvalidReceiverAddressLabel" Text="{Binding SendAddress.ValidationError}" 
+                                       IsVisible="{Binding SendAddress.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle2}" />
+                                <Grid WidthRequest="280" HeightRequest="280" IsVisible="{Binding ShowCamera}" >
+                                    <zxing:ZXingScannerView x:Name="ScannerView" 
+                                                        IsScanning="{Binding IsScanning}"
+                                                        IsAnalyzing="{Binding IsAnalyzing}"
+                                                        ScanResultCommand="{Binding ScanResultCommand}"
+                                                        Result="{Binding ScanResult, Mode=OneWayToSource}" />
+                                    <zxing:ZXingDefaultOverlay />
+                                </Grid>
                             </StackLayout>
+
 
                         </Grid>
 
                         <!-- FOOTER -->
-                        <StackLayout Grid.Row="2" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 30">
+                        <StackLayout Grid.Row="2" HorizontalOptions="Fill" VerticalOptions="End" Padding="20, 10">
 
                             <!-- SEND BUTTON -->
                             <artina:Button AutomationId="SendButton" Style="{StaticResource PrimaryActionButtonStyle}" 

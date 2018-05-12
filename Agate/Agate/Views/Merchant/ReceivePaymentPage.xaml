@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <Grid>
             <Image Style="{StaticResource SignUpBackgroundImage}" />
-            <Grid>
+            <Grid IsVisible="{Binding NewPaymentMode}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
@@ -16,7 +16,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid BackgroundColor="White" Margin="8" HorizontalOptions="FillAndExpand">
-                    <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeValue="{Binding Amount}" />
+                    <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeValue="{Binding GeneratedAddress}" IsVisible="{Binding BarcodeVisible}" />
                 </Grid>
 
                 <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Margin="8">
@@ -24,6 +24,16 @@
                 </StackLayout>
                 
                 <common:KeyPad Grid.Row="2" BackgroundColor="Transparent" Amount="{Binding Amount}" />
+            </Grid>
+            <Grid IsVisible="{Binding PaymentSuccessMode}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" TextColor="GreenYellow" Text="&#xe5ca;" FontFamily="{StaticResource GrialShapesFontFamily }" FontSize="96"/>
+                <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" TextColor="White" Text="Thank you" FontSize="48" />
+                <artina:Button Grid.Row="2" Margin="30" HorizontalOptions="Center" VerticalOptions="End" Style="{StaticResource PrimaryActionButtonStyle}" Text="Done" Command="{Binding ReturnCommand}" />
             </Grid>
         </Grid>
     </ContentPage.Content>
