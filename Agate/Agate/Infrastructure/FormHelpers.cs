@@ -9,7 +9,7 @@ namespace Agate.Infrastructure
 {
     public static class FormHelpers
     {
-        public static void ChainEntries(params Entry[] entries)
+        public static void ChainEntries(params VisualElement[] entries)
         {
             if(entries.Length == 0)
                 return;
@@ -20,7 +20,7 @@ namespace Agate.Infrastructure
                 var next = entries[i + 1];
 
                 CustomReturnEffect.SetReturnType(current, ReturnType.Next);
-                CustomReturnEffect.SetReturnCommand(current, new Command(x=>next.Focus()));
+                CustomReturnEffect.SetReturnCommand(current, new Command(x => next.Focus()));
             }
 
             var lastEntry = entries.Last();

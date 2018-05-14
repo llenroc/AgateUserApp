@@ -20,7 +20,7 @@ namespace Agate
 	        InitializeComponent();
 	        NavigationPage.SetHasNavigationBar(this, false);
 
-	        FormHelpers.ChainEntries(FirstNameEntry, LastNameEntry, MobileNumberEntry, EmailEntry);	        
+	        FormHelpers.ChainEntries(FirstNameEntry, LastNameEntry, CountryPicker, MobileNumberEntry, EmailEntry);	        
         }
 	}
 }
