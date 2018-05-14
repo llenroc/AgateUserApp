@@ -50,8 +50,9 @@
                 </StackLayout>
 
                 <!---FIELDS CONTAINER-->
-                <Grid Padding="40,0" VerticalOptions="CenterAndExpand" HeightRequest="260" Grid.Row="2">
+                <Grid Padding="40,0" VerticalOptions="CenterAndExpand" HeightRequest="320" Grid.Row="2">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
@@ -69,12 +70,18 @@
                     </StackLayout>
 
                     <StackLayout Grid.Row="2" VerticalOptions="Start">
+                        <Picker x:Name="CountryPicker" AutomationId="CountryPicker" 
+                                ItemsSource="{Binding AllCountries}" ItemDisplayBinding="{Binding Display}" SelectedItem="{Binding Country.Value}" 
+                                TextColor="White" Title="Country" artina:PickerProperties.PlaceholderColor="White" artina:PickerProperties.BorderWidth="1" artina:PickerProperties.BorderStyle="BottomLine" artina:PickerProperties.BorderColor="White" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="3" VerticalOptions="Start">
                         <!---EMAIL ENTRY-->
                         <Entry x:Name="MobileNumberEntry" AutomationId="MobileNumberEntry" Placeholder="Mobile Number" Text="{Binding MobileNumber.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next" />
                         <Label Text="{Binding MobileNumber.ValidationError}" IsVisible="{Binding MobileNumber.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}" />
                     </StackLayout>
 
-                    <StackLayout Grid.Row="3" VerticalOptions="Start">
+                    <StackLayout Grid.Row="4" VerticalOptions="Start">
                         <!---EMAIL ENTRY-->
                         <Entry x:Name="EmailEntry" AutomationId="EmailEntry" Placeholder="{ artina:Translate StringEmail }" Text="{Binding EmailAddress.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Done" />
                         <Label Text="{Binding EmailAddress.ValidationError}" IsVisible="{Binding EmailAddress.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}"/>

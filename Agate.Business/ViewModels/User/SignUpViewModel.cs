@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,14 +40,22 @@ namespace Agate.Business.ViewModels.User
 
             FirstName = new Property<string>("First Name").RequiredString("First Name is required");
             LastName = new Property<string>("Last Name").RequiredString("Last Name is required");
+            Country = new Property<CountryDetails>("Country").Required("Choose a country");
             MobileNumber = new Property<string>("Mobile Number").RequiredString("Mobile Number is required");//.RequiredFormat(@"\d*", "Please just enter digits");
             EmailAddress = new Property<string>("Email Address").RequiredString("Email address is required");
 
-            SignUpCommand.SetDependency(this, FirstName, LastName, MobileNumber, EmailAddress);            
+            SignUpCommand.SetDependency(this, FirstName, LastName, MobileNumber, EmailAddress);
+
+            AllCountries = CountriesData.List.OrderBy(c=>c.CountryName).ToArray();
+            var countryCode = GetCountryCode();
+            var country = AllCountries.SingleOrDefault(c => c.DialingCode == countryCode) ?? AllCountries.SingleOrDefault(c => c.CountryCode == "AU");
+            Country.InitializeValue(country);
         }
 
         public Property<string> FirstName { get; }
         public Property<string> LastName { get; }
+        public CountryDetails[] AllCountries { get; }
+        public Property<CountryDetails> Country { get; set; }
         public Property<string> MobileNumber { get; }
         public Property<string> EmailAddress { get; }
 
@@ -77,7 +86,7 @@ namespace Agate.Business.ViewModels.User
                 {
                     FirstName = FirstName.Value,
                     LastName = LastName.Value,
-                    CountryCode = GetCountryCode(),
+                    CountryCode = Country.Value?.DialingCode ?? GetCountryCode(),
                     DeviceId = GetDeviceId(),
                     EmailAddress = EmailAddress.Value,
                     MobileNumber = MobileNumber.Value,
