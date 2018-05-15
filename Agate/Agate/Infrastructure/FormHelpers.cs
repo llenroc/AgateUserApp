@@ -21,6 +21,11 @@ namespace Agate.Infrastructure
 
                 CustomReturnEffect.SetReturnType(current, ReturnType.Next);
                 CustomReturnEffect.SetReturnCommand(current, new Command(x => next.Focus()));
+
+                if(current is Picker picker)
+                {
+                    picker.SelectedIndexChanged += (sender, args) => next.Focus();
+                }
             }
 
             var lastEntry = entries.Last();
