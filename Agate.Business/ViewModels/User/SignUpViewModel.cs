@@ -26,8 +26,9 @@ namespace Agate.Business.ViewModels.User
         private readonly Func<IPhoneService> phoneService;
         private readonly IDeviceInfo deviceInfo;
         private readonly IConnectivity connectivity;
+        private readonly IAppInfo appInfo;
 
-        public SignUpPageViewModel(IAccountService accountService, Func<int, ConfirmationCodeEntryViewModel> createConfirmationCodeEntryViewModel, IDataFlow dataFlow, IViewService viewService, Func<IPhoneService> phoneService, IDeviceInfo deviceInfo, IConnectivity connectivity)
+        public SignUpPageViewModel(IAccountService accountService, Func<int, ConfirmationCodeEntryViewModel> createConfirmationCodeEntryViewModel, IDataFlow dataFlow, IViewService viewService, Func<IPhoneService> phoneService, IDeviceInfo deviceInfo, IConnectivity connectivity, IAppInfo appInfo)
         {
             this.accountService = accountService;
             this.createConfirmationCodeEntryViewModel = createConfirmationCodeEntryViewModel;
@@ -36,8 +37,10 @@ namespace Agate.Business.ViewModels.User
             this.phoneService = phoneService;
             this.deviceInfo = deviceInfo;
             this.connectivity = connectivity;
+            this.appInfo = appInfo;
             SignUpCommand = new XCommand(async () => await SignUp(), CanSignUp);
 
+            BusinessName = new Property<string>("Buiness Name").RequiredString("Business Name is required");
             FirstName = new Property<string>("First Name").RequiredString("First Name is required");
             LastName = new Property<string>("Last Name").RequiredString("Last Name is required");
             Country = new Property<CountryDetails>("Country").Required("Choose a country");
@@ -52,6 +55,7 @@ namespace Agate.Business.ViewModels.User
             Country.InitializeValue(country);
         }
 
+        public Property<string> BusinessName { get; set; }
         public Property<string> FirstName { get; }
         public Property<string> LastName { get; }
         public CountryDetails[] AllCountries { get; }
@@ -63,7 +67,14 @@ namespace Agate.Business.ViewModels.User
 
         public bool CanSignUp()
         {
-            return IsNotBusy && Validation.Check(FirstName, LastName, MobileNumber, EmailAddress);
+            if (appInfo.Mode == AppMode.Merchant)
+            {
+                return IsNotBusy && Validation.Check(BusinessName, MobileNumber, EmailAddress);
+            }
+            else
+            {
+                return IsNotBusy && Validation.Check(FirstName, LastName, MobileNumber, EmailAddress);
+            }
         }
 
         public async Task SignUp()
@@ -84,6 +95,7 @@ namespace Agate.Business.ViewModels.User
 
                 var requestObj = new SignUpRequest
                 {
+                    BusinessName = BusinessName.Value,
                     FirstName = FirstName.Value,
                     LastName = LastName.Value,
                     CountryCode = Country.Value?.DialingCode ?? GetCountryCode(),
@@ -106,7 +118,7 @@ namespace Agate.Business.ViewModels.User
                     {
                         using (WorkingScope.Enter())
                         {
-                            await dataFlow.InitializeUser(requestObj.FirstName, requestObj.LastName,
+                            await dataFlow.InitializeUser(requestObj.BusinessName, requestObj.FirstName, requestObj.LastName,
                                 requestObj.CountryCode,
                                 requestObj.EmailAddress, requestObj.MobileNumber);
                         }

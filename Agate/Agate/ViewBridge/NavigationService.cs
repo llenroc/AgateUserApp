@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Agate.Business.Services;
 using Triplezerooo.XMVVM;
 
 namespace Agate.ViewBridge
@@ -6,19 +7,21 @@ namespace Agate.ViewBridge
     public class NavigationService : INavigationService
     {
         private readonly INavigationView navigationView;
+        private readonly IAppInfo appInfo;
 
-        public NavigationService(INavigationView navigationView)
+        public NavigationService(INavigationView navigationView, IAppInfo appInfo)
         {
             this.navigationView = navigationView;
+            this.appInfo = appInfo;
         }
         public async Task SetCurrentPage(BaseViewModel viewModel)
         {
-            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
+            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel, appInfo.Mode);
             await navigationView.SetCurrentPage(view);
         }
         public async Task Push(BaseViewModel viewModel)
         {
-            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
+            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel, appInfo.Mode);
             await navigationView.Push(view);
         }
 
@@ -29,7 +32,7 @@ namespace Agate.ViewBridge
 
         public async void Replace(BaseViewModel viewModel)
         {
-            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
+            var view = ViewModelToViewMapping.ResolvePageForViewModel(viewModel, appInfo.Mode);
             await navigationView.Replace(view);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Agate.Business.Services;
 using Agate.Business.ViewModels;
 using Agate.Business.ViewModels.Main;
 using Agate.Business.ViewModels.Merchant;
@@ -15,22 +16,29 @@ namespace Agate.ViewBridge
 {
     public class ViewService : IViewService
     {
+        private readonly IAppInfo appInfo;
+
+        public ViewService(IAppInfo appInfo)
+        {
+            this.appInfo = appInfo;
+        }
+
         public void SetCurrentPage(BaseViewModel viewModel)
         {
-            Application.Current.MainPage = ViewModelToViewMapping.ResolvePageForViewModel(viewModel);
+            Application.Current.MainPage = ViewModelToViewMapping.ResolvePageForViewModel(viewModel, appInfo.Mode);
         }
 
         public INavigationService CreateNavigationService(INavigationView view)
         {
-            return new NavigationService(view);
+            return new NavigationService(view, appInfo);
         }
     }
 
     public class ViewModelToViewMapping
     {
-        public static Page ResolvePageForViewModel(BaseViewModel viewModel)
+        public static Page ResolvePageForViewModel(BaseViewModel viewModel, AppMode appMode)
         {
-            var view = CreateViewBasedOnViewModelType(viewModel);
+            var view = CreateViewBasedOnViewModelType(viewModel, appMode);
             view.BindingContext = viewModel;
             viewModel.View = view as IView;
             
@@ -44,10 +52,12 @@ namespace Agate.ViewBridge
             return view;
         }
 
-        private static Page CreateViewBasedOnViewModelType(BaseViewModel viewModel)
+        private static Page CreateViewBasedOnViewModelType(BaseViewModel viewModel, AppMode appMode)
         {
             if (viewModel.GetType() == typeof(SignUpPageViewModel))
             {
+                if(appMode == AppMode.Merchant)
+                    return new SignUpPage_Merchant();
                 return new SignUpPage();
             }
             if(viewModel.GetType() == typeof(ConfirmationCodeEntryViewModel))

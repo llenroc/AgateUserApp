@@ -36,8 +36,6 @@ namespace Agate
 			InitializeComponent();
 		    Resources["DefaultStringResources"] = new Resx.AppResources();
 
-            SingltonServices.ViewService = new ViewService();
-
             var builder = new ContainerBuilder();
 		    builder.RegisterType<UserData>().As<IUserData>();
 		    builder.RegisterType<DataFlow>().As<IDataFlow>();
@@ -90,6 +88,8 @@ namespace Agate
 		    var container = builder.Build();
 
 		    var dataReset = container.Resolve<DataReset>();
+
+		    SingltonServices.ViewService = new ViewService(container.Resolve<IAppInfo>());
 
             Task.Run((async () =>
             {

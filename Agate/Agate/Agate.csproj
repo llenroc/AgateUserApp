@@ -43,6 +43,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\User\SignUpPage_Merchant.xaml.cs">
+      <DependentUpon>SignUpPage_Merchant.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

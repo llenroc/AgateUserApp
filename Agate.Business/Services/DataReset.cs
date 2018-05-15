@@ -38,7 +38,7 @@ namespace Agate.Business.Services
             secureStorage.SetAccessCode("testaccesscode");
             secureStorage.SetPin("1234");
 
-            await dataFlow.InitializeUser("Meysam", "Naseri", "+61", "meysamnaseri@live.com", "+61424554644");
+            await dataFlow.InitializeUser("", "Meysam", "Naseri", "+61", "meysamnaseri@live.com", "+61424554644");
             
         }
     }

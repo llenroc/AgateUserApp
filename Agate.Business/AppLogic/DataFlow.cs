@@ -54,11 +54,12 @@ namespace Agate.Business.AppLogic
             };
         }
 
-        public async Task InitializeUser(string firstname, string lastname, string countryCode, string emailAddress, string mobileNumber)
+        public async Task InitializeUser(string businessName, string firstname, string lastname, string countryCode, string emailAddress, string mobileNumber)
         {
             await userData.SaveUserData(new UserProfile
             {
                 UserId = int.MinValue,
+                BusinessName = businessName,
                 FirstName = firstname,
                 LastName = lastname,
                 CountryCode = countryCode,
