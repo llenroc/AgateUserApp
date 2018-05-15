@@ -81,7 +81,7 @@ namespace Triplezerooo.XMVVM
         public string ErrorTemplate { get; set; } = "{0} is required.";
         public string[] Patterns { get; }
 
-        public string[] IsValid(string value) => Patterns.Any(pattern => Regex.IsMatch(value, pattern)) ? null : ErrorTemplate.SingleToArray();
+        public string[] IsValid(string value) => (value!=null && Patterns.Any(pattern => Regex.IsMatch(value, pattern))) ? null : ErrorTemplate.SingleToArray();
     }
 
 }
