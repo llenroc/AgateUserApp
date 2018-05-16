@@ -44,7 +44,7 @@ namespace Agate.Business.ViewModels.User
             FirstName = new Property<string>("First Name").RequiredString("First Name is required");
             LastName = new Property<string>("Last Name").RequiredString("Last Name is required");
             Country = new Property<CountryDetails>("Country").Required("Choose a country");
-            MobileNumber = new Property<string>("Mobile Number").RequiredString("Mobile Number is required").RequiredFormat(@"(\d|\s|-)*", "Please just enter digits");
+            MobileNumber = new Property<string>("Mobile Number").RequiredString("Mobile Number is required").RequiredFormat(@"^(\d|\s|-)*$", "Please just enter digits");
             EmailAddress = new Property<string>("Email Address").RequiredString("Email address is required");
 
             SignUpCommand.SetDependency(this, FirstName, LastName, MobileNumber, EmailAddress);
