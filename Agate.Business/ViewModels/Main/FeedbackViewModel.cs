@@ -20,7 +20,8 @@ namespace Agate.Business.ViewModels.Main
         {
             this.secureStorage = secureStorage;
             this.userServices = userServices;
-            Feedback = new Property<string>().Required("");
+            Feedback = new Property<string>("Message").Required("");
+            FeedbackType = new Property<string>("Type");
             SubmitCommand = new XCommand(Submit, CanSubmit);
             SubmitCommand.SetDependency(this, Feedback);
 
