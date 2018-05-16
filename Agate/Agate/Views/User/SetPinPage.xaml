@@ -49,6 +49,7 @@
 
                     <StackLayout Grid.Row="1" VerticalOptions="Start">
                         <Entry x:Name="Pin1Entry" AutomationId="Pin1Entry" Placeholder="PIN" Text="{Binding Pin1.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" ecr:CustomReturnEffect.ReturnType="Next"/>
+                        <Label Text="{Binding Pin1.ValidationError}" IsVisible="{Binding Pin1.IsInvalid}" Style="{StaticResource ValidationEntryErrorStyle}" />
                     </StackLayout>
                     <StackLayout Grid.Row="2" VerticalOptions="Start">
                         <Entry x:Name="Pin2Entry" AutomationId="Pin2Entry" Placeholder="Confirm the PIN" Text="{Binding Pin2.Value}" Style="{StaticResource ArtinaLoginEntryStyle}" />

@@ -26,7 +26,7 @@ namespace Agate.Business.ViewModels.User
             this.deviceInfo = deviceInfo;
             this.secureStorage = secureStorage;
             this.createMainViewModel = createMainViewModel;
-            Pin1 = new Property<string>("PIN").RequiredString("Please enter a PIN value").RequiredFormat(@"\d\d\d\d", "please enter four digits");
+            Pin1 = new Property<string>("PIN").RequiredString("Please enter a PIN value").RequiredFormat(@"^\d\d\d\d$", "please enter four digits");
             Pin2 = new Property<string>("PIN repeat").Check(pin2=>pin2 == Pin1.Value, "The values does not match");
             SetPinCommand = new XCommand(async ()=> await SetPin(), CanSetPin);
             SetPinCommand.SetDependency(this, Pin1, Pin2);
