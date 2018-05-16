@@ -39,13 +39,22 @@
                     <!---FIELDS CONTAINER-->
                     <Grid Grid.Row="1" Padding="40,0" VerticalOptions="CenterAndExpand">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
                             <RowDefinition Height="250" />
-                            <RowDefinition Height="60" />
+                            <RowDefinition Height="30" />
                         </Grid.RowDefinitions>
 
-                        <!-- First Name -->
-                        <StackLayout Grid.Row="0" VerticalOptions="Start" HeightRequest="55">
-                            <Editor x:Name="FeedbackEntry" AutomationId="FirstNameEntry" Text="{Binding Feedback.Value}" BackgroundColor="White" TextColor="Black" HeightRequest="250" VerticalOptions="FillAndExpand" />
+                        <!-- Type -->
+                        <StackLayout Grid.Row="0">
+                            <Picker Title="Type" x:Name="FeedbackTypePicker" AutomationId="FeedbackTypePicker" 
+                                    ItemsSource="{Binding FeedbackTypes}" SelectedItem="{Binding FeedbackType.Value}"
+                                    TextColor="White" artina:PickerProperties.PlaceholderColor="White" 
+                                    artina:PickerProperties.BorderWidth="1" artina:PickerProperties.BorderStyle="BottomLine" 
+                                    artina:PickerProperties.BorderColor="White" />
+                        </StackLayout>
+                        <!-- Feedback Body -->
+                        <StackLayout Grid.Row="1" VerticalOptions="Start" HeightRequest="55">
+                            <Editor x:Name="FeedbackEntry" AutomationId="FeedbackEntry" Text="{Binding Feedback.Value}" BackgroundColor="White" TextColor="Black" HeightRequest="250" VerticalOptions="FillAndExpand" />
                         </StackLayout>
 
                     </Grid>

@@ -48,6 +48,7 @@ namespace Agate
 		    builder.RegisterType<DataReset>().As<DataReset>();
 		    builder.Register(c => CrossSecureStorage.Current).As<ISecureStorage>();
 		    builder.Register(c => CrossConnectivity.Current).As<IConnectivity>();
+		    builder.RegisterType<UserServices>().As<IUserServices>();
 		    builder.RegisterType<AccountService>().As<IAccountService>();
 		    builder.RegisterType<UserAddressesServices>().As<IUserAddressesServices>();
 		    builder.RegisterType<CardOrderService>().As<ICardOrderService>();
