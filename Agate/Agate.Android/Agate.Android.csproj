@@ -127,6 +127,7 @@
     <AndroidAsset Include="Assets\grialshapes.ttf" />
     <AndroidAsset Include="Assets\ionicons.ttf" />
     <EmbeddedResource Include="GrialLicense" />
+    <AndroidAsset Include="Assets\Agate.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Tabs.axml" />
