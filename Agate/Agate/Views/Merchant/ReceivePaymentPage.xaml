@@ -20,7 +20,7 @@
                 </Grid>
 
                 <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Margin="8">
-                    <Label Text="{Binding Amount}" TextColor="Black" FontSize="24" HorizontalOptions="Center"/>
+                    <Label Text="{Binding Amount, StringFormat='$ {0}'}" TextColor="Black" FontSize="24" HorizontalOptions="Center"/>
                 </StackLayout>
                 
                 <common:KeyPad Grid.Row="2" BackgroundColor="Transparent" Amount="{Binding Amount}" />
