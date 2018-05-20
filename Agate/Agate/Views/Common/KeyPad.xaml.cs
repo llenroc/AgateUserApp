@@ -26,6 +26,8 @@ namespace Agate.Views.Common
 	        set => SetValue(AmountProperty, value);
 	    }
 
+	    public int MaxLength { get; set; }
+
 	    private static void AmountChanged(BindableObject bindable, object oldValue, object newValue)
 	    {
 	    }
@@ -34,6 +36,9 @@ namespace Agate.Views.Common
         private void NumberButton_OnClicked(object sender, EventArgs e)
         {
             var button = (Button) sender;
+            if (Amount.Length == MaxLength)
+                return;
+
             if(Amount == "0")
             {
                 Amount = button.Text;
