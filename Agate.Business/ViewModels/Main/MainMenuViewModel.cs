@@ -45,17 +45,17 @@ namespace Agate.Business.ViewModels.Main
             {
                 AllMenuItems = new List<MenuItem>(new[]
                 {
-                    new MenuItem("Merchant Home", createNotImplementedFeatureViewModel,  "#921243", "\ue80c"),
-                    new MenuItem("Manage Assets", CreateChooseAssetViewModel, "#921243", "\ue90f"),
-                    new MenuItem("Manage Cards", createNotImplementedFeatureViewModel, "#921243", "\ue870"),
-                    new MenuItem("Manage iBucket", createManageBucketViewModelFunc, "#921243", "\ue80c"),
-                    new MenuItem("Trader Bot", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
-                    new MenuItem("AI Engine", createNotImplementedFeatureViewModel, "#921243", "\ue906"),
-                    new MenuItem("Settings", createSettingsViewModelFunc, "#921243", "\ue90f"),
-                    new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "\ue8b8"),
-                    new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "\ue887"),
-                    new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "\ue0ca"),
-                    new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "\ue80c"),
+                    new MenuItem("Merchant Home", createNotImplementedFeatureViewModel,  "#921243", "N"),
+                    new MenuItem("Manage Assets", CreateChooseAssetViewModel, "#921243", "n"),
+                    new MenuItem("Manage Cards", createNotImplementedFeatureViewModel, "#921243", "A"),
+                    new MenuItem("Manage iBucket", createManageBucketViewModelFunc, "#921243", "Y"),
+                    new MenuItem("Trader Bot", createNotImplementedFeatureViewModel, "#921243", "D"),
+                    new MenuItem("AI Engine", createNotImplementedFeatureViewModel, "#921243", "S"),
+                    new MenuItem("Settings", createSettingsViewModelFunc, "#921243", "i"),
+                    new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "R"),
+                    new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "M"),
+                    new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "F"),
+                    new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "f"),
                 });
             }
         }

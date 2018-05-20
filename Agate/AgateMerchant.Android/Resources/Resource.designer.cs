@@ -7230,6 +7230,9 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f090024
 			public const int always = 2131296292;
 			
+			// aapt resource value: 0x7f0900ba
+			public const int animation_view = 2131296442;
+			
 			// aapt resource value: 0x7f090030
 			public const int auto = 2131296304;
 			

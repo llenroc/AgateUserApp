@@ -7230,6 +7230,9 @@ namespace Agate.Droid
 			// aapt resource value: 0x7f090024
 			public const int always = 2131296292;
 			
+			// aapt resource value: 0x7f0900b5
+			public const int animation_view = 2131296437;
+			
 			// aapt resource value: 0x7f090030
 			public const int auto = 2131296304;
 			
@@ -7272,8 +7275,8 @@ namespace Agate.Droid
 			// aapt resource value: 0x7f090078
 			public const int container = 2131296376;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int contentFrame = 2131296439;
+			// aapt resource value: 0x7f0900b8
+			public const int contentFrame = 2131296440;
 			
 			// aapt resource value: 0x7f090051
 			public const int contentPanel = 2131296337;
@@ -7392,8 +7395,8 @@ namespace Agate.Droid
 			// aapt resource value: 0x7f09000f
 			public const int lottie_layer_name = 2131296271;
 			
-			// aapt resource value: 0x7f0900b9
-			public const int masked = 2131296441;
+			// aapt resource value: 0x7f0900ba
+			public const int masked = 2131296442;
 			
 			// aapt resource value: 0x7f0900a4
 			public const int media_actions = 2131296420;
@@ -7593,8 +7596,8 @@ namespace Agate.Droid
 			// aapt resource value: 0x7f090018
 			public const int showTitle = 2131296280;
 			
-			// aapt resource value: 0x7f0900b5
-			public const int sliding_tabs = 2131296437;
+			// aapt resource value: 0x7f0900b6
+			public const int sliding_tabs = 2131296438;
 			
 			// aapt resource value: 0x7f090076
 			public const int smallLabel = 2131296374;
@@ -7674,8 +7677,8 @@ namespace Agate.Droid
 			// aapt resource value: 0x7f09005a
 			public const int title_template = 2131296346;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int toolbar = 2131296438;
+			// aapt resource value: 0x7f0900b7
+			public const int toolbar = 2131296439;
 			
 			// aapt resource value: 0x7f09002a
 			public const int top = 2131296298;
@@ -7701,8 +7704,8 @@ namespace Agate.Droid
 			// aapt resource value: 0x7f09000e
 			public const int view_offset_helper = 2131296270;
 			
-			// aapt resource value: 0x7f0900b8
-			public const int visible = 2131296440;
+			// aapt resource value: 0x7f0900b9
+			public const int visible = 2131296441;
 			
 			// aapt resource value: 0x7f090096
 			public const int volume_item_container = 2131296406;
@@ -7993,22 +7996,25 @@ namespace Agate.Droid
 			public const int select_dialog_singlechoice_material = 2130903104;
 			
 			// aapt resource value: 0x7f030041
-			public const int support_simple_spinner_dropdown_item = 2130903105;
+			public const int Splash = 2130903105;
 			
 			// aapt resource value: 0x7f030042
-			public const int Tabbar = 2130903106;
+			public const int support_simple_spinner_dropdown_item = 2130903106;
 			
 			// aapt resource value: 0x7f030043
-			public const int Tabs = 2130903107;
+			public const int Tabbar = 2130903107;
 			
 			// aapt resource value: 0x7f030044
-			public const int Toolbar = 2130903108;
+			public const int Tabs = 2130903108;
 			
 			// aapt resource value: 0x7f030045
-			public const int zxingscanneractivitylayout = 2130903109;
+			public const int Toolbar = 2130903109;
 			
 			// aapt resource value: 0x7f030046
-			public const int zxingscannerfragmentlayout = 2130903110;
+			public const int zxingscanneractivitylayout = 2130903110;
+			
+			// aapt resource value: 0x7f030047
+			public const int zxingscannerfragmentlayout = 2130903111;
 			
 			static Layout()
 			{

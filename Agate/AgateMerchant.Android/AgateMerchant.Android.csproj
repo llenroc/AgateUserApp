@@ -15,7 +15,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <AndroidKeyStore>false</AndroidKeyStore>
@@ -145,7 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Agate.ttf" />
-    <AndroidAsset Include="Assets\merchantLogo.json" />
+    <AndroidAsset Include="Assets\logo.json" />
     <AndroidAsset Include="Assets\progress.json" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
