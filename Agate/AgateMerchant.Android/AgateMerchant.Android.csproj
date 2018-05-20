@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>2.4.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Analytics">
       <Version>1.5.0</Version>
     </PackageReference>
@@ -142,6 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Agate.ttf" />
+    <AndroidAsset Include="Assets\merchantLogo.json" />
+    <AndroidAsset Include="Assets\progress.json" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

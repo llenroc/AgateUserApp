@@ -4,6 +4,7 @@
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared" 
              xmlns:local="clr-namespace:Agate;assembly=Agate"
              xmlns:ecr="clr-namespace:EntryCustomReturn.Forms.Plugin.Abstractions;assembly=EntryCustomReturn.Forms.Plugin.Abstractions"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="Agate.Views.Main.FeedbackPage"
              Title="Feedback">
     <ContentPage.Content>
@@ -73,6 +74,19 @@
                 </Grid>
 
             </ScrollView>
+
+            <Grid  BackgroundColor="#99000000" IsVisible="False">
+                <Grid VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="#999ACD32" Padding="4" HeightRequest="80" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <lottie:AnimationView Animation="progress.json" Loop="True" AutoPlay="True" BackgroundColor="Black" Margin="0" WidthRequest="80" HeightRequest="80" />
+                    <Label Text="Working ..." 
+                           TextColor="White" FontSize="18" 
+                           Grid.Column="1" HorizontalOptions="Start" VerticalTextAlignment="Center" />
+                </Grid>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Agate.Business.API;
 using Agate.Business.LocalData;
 using Agate.Business.Services;
@@ -41,9 +42,12 @@ namespace Agate.Business.ViewModels.Main
         {
             try
             {
-                await userServices.Feedback(secureStorage.GetUserId().Value, new SubmitFeedbackRequest {Type = FeedbackType.Value, Message = Feedback.Value});
-                await View.DisplayAlert("Success", "Thank you for your feedback.", "Ok");
-                Feedback.InitializeValue("");
+                using (var scope = base.WorkingScope.Enter())
+                {
+                    await userServices.Feedback(secureStorage.GetUserId().Value, new SubmitFeedbackRequest {Type = FeedbackType.Value, Message = Feedback.Value});
+                    await View.DisplayAlert("Success", "Thank you for your feedback.", "Ok");
+                    Feedback.InitializeValue("");
+                }
             }
             catch (Exception ex)
             {

@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>2.4.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Analytics">
       <Version>1.5.0</Version>
     </PackageReference>
@@ -128,6 +131,8 @@
     <AndroidAsset Include="Assets\ionicons.ttf" />
     <EmbeddedResource Include="GrialLicense" />
     <AndroidAsset Include="Assets\Agate.ttf" />
+    <AndroidAsset Include="Assets\progress.json" />
+    <AndroidAsset Include="Assets\userLogo.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Tabs.axml" />
