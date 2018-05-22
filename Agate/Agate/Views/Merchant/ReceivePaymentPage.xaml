@@ -8,22 +8,30 @@
     <ContentPage.Content>
         <Grid>
             <Image Style="{StaticResource SignUpBackgroundImage}" />
-            <Grid IsVisible="{Binding NewPaymentMode}">
+            <Grid IsVisible="{Binding NewPaymentMode}" RowSpacing="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="220" />
+                    <RowDefinition Height="250" />
                 </Grid.RowDefinitions>
 
-                <Grid BackgroundColor="White" Margin="8" HorizontalOptions="FillAndExpand">
-                    <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeValue="{Binding GeneratedAddress}" IsVisible="{Binding BarcodeVisible}" />
-                </Grid>
+                <Frame Grid.Row="0" CornerRadius="6" BackgroundColor="White" Margin="8" HasShadow="True"  >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid BackgroundColor="White" Margin="0" HorizontalOptions="FillAndExpand" >
+                            <zxing:ZXingBarcodeImageView x:Name="BarcodeImageView" BarcodeValue="{Binding GeneratedAddress}" IsVisible="{Binding BarcodeVisible}" />
+                        </Grid>
 
-                <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="White" Margin="8">
-                    <Label Text="{Binding Amount, StringFormat='$ {0}'}" TextColor="Black" FontSize="24" HorizontalOptions="Center"/>
-                </StackLayout>
-                
-                <common:KeyPad Grid.Row="2" BackgroundColor="Transparent" Amount="{Binding Amount}" MaxLength="9" />
+                        <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0" BackgroundColor="White">
+                            <Label Text="{Binding Amount, StringFormat='$ {0}'}" TextColor="Black" FontSize="24" HorizontalOptions="Center" />
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+                <Frame Grid.Row="1" CornerRadius="6" BackgroundColor="#52B4E4" Margin="8" Padding="0" HasShadow="True" >
+                    <common:KeyPad BackgroundColor="Transparent" Amount="{Binding Amount}" MaxLength="9" />
+                </Frame>
             </Grid>
             <Grid IsVisible="{Binding PaymentSuccessMode}">
                 <Grid.RowDefinitions>

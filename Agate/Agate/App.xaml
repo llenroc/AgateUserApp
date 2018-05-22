@@ -8,7 +8,7 @@
              xmlns:effects="clr-namespace:UXDivers.Effects;assembly=UXDivers.Effects" 
              xmlns:resx="clr-namespace:Agate.Resx;assembly=Agate" 
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-
+             
              x:Class="Agate.App">
     <Application.Resources>
 
@@ -952,6 +952,17 @@
             </Style>
 
 
+            <Style x:Key="KeyPadButton" TargetType="artina:Button">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#f4bb4f" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="BackgroundColor" Value="#16597e" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="artina:EntryProperties.BorderStyle" Value="RoundRect" />
+                <Setter Property="artina:EntryProperties.BorderCornerRadius" Value="1" />
+                <Setter Property="artina:EntryProperties.BorderColor" Value="#226494" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
