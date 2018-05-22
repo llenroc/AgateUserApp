@@ -18,6 +18,7 @@ namespace Agate.Business.Tests
         protected Mock<IConnectivity> connectivity;
         protected Mock<IPhoneService> phoneService;
         protected Mock<ISecureStorage> secureStorage;
+        protected Mock<IAppInfo> appInfo;
 
         public ViewModelTestBase()
         {
@@ -43,6 +44,8 @@ namespace Agate.Business.Tests
             phoneService.SetupAllProperties();
 
             secureStorage = new Mock<ISecureStorage>();
+
+            appInfo = new Mock<IAppInfo>();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Agate.Business.Tests.User
         [Fact(DisplayName = "Validation check")]
         public void ValidationTest()
         {
-            var viewModel = new SignUpPageViewModel(new Mock<IAccountService>().Object, null,  dataFlow.Object, viewService.Object,()=> phoneService.Object, deviceInfo.Object, connectivity.Object)
+            var viewModel = new SignUpPageViewModel(new Mock<IAccountService>().Object, null,  dataFlow.Object, viewService.Object,()=> phoneService.Object, deviceInfo.Object, connectivity.Object, appInfo.Object)
             {
                 View = view.Object,
                 FirstName = {Value = ""},
@@ -41,7 +41,7 @@ namespace Agate.Business.Tests.User
             ConfirmationCodeEntryViewModel CreateConfirmationCodeEntryViewModel(int requestId) 
                 => new ConfirmationCodeEntryViewModel(requestId, null, null, null, null, null, null);
 
-            var viewModel = new SignUpPageViewModel(accountService.Object, CreateConfirmationCodeEntryViewModel, dataFlow.Object, viewService.Object, () => phoneService.Object, deviceInfo.Object, connectivity.Object)
+            var viewModel = new SignUpPageViewModel(accountService.Object, CreateConfirmationCodeEntryViewModel, dataFlow.Object, viewService.Object, () => phoneService.Object, deviceInfo.Object, connectivity.Object, appInfo.Object)
             {
                 View = view.Object,
                 FirstName = { Value = "Jhon" },
