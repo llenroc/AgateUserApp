@@ -430,7 +430,7 @@
                 <Setter Property="Aspect" Value="AspectFill" />
                 <Setter Property="Source">
                     <Setter.Value>
-                        <OnIdiom x:TypeArguments="ImageSource" Phone="{ StaticResource SignUpBackgroundImagePhone }" Tablet="{ StaticResource SignUpBackgroundImageTablet }" />
+                        <OnIdiom x:TypeArguments="ImageSource" Phone="{ StaticResource SignUpBackgroundImagePhone }" Tablet="{ StaticResource SignUpBackgroundImagePhone }" />
                     </Setter.Value>
                 </Setter>
             </Style>
