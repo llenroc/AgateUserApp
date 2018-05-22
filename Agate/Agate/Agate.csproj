@@ -44,6 +44,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Main\LegalPrivayPolicyPage.xaml.cs">
+      <DependentUpon>LegalPrivayPolicyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\User\SignUpPage_Merchant.xaml.cs">
       <DependentUpon>SignUpPage_Merchant.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Main\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Main\LegalPrivayPolicyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Main\MainMenuPage.xaml">

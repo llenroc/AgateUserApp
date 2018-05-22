@@ -116,6 +116,10 @@ namespace Agate.ViewBridge
             {
                 return new ReceivePaymentPage();
             }
+            if(viewModel.GetType() == typeof(LegalPrivacyPolicyViewModel))
+            {
+                return new LegalPrivayPolicyPage();
+            }
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }
     }

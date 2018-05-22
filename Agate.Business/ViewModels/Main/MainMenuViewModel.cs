@@ -38,7 +38,7 @@ namespace Agate.Business.ViewModels.Main
                     new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "R"),
                     new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "M"),
                     new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "F"),
-                    new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "f"),
+                    new MenuItem("Legal", ()=>new LegalPrivacyPolicyViewModel(), "#921243", "f"),
                 });
             }
             else
@@ -55,7 +55,7 @@ namespace Agate.Business.ViewModels.Main
                     new MenuItem("Tools", createNotImplementedFeatureViewModel, "#921243", "R"),
                     new MenuItem("Help Center", createNotImplementedFeatureViewModel, "#921243", "M"),
                     new MenuItem("Feedback", createFeedbackViewModelFunc, "#921243", "F"),
-                    new MenuItem("Legal", createNotImplementedFeatureViewModel, "#921243", "f"),
+                    new MenuItem("Legal",  ()=>new LegalPrivacyPolicyViewModel(), "#921243", "f"),
                 });
             }
         }
