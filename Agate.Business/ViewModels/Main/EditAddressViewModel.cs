@@ -165,7 +165,6 @@ namespace Agate.Business.ViewModels.Main
                     {"page", "edit address"},
                     {"operation", $"saving changes"}
                 });
-                await View.DisplayAlert("Error", "An error occurred while processing your request" + ex, "Ok");
 
                 await View.DisplayErrorAlert("An error occurred. Please try again." + ex.Message);
             }
