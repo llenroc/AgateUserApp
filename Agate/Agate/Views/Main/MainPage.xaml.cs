@@ -41,6 +41,7 @@ namespace Agate.Views.Main
             mainMenuPage.SetBinding(ContentPage.BindingContextProperty, new Binding("MainMenu"));
             Master = mainMenuPage;
         }
+
         private void LaunchSampleInDetail(Page page, bool animated)
         {
             Detail = NavigationPageHelper.Create(page);

@@ -7,6 +7,7 @@
 
     public class ChargeCardResponse : ApiResponse
     {
+        public decimal NewBucketAmount { get; set; }
         public decimal NewCardBalance { get; set; }
     }
 

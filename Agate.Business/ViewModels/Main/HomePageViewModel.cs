@@ -30,7 +30,7 @@ namespace Agate.Business.ViewModels.Main
         public void Initialize(INavigationService navigationService)
         {
             Assets.Initialize(this, navigationService);
-            Bucket.Initialize(this);
+            Bucket.Initialize(this, navigationService);
             Cards.Initialize(this, navigationService);
         }
 

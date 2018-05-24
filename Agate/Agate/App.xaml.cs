@@ -85,6 +85,7 @@ namespace Agate
 		    builder.RegisterType<FeedbackViewModel>();
 		    builder.RegisterType<SettingsViewModel>();
 		    builder.RegisterType<ReceivePaymentViewModel>();
+		    builder.RegisterType<BucketHomeViewModel>();
 
 		    var container = builder.Build();
 

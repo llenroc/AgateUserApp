@@ -120,6 +120,11 @@ namespace Agate.ViewBridge
             {
                 return new LegalPrivayPolicyPage();
             }
+            if (viewModel.GetType() == typeof(BucketHomeViewModel))
+            {
+                return new BucketHomePage();
+            }
+        
             throw new Exception($"Implement ResolvePageForViewModel for {viewModel.GetType().Name}");
         }
     }
