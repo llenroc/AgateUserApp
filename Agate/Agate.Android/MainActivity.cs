@@ -19,7 +19,7 @@ namespace Agate.Droid
     Label = "Agate User's Wallet",
     Icon = "@drawable/icon",
     Theme = "@style/Theme.Splash",
-    MainLauncher = true,
+    MainLauncher = false,
     LaunchMode = LaunchMode.SingleTask,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Locale | ConfigChanges.LayoutDirection
     )]

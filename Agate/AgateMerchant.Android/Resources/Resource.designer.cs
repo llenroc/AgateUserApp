@@ -6527,26 +6527,26 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+			// aapt resource value: 0x7f02011b
+			public const int avd_hide_password_1 = 2130837787;
+			
 			// aapt resource value: 0x7f02011c
-			public const int avd_hide_password_1 = 2130837788;
+			public const int avd_hide_password_2 = 2130837788;
 			
 			// aapt resource value: 0x7f02011d
-			public const int avd_hide_password_2 = 2130837789;
-			
-			// aapt resource value: 0x7f02011e
-			public const int avd_hide_password_3 = 2130837790;
+			public const int avd_hide_password_3 = 2130837789;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
+			// aapt resource value: 0x7f02011e
+			public const int avd_show_password_1 = 2130837790;
+			
 			// aapt resource value: 0x7f02011f
-			public const int avd_show_password_1 = 2130837791;
+			public const int avd_show_password_2 = 2130837791;
 			
 			// aapt resource value: 0x7f020120
-			public const int avd_show_password_2 = 2130837792;
-			
-			// aapt resource value: 0x7f020121
-			public const int avd_show_password_3 = 2130837793;
+			public const int avd_show_password_3 = 2130837792;
 			
 			// aapt resource value: 0x7f020055
 			public const int back = 2130837589;
@@ -7112,11 +7112,11 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f020110
 			public const int notification_icon_background = 2130837776;
 			
-			// aapt resource value: 0x7f02011a
-			public const int notification_template_icon_bg = 2130837786;
+			// aapt resource value: 0x7f020119
+			public const int notification_template_icon_bg = 2130837785;
 			
-			// aapt resource value: 0x7f02011b
-			public const int notification_template_icon_low_bg = 2130837787;
+			// aapt resource value: 0x7f02011a
+			public const int notification_template_icon_low_bg = 2130837786;
 			
 			// aapt resource value: 0x7f020111
 			public const int notification_tile_bg = 2130837777;
@@ -7137,13 +7137,10 @@ namespace AgateMerchant.Droid
 			public const int splash = 2130837782;
 			
 			// aapt resource value: 0x7f020117
-			public const int splash_drawable = 2130837783;
+			public const int transfer = 2130837783;
 			
 			// aapt resource value: 0x7f020118
-			public const int transfer = 2130837784;
-			
-			// aapt resource value: 0x7f020119
-			public const int xrp = 2130837785;
+			public const int xrp = 2130837784;
 			
 			static Drawable()
 			{
@@ -7230,8 +7227,8 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f090024
 			public const int always = 2131296292;
 			
-			// aapt resource value: 0x7f0900ba
-			public const int animation_view = 2131296442;
+			// aapt resource value: 0x7f0900b5
+			public const int animation_view = 2131296437;
 			
 			// aapt resource value: 0x7f090030
 			public const int auto = 2131296304;
@@ -7275,8 +7272,8 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f090078
 			public const int container = 2131296376;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int contentFrame = 2131296439;
+			// aapt resource value: 0x7f0900b8
+			public const int contentFrame = 2131296440;
 			
 			// aapt resource value: 0x7f090051
 			public const int contentPanel = 2131296337;
@@ -7395,8 +7392,8 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f09000f
 			public const int lottie_layer_name = 2131296271;
 			
-			// aapt resource value: 0x7f0900b9
-			public const int masked = 2131296441;
+			// aapt resource value: 0x7f0900ba
+			public const int masked = 2131296442;
 			
 			// aapt resource value: 0x7f0900a4
 			public const int media_actions = 2131296420;
@@ -7596,8 +7593,8 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f090018
 			public const int showTitle = 2131296280;
 			
-			// aapt resource value: 0x7f0900b5
-			public const int sliding_tabs = 2131296437;
+			// aapt resource value: 0x7f0900b6
+			public const int sliding_tabs = 2131296438;
 			
 			// aapt resource value: 0x7f090076
 			public const int smallLabel = 2131296374;
@@ -7677,8 +7674,8 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f09005a
 			public const int title_template = 2131296346;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int toolbar = 2131296438;
+			// aapt resource value: 0x7f0900b7
+			public const int toolbar = 2131296439;
 			
 			// aapt resource value: 0x7f09002a
 			public const int top = 2131296298;
@@ -7704,8 +7701,8 @@ namespace AgateMerchant.Droid
 			// aapt resource value: 0x7f09000e
 			public const int view_offset_helper = 2131296270;
 			
-			// aapt resource value: 0x7f0900b8
-			public const int visible = 2131296440;
+			// aapt resource value: 0x7f0900b9
+			public const int visible = 2131296441;
 			
 			// aapt resource value: 0x7f090096
 			public const int volume_item_container = 2131296406;
@@ -7996,22 +7993,25 @@ namespace AgateMerchant.Droid
 			public const int select_dialog_singlechoice_material = 2130903104;
 			
 			// aapt resource value: 0x7f030041
-			public const int support_simple_spinner_dropdown_item = 2130903105;
+			public const int Splash = 2130903105;
 			
 			// aapt resource value: 0x7f030042
-			public const int Tabbar = 2130903106;
+			public const int support_simple_spinner_dropdown_item = 2130903106;
 			
 			// aapt resource value: 0x7f030043
-			public const int Tabs = 2130903107;
+			public const int Tabbar = 2130903107;
 			
 			// aapt resource value: 0x7f030044
-			public const int Toolbar = 2130903108;
+			public const int Tabs = 2130903108;
 			
 			// aapt resource value: 0x7f030045
-			public const int zxingscanneractivitylayout = 2130903109;
+			public const int Toolbar = 2130903109;
 			
 			// aapt resource value: 0x7f030046
-			public const int zxingscannerfragmentlayout = 2130903110;
+			public const int zxingscanneractivitylayout = 2130903110;
+			
+			// aapt resource value: 0x7f030047
+			public const int zxingscannerfragmentlayout = 2130903111;
 			
 			static Layout()
 			{

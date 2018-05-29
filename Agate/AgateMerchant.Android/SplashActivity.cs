@@ -13,15 +13,15 @@ using Android.Widget;
 using Com.Airbnb.Lottie;
 using Xamarin.Forms.Platform.Android;
 
-namespace Agate.Droid
+namespace AgateMerchant.Droid
 {
     [Activity(
-        Theme = "@style/Theme.Splash", 
-        MainLauncher = true, 
-        NoHistory = true, 
-        LaunchMode = LaunchMode.SingleTask, 
+        Theme = "@style/Theme.Splash",
+        MainLauncher = true,
+        NoHistory = true,
+        LaunchMode = LaunchMode.SingleTask,
         AllowEmbedded = false,
-        StateNotNeeded = true,                
+        StateNotNeeded = true,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Locale | ConfigChanges.LayoutDirection)]
     public class SplashActivity : Activity, Animator.IAnimatorListener
     {
