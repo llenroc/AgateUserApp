@@ -1,9 +1,7 @@
 ﻿namespace Agate.Contracts.Models.Account
 {
-    public class ChangePinRequest
+    public class ChangePinRequest : ApiRequest
     {
-        public int UserId { get; set; }
-        public string DeviceId { get; set; }
         public string PreviousPin { get; set; }
         public string Pin { get; set; }
     }

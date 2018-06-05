@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Agate.Business.Api;
 using Agate.Business.Services;
 using Agate.Business.ViewModels.Main;
+using Agate.Contracts.Models;
 using Agate.Contracts.Models.Account;
 using Plugin.DeviceInfo.Abstractions;
 using Plugin.SecureStorage.Abstractions;
@@ -61,8 +62,12 @@ namespace Agate.Business.ViewModels.User
 
                 var response = await accountService.ChangePin(new ChangePinRequest
                 {
-                    UserId = secureStorage.GetUserId().Value,
-                    DeviceId = deviceInfo.Id,
+                    Credentials = new Credentials
+                    {
+                        UserId = secureStorage.GetUserId().Value,
+                        DeviceId = deviceInfo.Id,
+                        AccessCode = secureStorage.GetAccessCode()
+                    },
                     Pin = Pin1.Value,
                 });
 
