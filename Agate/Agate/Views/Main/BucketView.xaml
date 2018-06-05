@@ -17,8 +17,13 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <artina:Button Grid.Column="1" WidthRequest="50" HeightRequest="50" BorderRadius="8" BorderColor="Black" BackgroundColor="White" BorderWidth="1" 
-                            Text="+" Command="{Binding TransferToCardCommand}" FontSize="10" FontAttributes="Bold" TextColor="Black"  />
+                    <Label Grid.Column="1"
+                           BackgroundColor="White" TextColor="Black"
+                           Text="G" FontFamily="Agate.ttf#Calligraphr" FontSize="30" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TransferToCardCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Grid>
             </Grid>
         </StackLayout>
