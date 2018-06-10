@@ -48,7 +48,7 @@ namespace Agate.Business.ViewModels.Main
 
         public bool CanSend()
         {
-            return IsNotBusy && Validation.Check(Amount);
+            return IsNotBusy && Validation.Check(Amount) && appData.Cards.Any();
         }
 
         public async Task Send()
