@@ -16,7 +16,7 @@ using Xamarin.Forms.Platform.Android;
 namespace Agate.Droid
 {
     [Activity(
-    Label = "Agate User's Wallet",
+    Label = "Agate User",
     Icon = "@drawable/icon",
     Theme = "@style/Theme.Splash",
     MainLauncher = false,

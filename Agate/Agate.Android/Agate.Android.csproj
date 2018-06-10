@@ -32,6 +32,8 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidSupportedAbis />
+    <AndroidLinkSkip>
+    </AndroidLinkSkip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,10 +132,10 @@
     <AndroidAsset Include="Assets\grial_animation.json" />
     <AndroidAsset Include="Assets\grialshapes.ttf" />
     <AndroidAsset Include="Assets\ionicons.ttf" />
-    <EmbeddedResource Include="GrialLicense" />
     <AndroidAsset Include="Assets\Agate.ttf" />
     <AndroidAsset Include="Assets\progress.json" />
     <AndroidAsset Include="Assets\logo.json" />
+    <EmbeddedResource Include="GrialLicense" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Tabs.axml" />
