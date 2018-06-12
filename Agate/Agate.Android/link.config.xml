@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<linker>
+  <assembly fullname="Agate">
+    <type fullname="*"></type>
+  </assembly>
+  <assembly fullname="Agate.Contracts">
+    <type fullname="*"></type>
+  </assembly>
+  <assembly fullname="Agate.Business">
+    <type fullname="*"></type>
+  </assembly>
+  <assembly fullname="UXDivers.Artina.Shared.Base">
+    <type fullname="*"></type>
+  </assembly>
+  <assembly fullname="UXDivers.Artina.Shared">
+    <type fullname="*"></type>
+  </assembly>
+  <assembly fullname="UXDivers.Artina.Shared.Base.Droid">
+    <type fullname="*"></type>
+  </assembly>
+  <assembly fullname="UXDivers.Artina.Shared.Droid">
+    <type fullname="*"></type>
+  </assembly>
+  <assembly fullname="UXDivers.Effects">    
+  </assembly>
+  <assembly fullname="UXDivers.Effects.Droid">    
+  </assembly>
+</linker>
